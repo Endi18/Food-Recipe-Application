@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Food-Recipes-Application</string>
+    <string name="apiKey">aeb625c3f68d4365b5a01116e78a3663</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Log In</string>
+    <string name="login_failed">"Login failed!"</string>
+</resources>
