@@ -7,4 +7,7 @@
     <string name="login_failed">"Login failed!"</string>
     <string name="guest_mode">Guest Mode</string>
     <string name="tasty">Tasty</string>
+    <string name="username">Username</string>
+    <string name="backgroundSignUp">Background Image for Sign Up Activity</string>
+    <string name="btn_sign_up">Sign Up</string>
 </resources>

@@ -12,12 +12,13 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);;
+        setContentView(R.layout.activity_login);
     }
 
     public void authenticateUser(View view) {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
-        //IMPLEMENT AUTH AFTER DB CONNECTION
+
+        //DONE IMPLEMENT AUTH AFTER DB CONNECTION
     }
 }

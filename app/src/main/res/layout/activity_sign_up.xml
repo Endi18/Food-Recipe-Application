@@ -6,4 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".SignUpActivity">
 
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="442dp"
+        android:layout_height="821dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/backgroundSignUp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/Background_Sign_Up" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
