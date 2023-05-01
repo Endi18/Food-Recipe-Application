@@ -21,7 +21,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_EMAIL = "Email";
     private static final String COLUMN_PASSWORD = "Password";
 
-    MyDatabaseHelper(@Nullable Context context) {
+    public MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
@@ -43,13 +43,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Recycle")
-    public void addUser(String username, String email, String password){
+    public int addUser(String username, String email, String password){
         SQLiteDatabase db = this.getWritableDatabase();
-
 
         Cursor cursor = db.query("Users", new String[]{"ID"}, "Email=?", new String[]{email}, null, null, null);
             if (cursor.getCount() > 0) {
                 Toast.makeText(context, "Email Already Exists!", Toast.LENGTH_SHORT).show();
+                return 0;
             } else {
                 ContentValues values = new ContentValues();
                 values.put("Username", username);
@@ -58,6 +58,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
                 db.insertOrThrow("Users", null, values);
                 Toast.makeText(context, "User added successfully!", Toast.LENGTH_SHORT).show();
+                return 1;
             }
 
     }
