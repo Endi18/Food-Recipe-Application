@@ -6,16 +6,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class WelcomeActivity extends AppCompatActivity {
+import com.example.food_recipes_application.Models.Recipe;
 
+public class InitialActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        setContentView(R.layout.activity_initial);
     }
 
     public void goToLoginPage(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+    }
+    public void goToSearchPage(View view) {
+        //Intent intent = new Intent(this, class); //@@COMPLETE WHEN SEARCH ACTIVITY IS DONE
+        // startActivity(intent);
     }
 }
