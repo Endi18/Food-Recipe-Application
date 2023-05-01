@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/background" />
+        app:srcCompat="@drawable/intialbg" />
 
     <Button
         android:id="@+id/guestButton"
@@ -25,7 +25,8 @@
         android:layout_height="57dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="76dp"
-        android:backgroundTint="@color/coral"
+        android:backgroundTint="@color/material_dynamic_tertiary40"
+        android:onClick="goToSearchPage"
         android:text="@string/guest_mode"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -35,9 +36,9 @@
         android:layout_width="154dp"
         android:layout_height="57dp"
         android:layout_marginBottom="76dp"
-        android:backgroundTint="@color/coral"
-        android:text="@string/action_sign_in"
+        android:backgroundTint="@color/material_dynamic_tertiary40"
         android:onClick="goToLoginPage"
+        android:text="@string/action_sign_in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guestButton"
         app:layout_constraintHorizontal_bias="0.303"
