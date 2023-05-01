@@ -72,7 +72,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:layout_marginBottom="44dp"
+        android:autofillHints=""
         android:background="@drawable/signup_input"
         android:drawableStart="@drawable/ic_email_icon"
         android:drawablePadding="10dp"
@@ -90,16 +90,17 @@
         app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
         app:layout_constraintEnd_toEndOf="@+id/editTextUsername"
         app:layout_constraintStart_toStartOf="@+id/editTextUsername"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUsername"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
+        android:autofillHints=""
         android:background="@drawable/signup_input"
         android:drawableStart="@drawable/ic_security_icon"
+        android:drawableEnd="@drawable/ic_visibility_off"
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="@string/prompt_password"
@@ -113,9 +114,9 @@
         android:textColorHint="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/editTextEmail"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextEmail"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
 
     <EditText
         android:id="@+id/editTextConfirmPassword"
@@ -123,8 +124,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:layout_marginBottom="305dp"
+        android:autofillHints=""
         android:background="@drawable/signup_input"
         android:drawableStart="@drawable/ic_security_icon"
+        android:drawableEnd="@drawable/ic_visibility_off"
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="@string/confirm_password"
@@ -140,15 +143,14 @@
         app:layout_constraintBottom_toBottomOf="@+id/backgroundImage"
         app:layout_constraintEnd_toEndOf="@+id/editTextPassword"
         app:layout_constraintStart_toStartOf="@+id/editTextPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
     <Button
         android:id="@+id/btnSignUp"
         android:layout_width="170dp"
         android:layout_height="70dp"
         android:layout_marginTop="50dp"
-        android:backgroundTint="@color/mainColor"
+        android:backgroundTint="@color/coral"
         android:onClick="clickSignUpButton"
         android:text="@string/sign_up"
         android:textSize="24sp"
@@ -158,10 +160,11 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPassword"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
-    <TextView
-        android:id="@+id/txtViewAlreadyHaveAnAccount"
+    <Button
+        android:id="@+id/btnAlreadyHaveAnAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/transparent"
         android:minHeight="48dp"
         android:onClick="clickAlreadyHaveAnAccount"
         android:text="@string/already_have_an_account"
@@ -171,8 +174,9 @@
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSignUp"
-        app:layout_constraintVertical_bias="0.19999999" />
+        app:layout_constraintVertical_bias="0.116" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
