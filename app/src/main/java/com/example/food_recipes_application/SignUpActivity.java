@@ -7,14 +7,28 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
-import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.food_recipes_application.Database.MyDatabaseHelper;
 
+import java.util.regex.Pattern;
+
 public class SignUpActivity extends AppCompatActivity {
+
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    "(?=.*[0-9])" +         //at least 1 digit
+                    "(?=.*[a-z])" +         //at least 1 lower case letter
+                    "(?=.*[A-Z])" +         //at least 1 upper case letter
+                    //"(?=.*[a-zA-Z])" +      //any letter
+                    //"(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    //"(?=\\S+$)" +           //no white spaces
+                    ".{8,}" +               //at least 8 characters
+                    "$");
 
     EditText username, email, password, confirmPassword;
 
@@ -73,48 +87,92 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void clickSignUpButton(View view) {
-        if (TextUtils.isEmpty(username.getText().toString())) {
-            username.setError("Username is compulsory!");
-            return;
-        }
 
-        if (TextUtils.isEmpty(email.getText().toString())) {
-            email.setError("Email is compulsory!");
-            return;
-        }
+        boolean confirmedInput = confirmInput();
+        boolean result;
 
-        if (TextUtils.isEmpty(password.getText().toString())) {
-            password.setError("Password is compulsory!");
-            return;
-        }
+        if(confirmedInput) {
+            try (MyDatabaseHelper db = new MyDatabaseHelper(SignUpActivity.this)) {
+                result = db.addUser(username.getText().toString().trim(),
+                        email.getText().toString().trim(), password.getText().toString().trim());
+            }
 
-        if (TextUtils.isEmpty(confirmPassword.getText().toString())) {
-            confirmPassword.setError("Confirmed Password is compulsory!");
-            return;
+            if (result) {
+                username.setText("");
+                email.setText("");
+                password.setText("");
+                confirmPassword.setText("");
+                Toast.makeText(this, "User added successfully!", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(this, "Email Already Exists!", Toast.LENGTH_SHORT).show();
+            }
         }
+    }
 
-        if (!password.getText().toString().equals(confirmPassword.getText().toString())) {
-            confirmPassword.setError("Password does not match!");
-            return;
-        }
-
-        int result;
-
-        try(MyDatabaseHelper db = new MyDatabaseHelper(SignUpActivity.this)) {
-            result = db.addUser(username.getText().toString().trim(),
-                            email.getText().toString().trim(), password.getText().toString().trim());
-        }
-
-        if (result == 1) {
-            username.setText("");
-            email.setText("");
-            password.setText("");
-            confirmPassword.setText("");
-        }
+    public boolean confirmInput() {
+        return validateEmail() && validateUsername() && validatePassword() && validateConfirmPassword();
     }
 
     public void clickAlreadyHaveAnAccount(View view) {
         Intent goToLogInActivity = new Intent(SignUpActivity.this, LoginActivity.class);
         startActivity(goToLogInActivity);
+    }
+
+    private boolean validateEmail() {
+        String emailInput = email.getText().toString().trim();
+
+        if (emailInput.isEmpty()) {
+            email.setError("Field cannot be empty!");
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            email.setError("Please enter a valid email address!");
+            return false;
+        } else {
+            email.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateUsername() {
+        String usernameInput = username.getText().toString().trim();
+
+        if (usernameInput.isEmpty()) {
+            username.setError("Field cannot be empty!");
+            return false;
+        } else {
+            username.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validatePassword() {
+        String passwordInput = password.getText().toString().trim();
+
+        if (passwordInput.isEmpty()) {
+            password.setError("Field cannot be empty!");
+            return false;
+        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+            password.setError("Password too weak!");
+            return false;
+        } else {
+            password.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateConfirmPassword() {
+        String confirmPasswordInput = confirmPassword.getText().toString().trim();
+
+        if (confirmPasswordInput.isEmpty()) {
+            confirmPassword.setError("Field cannot be empty!");
+            return false;
+        } else if (!confirmPasswordInput.equals(password.getText().toString())) {
+            confirmPassword.setError("Passwords does not match!");
+            return false;
+        } else {
+            confirmPassword.setError(null);
+            return true;
+        }
     }
 }
