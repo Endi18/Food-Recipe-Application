@@ -19,6 +19,6 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
 
-        //DONE IMPLEMENT AUTH AFTER DB CONNECTION
+        //IMPLEMENT AUTH AFTER DB CONNECTION
     }
 }
