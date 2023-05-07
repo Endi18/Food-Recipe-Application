@@ -175,4 +175,13 @@ public class SignUpActivity extends AppCompatActivity {
             return true;
         }
     }
+
+    public void passwordInformation(View view){
+        Toast.makeText(this, "Password MUST contain at least 8 characters, at least 1 upper & lower case & 1 digit", Toast.LENGTH_LONG).show();
+    }
+
+    public void goBackToInitialActivity(View view){
+        Intent intent = new Intent(this, InitialActivity.class);
+        startActivity(intent);
+    }
 }
