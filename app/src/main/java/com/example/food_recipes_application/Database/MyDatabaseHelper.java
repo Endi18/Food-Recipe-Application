@@ -43,13 +43,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Recycle")
-    public int addUser(String username, String email, String password){
+    public boolean addUser(String username, String email, String password){
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.query("Users", new String[]{"ID"}, "Email=?", new String[]{email}, null, null, null);
             if (cursor.getCount() > 0) {
-                Toast.makeText(context, "Email Already Exists!", Toast.LENGTH_SHORT).show();
-                return 0;
+                return false;
             } else {
                 ContentValues values = new ContentValues();
                 values.put("Username", username);
@@ -57,8 +56,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 values.put("Password", password);
 
                 db.insertOrThrow("Users", null, values);
-                Toast.makeText(context, "User added successfully!", Toast.LENGTH_SHORT).show();
-                return 1;
+                return true;
             }
 
     }

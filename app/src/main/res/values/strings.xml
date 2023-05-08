@@ -11,7 +11,12 @@
     <string name="backgroundSignUp">Background Image for Sign Up Activity</string>
     <string name="sign_up">Sign Up</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="already_have_an_account"><u>Already Have An Account</u></string>
+    <string name="already_have_an_account">Already Have An Account</string>
     <string name="sign_up_now"><u>Sign Up Now</u></string>
     <string name="not_a_user_yet_question">Not a user yet?</string>
+    <string name="go_back"><![CDATA[<]]></string>
+    <string name="information_icon_letter">i</string>
+    <string name="to">To</string>
+    <string name="food_recipe">Food Recipe</string>
+    <string name="welcome">Welcome</string>
 </resources>
