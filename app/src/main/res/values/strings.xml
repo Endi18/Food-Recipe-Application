@@ -11,11 +11,7 @@
     <string name="backgroundSignUp">Background Image for Sign Up Activity</string>
     <string name="sign_up">Sign Up</string>
     <string name="confirm_password">Confirm Password</string>
-<<<<<<< HEAD
     <string name="already_have_an_account"><u>Already Have An Account</u></string>
-=======
-    <string name="already_have_an_account">Already Have An Account</string>
-    <string name="sign_up_now">Sign Up Now</string>
+    <string name="sign_up_now"><u>Sign Up Now</u></string>
     <string name="not_a_user_yet_question">Not a user yet?</string>
->>>>>>> 3b321362cd6341385641c6405fa38047689f9200
 </resources>
