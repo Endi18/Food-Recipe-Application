@@ -16,10 +16,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     private static final String TABLE_NAME = "Users";
-    private static final String COLUMN_ID = "ID";
-    private static final String COLUMN_USERNAME = "Username";
-    private static final String COLUMN_EMAIL = "Email";
-    private static final String COLUMN_PASSWORD = "Password";
+    public static final String COLUMN_ID = "ID";
+    public static final String COLUMN_USERNAME = "Username";
+    public static final String COLUMN_EMAIL = "Email";
+    public static final String COLUMN_PASSWORD = "Password";
 
     public MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -70,6 +70,18 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = null;
         if(db != null){
             cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+    public Cursor getUserData(String email){
+       // String query = "SELECT * FROM " + TABLE_NAME + "WHERE " + COLUMN_USERNAME + " = " + email;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selection = COLUMN_EMAIL + " =?";
+        String[] selectionArgs = {email};
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.query(TABLE_NAME, new String[]{COLUMN_EMAIL, COLUMN_PASSWORD, COLUMN_USERNAME, COLUMN_ID},selection, selectionArgs, null, null, null);
         }
         return cursor;
     }
