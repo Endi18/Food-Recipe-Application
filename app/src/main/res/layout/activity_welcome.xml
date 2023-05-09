@@ -11,7 +11,7 @@
         android:id="@+id/txtViewWelcome"
         android:layout_width="255dp"
         android:layout_height="74dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="104dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/welcome"
         android:textColor="@color/white"
@@ -26,17 +26,15 @@
         android:id="@+id/txtViewFoodRecipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/food_recipe"
         android:textColor="@color/white"
         android:textSize="60sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtViewTOKO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewWelcome"
-        app:layout_constraintVertical_bias="0.542" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewTo" />
 
     <TextView
         android:id="@+id/txtViewTo"
@@ -53,21 +51,21 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewWelcome"
-        app:layout_constraintVertical_bias="0.438" />
+        app:layout_constraintVertical_bias="0.20999998" />
 
     <TextView
-        android:id="@+id/txtViewTOKO"
+        android:id="@+id/txtViewFoodtopia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="256dp"
+        android:layout_marginBottom="200dp"
         android:fontFamily="sans-serif-black"
-        android:text="TOKO"
+        android:text="FOODTOPIA"
         android:textColor="@color/white"
         android:textSize="60sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText" />
 
