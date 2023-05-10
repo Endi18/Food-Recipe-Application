@@ -173,6 +173,7 @@
         android:layout_marginEnd="341dp"
         android:layout_marginBottom="500dp"
         android:backgroundTint="#00FFFFFF"
+        android:onClick="goBackToInitialActivity"
         android:text="@string/go_back"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -182,11 +183,11 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
-        android:id="@+id/layout"
-        android:layout_width="match_parent"
+        android:id="@+id/containerTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints" >
 
     </LinearLayout>
 
@@ -195,7 +196,6 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="6dp"
-        android:layout_marginTop="20dp"
         android:background="@drawable/information_bg"
         android:backgroundTint="@color/mainColor"
         android:backgroundTintMode="add"
@@ -204,17 +204,17 @@
         android:foregroundTintMode="add"
         android:freezesText="false"
         android:gravity="center"
-        android:onClick="goBackToInitialActivity"
+        android:onClick="passwordInformation"
         android:text="@string/information_icon_letter"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/editTextPassword"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextPassword"
         app:layout_constraintVertical_bias="0.52"
-        tools:ignore="TextSizeCheck" />
+        tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,8 +34,11 @@ public class SignUpActivity extends AppCompatActivity {
                     "$");
 
     EditText username, email, password, confirmPassword;
+    private boolean passwordVisible = false;
+    private Drawable visibilityOnIcon, visibilityOffIcon, securityIcon;
+    private Typeface typeface;
 
-    @SuppressLint({"ClickableViewAccessibility"})
+    @SuppressLint({"ClickableViewAccessibility", "UseCompatLoadingForDrawables"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,47 +49,42 @@ public class SignUpActivity extends AppCompatActivity {
         password = findViewById(R.id.editTextPassword);
         confirmPassword = findViewById(R.id.editTextConfirmPassword);
 
-        password.setOnTouchListener((v, event) -> {
-            @SuppressLint("UseCompatLoadingForDrawables") Drawable visibilityOn = getDrawable(R.drawable.ic_visibility_on);
-            @SuppressLint("UseCompatLoadingForDrawables") Drawable visibilityOff = getDrawable(R.drawable.ic_visibility_off);
-            @SuppressLint("UseCompatLoadingForDrawables") Drawable securityIcon = getDrawable(R.drawable.ic_security_icon);
+        visibilityOnIcon = getDrawable(R.drawable.ic_visibility_on);
+        visibilityOffIcon = getDrawable(R.drawable.ic_visibility_off);
+        securityIcon = getDrawable(R.drawable.ic_security_icon);
 
-            int DRAWABLE_RIGHT = 2;
-            if (event.getAction() == MotionEvent.ACTION_UP) {
-                if (event.getRawX() >= (password.getRight() - password.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                    if (password.getInputType() == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
-                        password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                        password.setCompoundDrawablesWithIntrinsicBounds(securityIcon, null, visibilityOff, null);
-                    } else {
-                        password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                        password.setCompoundDrawablesWithIntrinsicBounds(securityIcon, null, visibilityOn, null);
+        typeface = password.getTypeface();
+
+
+        password.setOnTouchListener(new View.OnTouchListener() {
+            final int DRAWABLE_RIGHT = 2;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (password.getRight() - password.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        togglePasswordVisibility();
+                        return true;
                     }
-                    return true;
                 }
+                return false;
             }
-            return false;
         });
+    }
 
-        confirmPassword.setOnTouchListener((v, event) -> {
-            @SuppressLint("UseCompatLoadingForDrawables") Drawable visibilityOn = getDrawable(R.drawable.ic_visibility_on);
-            @SuppressLint("UseCompatLoadingForDrawables") Drawable visibilityOff = getDrawable(R.drawable.ic_visibility_off);
-            @SuppressLint("UseCompatLoadingForDrawables") Drawable securityIcon = getDrawable(R.drawable.ic_security_icon);
-
-            int DRAWABLE_RIGHT = 2;
-            if (event.getAction() == MotionEvent.ACTION_UP) {
-                if (event.getRawX() >= (confirmPassword.getRight() - confirmPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                    if (confirmPassword.getInputType() == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
-                        confirmPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                        confirmPassword.setCompoundDrawablesWithIntrinsicBounds(securityIcon, null, visibilityOff, null);
-                    } else {
-                        confirmPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                        confirmPassword.setCompoundDrawablesWithIntrinsicBounds(securityIcon, null, visibilityOn, null);
-                    }
-                    return true;
-                }
-            }
-            return false;
-        });
+    private void togglePasswordVisibility() {
+        if (passwordVisible) {
+            // Hide the password
+            passwordVisible = false;
+            password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            password.setCompoundDrawablesRelativeWithIntrinsicBounds(securityIcon, null, visibilityOffIcon, null);
+        } else {
+            // Show the password
+            passwordVisible = true;
+            password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            password.setCompoundDrawablesRelativeWithIntrinsicBounds(securityIcon, null, visibilityOnIcon, null);
+        }
+        password.setTypeface(typeface);
     }
 
     public void clickSignUpButton(View view) {
@@ -177,7 +178,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void passwordInformation(View view){
-        Toast.makeText(this, "Password MUST contain at least 8 characters, at least 1 upper & lower case & 1 digit", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "It must have at least 8 characters, 1 upper & lower case & 1 digit", Toast.LENGTH_LONG).show();
     }
 
     public void goBackToInitialActivity(View view){

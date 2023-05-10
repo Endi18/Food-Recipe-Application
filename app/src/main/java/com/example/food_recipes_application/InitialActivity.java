@@ -21,7 +21,7 @@ public class InitialActivity extends AppCompatActivity {
     }
 
     public void goToSearchPage(View view) {
-        //Intent intent = new Intent(this, class); //@@COMPLETE WHEN SEARCH ACTIVITY IS DONE
-        // startActivity(intent);
+        Intent intent = new Intent(this, WelcomeActivity.class); //@@COMPLETE WHEN SEARCH ACTIVITY IS DONE
+        startActivity(intent);
     }
 }

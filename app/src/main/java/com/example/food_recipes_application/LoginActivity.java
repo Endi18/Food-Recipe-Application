@@ -82,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
             toast.show();
         }
     }
+
     public void registerUser(View view) {
         registerButton = findViewById(R.id.register_button);
         registerButton.setTextColor(Color.WHITE);

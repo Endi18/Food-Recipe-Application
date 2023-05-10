@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_Welcome"
-    tools:context=".WelcomeActivity" >
+    android:background="@drawable/background_welcome"
+    tools:context=".WelcomeActivity">
 
     <TextView
         android:id="@+id/txtViewWelcome"
-        android:layout_width="255dp"
+        android:layout_width="wrap_content"
         android:layout_height="74dp"
-        android:layout_marginTop="104dp"
-        android:fontFamily="sans-serif-black"
-        android:text="@string/welcome"
+        android:layout_marginTop="172dp"
+        android:fontFamily="cursive"
+        android:text="Welcome to Food"
         android:textColor="@color/white"
         android:textSize="60sp"
         android:textStyle="bold"
@@ -23,41 +23,24 @@
         tools:ignore="TextSizeCheck" />
 
     <TextView
-        android:id="@+id/txtViewFoodRecipe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-black"
-        android:text="@string/food_recipe"
-        android:textColor="@color/white"
-        android:textSize="60sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewTo" />
-
-    <TextView
         android:id="@+id/txtViewTo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-black"
-        android:text="@string/to"
+        android:layout_marginTop="36dp"
+        android:fontFamily="cursive"
+        android:text="Recipe Application"
         android:textColor="@color/white"
         android:textSize="60sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtViewFoodRecipe"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewWelcome"
-        app:layout_constraintVertical_bias="0.20999998" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewWelcome" />
 
     <TextView
         android:id="@+id/txtViewFoodtopia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="208dp"
         android:fontFamily="sans-serif-black"
         android:text="FOODTOPIA"
         android:textColor="@color/white"
@@ -68,5 +51,10 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText" />
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
