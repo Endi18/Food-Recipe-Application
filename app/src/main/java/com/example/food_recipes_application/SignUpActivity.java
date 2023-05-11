@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
@@ -27,14 +26,13 @@ public class SignUpActivity extends AppCompatActivity {
                     "(?=.*[0-9])" +         //at least 1 digit
                     "(?=.*[a-z])" +         //at least 1 lower case letter
                     "(?=.*[A-Z])" +         //at least 1 upper case letter
-                    //"(?=.*[a-zA-Z])" +      //any letter
-                    //"(?=.*[@#$%^&+=])" +    //at least 1 special character
-                    //"(?=\\S+$)" +           //no white spaces
                     ".{8,}" +               //at least 8 characters
                     "$");
 
     EditText username, email, password, confirmPassword;
     private boolean passwordVisible = false;
+    private boolean confirmPasswordVisible = false;
+
     private Drawable visibilityOnIcon, visibilityOffIcon, securityIcon;
     private Typeface typeface;
 
@@ -55,7 +53,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         typeface = password.getTypeface();
 
-
         password.setOnTouchListener(new View.OnTouchListener() {
             final int DRAWABLE_RIGHT = 2;
 
@@ -70,6 +67,36 @@ public class SignUpActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        confirmPassword.setOnTouchListener(new View.OnTouchListener() {
+            final int DRAWABLE_RIGHT = 2;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (confirmPassword.getRight() - password.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        toggleConfirmPasswordVisibility();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+    }
+
+    private void toggleConfirmPasswordVisibility() {
+        if (confirmPasswordVisible) {
+            // Hide the password
+            confirmPasswordVisible = false;
+            confirmPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            confirmPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(securityIcon, null, visibilityOffIcon, null);
+        } else {
+            // Show the password
+            confirmPasswordVisible = true;
+            confirmPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            confirmPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(securityIcon, null, visibilityOnIcon, null);
+        }
+        confirmPassword.setTypeface(typeface);
     }
 
     private void togglePasswordVisibility() {

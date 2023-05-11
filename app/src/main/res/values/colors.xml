@@ -5,4 +5,6 @@
     <color name="mainColor">#605A7C</color>
     <color name="coral">#DE543F</color>
     <color name="navigationBarColor">#eecafc</color>
+    <color name="lavender">#8692f7</color>
+    <color name="grey">#d2d2d2</color>
 </resources>
