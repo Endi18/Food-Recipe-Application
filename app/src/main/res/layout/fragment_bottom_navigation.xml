@@ -12,7 +12,7 @@
         android:layout_marginBottom="-1dp"
         android:background="#8A87AA"
         app:itemIconSize="35dp"
-        app:itemIconTint="@color/white"
+        app:itemIconTint="@drawable/bottom_nav_background"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_navigation_menu" />
 
