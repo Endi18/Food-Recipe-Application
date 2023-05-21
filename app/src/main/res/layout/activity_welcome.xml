@@ -8,25 +8,10 @@
     tools:context=".WelcomeActivity">
 
     <TextView
-        android:id="@+id/txtViewWelcome"
-        android:layout_width="wrap_content"
-        android:layout_height="74dp"
-        android:layout_marginTop="150dp"
-        android:fontFamily="cursive"
-        android:text="Welcome to Food"
-        android:textColor="@color/white"
-        android:textSize="60sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TextSizeCheck" />
-
-    <TextView
         android:id="@+id/txtViewTo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="48dp"
         android:fontFamily="cursive"
         android:text="Recipe Application"
         android:textColor="@color/white"
@@ -37,25 +22,65 @@
         app:layout_constraintTop_toBottomOf="@+id/txtViewWelcome" />
 
     <TextView
+        android:id="@+id/textViewEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_email"
+        android:drawablePadding="10dp"
+        android:fontFamily="cursive"
+        android:text="Contact Us"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.832"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewFoodtopia"
+        app:layout_constraintVertical_bias="0.391" />
+
+    <TextView
+        android:id="@+id/txtViewWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="74dp"
+        android:fontFamily="cursive"
+        android:text="Welcome to Food"
+        android:textColor="@color/white"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtViewFoodtopia"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.425"
+        tools:ignore="TextSizeCheck" />
+
+    <TextView
         android:id="@+id/txtViewFoodtopia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="208dp"
         android:fontFamily="cursive"
         android:text="FOODTOPIA"
         android:textAllCaps="true"
-        android:textColor="@color/navigationBarColor"
+        android:textColor="@color/white"
         android:textSize="60sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.545"
         tools:ignore="HardcodedText" />
 
-    <FrameLayout
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:name="com.example.food_recipes_application.BottomNavigationFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewFoodtopia"
+        tools:layout="@layout/fragment_bottom_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
