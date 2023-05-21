@@ -8,68 +8,56 @@
     tools:context=".WelcomeActivity">
 
     <TextView
-        android:id="@+id/txtViewTo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:fontFamily="cursive"
-        android:text="Recipe Application"
-        android:textColor="@color/white"
-        android:textSize="60sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewWelcome" />
-
-    <TextView
         android:id="@+id/textViewEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_email"
         android:drawablePadding="10dp"
-        android:fontFamily="cursive"
+        android:fontFamily="@font/abril_fatface"
         android:text="Contact Us"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.832"
+        app:layout_constraintHorizontal_bias="0.177"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewFoodtopia"
-        app:layout_constraintVertical_bias="0.391" />
+        app:layout_constraintVertical_bias="0.392" />
 
     <TextView
         android:id="@+id/txtViewWelcome"
         android:layout_width="wrap_content"
         android:layout_height="74dp"
-        android:fontFamily="cursive"
-        android:text="Welcome to Food"
+        android:fontFamily="@font/abril_fatface"
+        android:text="@string/welcome"
         android:textColor="@color/white"
         android:textSize="60sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtViewFoodtopia"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.425"
+        app:layout_constraintVertical_bias="0.82"
         tools:ignore="TextSizeCheck" />
 
     <TextView
         android:id="@+id/txtViewFoodtopia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="cursive"
-        android:text="FOODTOPIA"
-        android:textAllCaps="true"
+        android:fontFamily="@font/abril_fatface"
+        android:text="Foodtopia"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="60sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.545"
+        app:layout_constraintVertical_bias="0.469"
         tools:ignore="HardcodedText" />
 
     <androidx.fragment.app.FragmentContainerView

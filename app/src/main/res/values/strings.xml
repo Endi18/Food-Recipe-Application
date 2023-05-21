@@ -16,9 +16,8 @@
     <string name="not_a_user_yet_question">Not a user yet?</string>
     <string name="go_back"><![CDATA[<]]></string>
     <string name="information_icon_letter">i</string>
-    <string name="to">To</string>
     <string name="food_recipe">Food Recipe</string>
-    <string name="welcome">Welcome</string>
+    <string name="welcome">Welcome to</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
