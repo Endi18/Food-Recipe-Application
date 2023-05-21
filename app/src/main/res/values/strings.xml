@@ -6,7 +6,7 @@
     <string name="action_sign_in">Log In</string>
     <string name="login_failed">"Login failed!"</string>
     <string name="guest_mode">Guest Mode</string>
-    <string name="tasty">Tasty</string>
+    <string name="app_title">Foodtopia</string>
     <string name="username">Username</string>
     <string name="backgroundSignUp">Background Image for Sign Up Activity</string>
     <string name="sign_up">Sign Up</string>
