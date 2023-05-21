@@ -2,8 +2,8 @@ package com.example.food_recipes_application;
 
 import android.content.Context;
 
-import com.example.food_recipes_application.Listeners.APIRecipeInformationResponseListener;
-import com.example.food_recipes_application.Models.APIRecipeInformationResponse;
+import com.example.food_recipes_application.Listeners.RecipeDetailsListener;
+import com.example.food_recipes_application.Models.RecipeDetailsResponse;
 import com.example.food_recipes_application.Models.APISearchResponse;
 import com.example.food_recipes_application.Listeners.APISearchResponseListener;
 
@@ -19,8 +19,8 @@ import retrofit2.http.Query;
 public class APIRequestManager {
     Context context;
     String recipeName;
-    Integer recipeId;
-    Retrofit retrofit = new Retrofit.Builder()
+    String recipeId;
+    Retrofit retrofit =new Retrofit. Builder ()
             .baseUrl("https://api.spoonacular.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
@@ -30,23 +30,14 @@ public class APIRequestManager {
         this.recipeName = recipeName;
     }
 
-    public APIRequestManager(Context context, Integer recipeId) {
+    public APIRequestManager(Context context) {
         this.context = context;
-        this.recipeId = recipeId;
-    }
-
-    private interface searchRecipes {
-        @GET("recipes/complexSearch")
-        Call<APISearchResponse> callSearchRecipesAPI(
-                @Query("query") String recipeName,
-                @Query("number") String numberOfResults,
-                @Query("apiKey") String apiKey
-        );
     }
 
     public void getRecipesSearchResults(APISearchResponseListener listener) {
         searchRecipes searchRecipes = retrofit.create(APIRequestManager.searchRecipes.class);
-        Call<APISearchResponse> callResponse = searchRecipes.callSearchRecipesAPI(recipeName, "50", context.getString(R.string.apiKey));
+        Call<APISearchResponse> callResponse = searchRecipes.callSearchRecipesAPI(recipeName,  "20", context.getString(R.string.apiKey));
+
         callResponse.enqueue(new Callback<APISearchResponse>() {
             @Override
             public void onResponse(Call<APISearchResponse> call, Response<APISearchResponse> response) {
@@ -54,7 +45,7 @@ public class APIRequestManager {
                     listener.didError(response.message());
                     return;
                 }
-                listener.didFetch(response.body(), response.message());
+                    listener.didFetch(response.body(), response.message());
             }
 
             @Override
@@ -64,21 +55,13 @@ public class APIRequestManager {
         });
     }
 
-    private interface recipeInformation{
-        @GET("/recipes/{id}/information")
-        Call<APIRecipeInformationResponse> callRecipeInformationAPI(
-                @Path("id") Integer recipeId,
-                @Query("apiKey") String apiKey
-        );
-    }
-
-    public void getRecipeInformationSearchResults(APIRecipeInformationResponseListener listener) {
+    public void getRecipeInformationSearchResults(RecipeDetailsListener listener, int id) {
         recipeInformation recipeInformation = retrofit.create(APIRequestManager.recipeInformation.class);
-        Call<APIRecipeInformationResponse> callResponse = recipeInformation.callRecipeInformationAPI(recipeId, context.getString(R.string.apiKey));
+        Call<RecipeDetailsResponse> callResponse = recipeInformation.callRecipeInformationAPI(recipeId, context.getString(R.string.apiKey));
 
-        callResponse.enqueue(new Callback<APIRecipeInformationResponse>() {
+        callResponse.enqueue(new Callback<RecipeDetailsResponse>() {
             @Override
-            public void onResponse(Call<APIRecipeInformationResponse> call, Response<APIRecipeInformationResponse> response) {
+            public void onResponse(Call<RecipeDetailsResponse> call, Response<RecipeDetailsResponse> response) {
                 if (!response.isSuccessful()) {
                     listener.didError(response.message());
                     return;
@@ -87,9 +70,25 @@ public class APIRequestManager {
             }
 
             @Override
-            public void onFailure(Call<APIRecipeInformationResponse> call, Throwable t) {
+            public void onFailure(Call<RecipeDetailsResponse> call, Throwable t) {
                 listener.didError(t.getMessage());
             }
         });
+    }
+    private interface searchRecipes {
+        @GET("recipes/complexSearch")
+        Call<APISearchResponse> callSearchRecipesAPI(
+                @Query("query") String recipeName,
+                @Query("number") String numberOfResults,
+                @Query("apiKey") String apiKey
+        );
+    }
+
+    private interface recipeInformation{
+        @GET("/recipes/{id}/information")
+        Call<RecipeDetailsResponse> callRecipeInformationAPI(
+                @Path("id") String recipeId,
+                @Query("apiKey") String apiKey
+        );
     }
 }
