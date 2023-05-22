@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.food_recipes_application.Adapters.RecipeSearchResultAdapter;
 import com.example.food_recipes_application.Listeners.APISearchResponseListener;
+import com.example.food_recipes_application.Listeners.RecipeClickListener;
 import com.example.food_recipes_application.Models.APISearchResponse;
 
 public class RecipeSearchResultActivity extends AppCompatActivity {
@@ -36,7 +38,7 @@ public class RecipeSearchResultActivity extends AppCompatActivity {
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new GridLayoutManager(RecipeSearchResultActivity.this, 1));
 
-            adapter = new RecipeSearchResultAdapter(RecipeSearchResultActivity.this, response.results);
+            adapter = new RecipeSearchResultAdapter(RecipeSearchResultActivity.this, response.results, recipeClickListener);
             recyclerView.setAdapter(adapter);
         }
 
@@ -65,4 +67,12 @@ public class RecipeSearchResultActivity extends AppCompatActivity {
        // startActivity(intent);
     }
 
+    private final RecipeClickListener recipeClickListener = new RecipeClickListener() {
+        @Override
+        public void onRecipeClicked(String id) {
+           startActivity(new Intent(RecipeSearchResultActivity.this, RecipeDetailsActivity.class)
+                    .putExtra("id", id));
+          //  Toast.makeText(RecipeSearchResultActivity.this, id, Toast.LENGTH_SHORT).show();
+        }
+    };
 }

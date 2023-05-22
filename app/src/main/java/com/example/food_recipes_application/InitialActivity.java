@@ -21,7 +21,7 @@ public class InitialActivity extends AppCompatActivity {
     }
 
     public void goToSearchPage(View view) {
-       // Intent intent = new Intent(this, .class); @@IMPLEMENT WHEN SEARCH IS DONE
-      //  startActivity(intent);
+       Intent intent = new Intent(this, RecipeSearchResultActivity.class); //@@IMPLEMENT WHEN SEARCH IS DONE
+        startActivity(intent);
     }
 }

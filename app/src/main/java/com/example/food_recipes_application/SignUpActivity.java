@@ -131,6 +131,8 @@ public class SignUpActivity extends AppCompatActivity {
                 password.setText("");
                 confirmPassword.setText("");
                 Toast.makeText(this, "User added successfully!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
             else{
                 Toast.makeText(this, "Email Already Exists!", Toast.LENGTH_SHORT).show();
@@ -139,7 +141,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public boolean confirmInput() {
-        return validateEmail() && validateUsername() && validatePassword() && validateConfirmPassword();
+        return validateUsername() && validateEmail() &&  validatePassword() && validateConfirmPassword();
     }
 
     public void clickAlreadyHaveAnAccount(View view) {

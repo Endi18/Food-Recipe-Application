@@ -58,8 +58,8 @@ public class APIRequestManager {
     }
 
     public void getRecipeInformationSearchResults(RecipeDetailsListener listener, int id) {
-        recipeInformation recipeInformation = retrofit.create(APIRequestManager.recipeInformation.class);
-        Call<RecipeDetailsResponse> callResponse = recipeInformation.callRecipeInformationAPI(recipeId, context.getString(R.string.apiKey));
+        CallRecipeDetails recipeInformation = retrofit.create(CallRecipeDetails.class);
+        Call<RecipeDetailsResponse> callResponse = recipeInformation.callRecipeInformation(Integer.parseInt(recipeId), context.getString(R.string.apiKey));
 
         callResponse.enqueue(new Callback<RecipeDetailsResponse>() {
             @Override
@@ -77,6 +77,28 @@ public class APIRequestManager {
             }
         });
     }
+
+    public void getRecipeDetails(RecipeDetailsListener listener, int id){
+        CallRecipeDetails callRecipeDetails = retrofit.create(CallRecipeDetails.class);
+        Call<RecipeDetailsResponse> call = callRecipeDetails.callRecipeInformation(id, context.getString(R.string.apiKey));
+        call.enqueue(new Callback<RecipeDetailsResponse>() {
+            @Override
+            public void onResponse(Call<RecipeDetailsResponse> call, Response<RecipeDetailsResponse> response) {
+                if (!response.isSuccessful()) {
+                    listener.didError(response.message());
+                    return;
+                }
+                listener.didFetch(response.body(), response.message());
+            }
+
+            @Override
+            public void onFailure(Call<RecipeDetailsResponse> call, Throwable t) {
+                listener.didError(t.getMessage());
+
+            }
+        });
+    }
+
     private interface searchRecipes {
         @GET("recipes/complexSearch")
         Call<APISearchResponse> callSearchRecipesAPI(
@@ -86,10 +108,10 @@ public class APIRequestManager {
         );
     }
 
-    private interface recipeInformation{
+    private interface CallRecipeDetails {
         @GET("/recipes/{id}/information")
-        Call<RecipeDetailsResponse> callRecipeInformationAPI(
-                @Path("id") String recipeId,
+        Call<RecipeDetailsResponse> callRecipeInformation(
+                @Path("id") int id,
                 @Query("apiKey") String apiKey
         );
     }
