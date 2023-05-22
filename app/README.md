@@ -1,4 +1,4 @@
-# Tasty - A Food Recipes Application
+# Foodtopia - A Food Recipes Application
 
 ## Team Members
 
@@ -8,9 +8,9 @@
 
 ## Project Description
 
-For the Mobile Application Development course, we decided to develop a food recipes application. With our app, named "Tasty", users can either opt to log in or continue in guest mode so as to access a vast collection of delicious recipes from different cuisines all around the world.
+For the Mobile Application Development course, we decided to develop a food recipes application. With our app, named "Foodtopia", users can either opt to log in or continue in guest mode so as to access a vast collection of delicious recipes from different cuisines all around the world.
 
-Inside our app, we have incorporated a search function that allows users to easily browse through hundreds of recipes simply by entering a keyword. Moreover, the "Tasty" app also allows users to like their favorite recipes, making it easy to save and revisit them later, in their own dedicated "Favorites" page.
+Inside our app, we have incorporated a search function that allows users to easily browse through hundreds of recipes simply by entering a keyword. Moreover, the "Foodtopia" app also allows users to like their favorite recipes, making it easy to save and revisit them later, in their own dedicated "Favorites" page.
 
 Overall, thanks to its user-friendly interface and extensive recipe collection, our food recipes app is a must-have for anyone who loves to cook and experiment with new flavors, all through the convenience of their own mobile phone.
 
@@ -72,7 +72,7 @@ The `RecipeSearchResultViewHolder` class is an inner class that extends `Recycle
 
 ### Activities
 
-Delving into more detail, we have created multi-activities that allow users to perform various actions inside the "Tasty" application. These are those activities:
+Delving into more detail, we have created multi-activities that allow users to perform various actions inside the "Foodtopia" application. These are those activities:
 
 #### Initial Activity
 ##### _Author: Sara Hoxha_
@@ -103,7 +103,7 @@ The `goBackToSearchPage()` method is called when the user clicks the "Back" butt
 
 
 ## External Resources
-To provide a way for the "Tasty" application to access and retrieve data about various food recipes, ingredients, and nutritional information, we have used the Spoonacular Food API. Through using two API functions, namely Search Recipes and Get Recipe Information, we were able to offer a vast array of recipes that are updated regularly and provide our users with accurate information about ingredients, measurements, and nutritional values for their chosen recipes.
+To provide a way for the "Foodtopia" application to access and retrieve data about various food recipes, ingredients, and nutritional information, we have used the Spoonacular Food API. Through using two API functions, namely Search Recipes and Get Recipe Information, we were able to offer a vast array of recipes that are updated regularly and provide our users with accurate information about ingredients, measurements, and nutritional values for their chosen recipes.
 
 **Spoonacular Food API** - https://spoonacular.com/food-api
 
