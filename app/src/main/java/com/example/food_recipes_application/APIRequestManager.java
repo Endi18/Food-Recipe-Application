@@ -2,6 +2,8 @@ package com.example.food_recipes_application;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.example.food_recipes_application.Listeners.RecipeDetailsListener;
 import com.example.food_recipes_application.Models.RecipeDetailsResponse;
 import com.example.food_recipes_application.Models.APISearchResponse;
@@ -40,7 +42,7 @@ public class APIRequestManager {
 
         callResponse.enqueue(new Callback<APISearchResponse>() {
             @Override
-            public void onResponse(Call<APISearchResponse> call, Response<APISearchResponse> response) {
+            public void onResponse(@NonNull Call<APISearchResponse> call, @NonNull Response<APISearchResponse> response) {
                 if (!response.isSuccessful()) {
                     listener.didError(response.message());
                     return;
@@ -49,7 +51,7 @@ public class APIRequestManager {
             }
 
             @Override
-            public void onFailure(Call<APISearchResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<APISearchResponse> call, @NonNull Throwable t) {
                 listener.didError(t.getMessage());
             }
         });
@@ -61,7 +63,7 @@ public class APIRequestManager {
 
         callResponse.enqueue(new Callback<RecipeDetailsResponse>() {
             @Override
-            public void onResponse(Call<RecipeDetailsResponse> call, Response<RecipeDetailsResponse> response) {
+            public void onResponse(@NonNull Call<RecipeDetailsResponse> call, @NonNull Response<RecipeDetailsResponse> response) {
                 if (!response.isSuccessful()) {
                     listener.didError(response.message());
                     return;
@@ -70,7 +72,7 @@ public class APIRequestManager {
             }
 
             @Override
-            public void onFailure(Call<RecipeDetailsResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<RecipeDetailsResponse> call, @NonNull Throwable t) {
                 listener.didError(t.getMessage());
             }
         });
