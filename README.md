@@ -77,11 +77,15 @@ Delving into more detail, we have created multi-activities that allow users to p
 #### Initial Activity
 ##### _Author: Sara Hoxha_
 
+![Initial Activity](app-screenshots/initialActivity.png)
+
 When the user first launches the application, he is shown an acitivty that allows the user to opt for authentication or to continue using our application in Guest Mode. This choice is facilitated through the use of Buttons. If the user clicks on the "Log in" button, he is redirected to the Login Activity. Alternatively, if the user clicks on the "Guest Mode" button, he is directly redirected to the Search Recipes Activity.This redirection is done through the use of explicit intents.
 
 
 #### Login Activity
 ##### _Author: Sara Hoxha_
+
+![Login Activity](app-screenshots/loginActivity.png)
 
 After being redirected to the Login Activity, the user will be prompted to enter their email and password. After finishing entering their credentials, the user can try to authenticate and enter the application by clicking on the button "Log In". Firstly, after the user has clicked this button, we check if the user has provided an email and password, and if the email is in valid format. If these conditions are not fulfilled, we display an error message to the appropriate TextView and require the user to amend this data. If this data is entered and in valid format, we check these credentials checked against the data stored in our SQLite database. The process of authentication works by querying the database to see if the entered email and password exists in our database. If a match is found, the user is authenticated and they are redirected to the "Search Activity", through the use of an explicit intent that also sends the authenticated user ID as part of the message. On the other hand, if there is not a match found, the application will display an error toast message indicating that the login failed due to invalid data.
 
@@ -90,6 +94,8 @@ Furthermore, we also have the option for the user to register if they haven't al
 
 #### Recipe Search Result Activity
 ##### _Author: Sara Hoxha_
+
+![Recipe Search Result Activity](app-screenshots/RecipeResultsActivity.png)
 
 The `RecipeSearchResultActivity` is used to display the search results of recipes, based on the keyword provided by the user.
 
