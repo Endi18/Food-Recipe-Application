@@ -1,4 +1,4 @@
-# Tasty - A Food Recipes Application
+# Foodtopia - A Food Recipes Application
 
 ## Team Members
 
@@ -8,9 +8,9 @@
 
 ## Project Description
 
-For the Mobile Application Development course, we decided to develop a food recipes application. With our app, named "Tasty", users can either opt to log in or continue in guest mode so as to access a vast collection of delicious recipes from different cuisines all around the world.
+For the Mobile Application Development course, we decided to develop a food recipes application. With our app, named "Foodtopia", users can either opt to log in or continue in guest mode so as to access a vast collection of delicious recipes from different cuisines all around the world.
 
-Inside our app, we have incorporated a search function that allows users to easily browse through hundreds of recipes simply by entering a keyword. Moreover, the "Tasty" app also allows users to like their favorite recipes, making it easy to save and revisit them later, in their own dedicated "Favorites" page.
+Inside our app, we have incorporated a search function that allows users to easily browse through hundreds of recipes simply by entering a keyword. Moreover, the "Foodtopia" app also allows users to like their favorite recipes, making it easy to save and revisit them later, in their own dedicated "Favorites" page.
 
 Overall, thanks to its user-friendly interface and extensive recipe collection, our food recipes app is a must-have for anyone who loves to cook and experiment with new flavors, all through the convenience of their own mobile phone.
 
@@ -72,16 +72,20 @@ The `RecipeSearchResultViewHolder` class is an inner class that extends `Recycle
 
 ### Activities
 
-Delving into more detail, we have created multi-activities that allow users to perform various actions inside the "Tasty" application. These are those activities:
+Delving into more detail, we have created multi-activities that allow users to perform various actions inside the "Foodtopia" application. These are those activities:
 
 #### Initial Activity
 ##### _Author: Sara Hoxha_
+
+![Initial Activity](app-screenshots/initialActivity.png)
 
 When the user first launches the application, he is shown an acitivty that allows the user to opt for authentication or to continue using our application in Guest Mode. This choice is facilitated through the use of Buttons. If the user clicks on the "Log in" button, he is redirected to the Login Activity. Alternatively, if the user clicks on the "Guest Mode" button, he is directly redirected to the Search Recipes Activity.This redirection is done through the use of explicit intents.
 
 
 #### Login Activity
 ##### _Author: Sara Hoxha_
+
+![Login Activity](app-screenshots/loginActivity.png)
 
 After being redirected to the Login Activity, the user will be prompted to enter their email and password. After finishing entering their credentials, the user can try to authenticate and enter the application by clicking on the button "Log In". Firstly, after the user has clicked this button, we check if the user has provided an email and password, and if the email is in valid format. If these conditions are not fulfilled, we display an error message to the appropriate TextView and require the user to amend this data. If this data is entered and in valid format, we check these credentials checked against the data stored in our SQLite database. The process of authentication works by querying the database to see if the entered email and password exists in our database. If a match is found, the user is authenticated and they are redirected to the "Search Activity", through the use of an explicit intent that also sends the authenticated user ID as part of the message. On the other hand, if there is not a match found, the application will display an error toast message indicating that the login failed due to invalid data.
 
@@ -90,6 +94,8 @@ Furthermore, we also have the option for the user to register if they haven't al
 
 #### Recipe Search Result Activity
 ##### _Author: Sara Hoxha_
+
+![Recipe Search Result Activity](app-screenshots/RecipeResultsActivity.png)
 
 The `RecipeSearchResultActivity` is used to display the search results of recipes, based on the keyword provided by the user.
 
@@ -103,7 +109,7 @@ The `goBackToSearchPage()` method is called when the user clicks the "Back" butt
 
 
 ## External Resources
-To provide a way for the "Tasty" application to access and retrieve data about various food recipes, ingredients, and nutritional information, we have used the Spoonacular Food API. Through using two API functions, namely Search Recipes and Get Recipe Information, we were able to offer a vast array of recipes that are updated regularly and provide our users with accurate information about ingredients, measurements, and nutritional values for their chosen recipes.
+To provide a way for the "Foodtopia" application to access and retrieve data about various food recipes, ingredients, and nutritional information, we have used the Spoonacular Food API. Through using two API functions, namely Search Recipes and Get Recipe Information, we were able to offer a vast array of recipes that are updated regularly and provide our users with accurate information about ingredients, measurements, and nutritional values for their chosen recipes.
 
 **Spoonacular Food API** - https://spoonacular.com/food-api
 
