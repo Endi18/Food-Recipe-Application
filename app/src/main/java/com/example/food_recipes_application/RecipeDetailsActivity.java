@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.food_recipes_application.Adapter.IngredientsAdapter;
+import com.example.food_recipes_application.Adapters.IngredientsAdapter;
 import com.example.food_recipes_application.Listeners.RecipeDetailsListener;
 import com.example.food_recipes_application.Models.RecipeDetailsResponse;
 import com.squareup.picasso.Picasso;

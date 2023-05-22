@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void goToSearchActivity(View view) {
         if(isDataCorrect) {
-            Intent intent = new Intent(this, InitialActivity.class); //@@ SWITCH TO SEARCH ACTIVITY WHEN IMPLEMENTED
+            Intent intent = new Intent(this, WelcomeActivity.class);
             intent.putExtra("UserId", userId);
             startActivity(intent);
         }

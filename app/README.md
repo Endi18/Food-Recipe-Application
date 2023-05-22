@@ -19,7 +19,7 @@ Overall, thanks to its user-friendly interface and extensive recipe collection, 
 ### Classes
 
 #### APIRequestManager
-##### _Author: Sara Hoxha_
+##### _Author: Sara Hoxha & Endi Triço_
 
 To make API requests to retrieve recipe information from the Spoonacular API, we have implemented the `APIRequestManager` class. The class contains two constructors, one for searching recipes by name and another for searching recipes information by recipes ID. Moreover, the class utilizes Retrofit library to handle network requests and responses.
 
@@ -36,8 +36,8 @@ Moreover, the class contains two methods to get search results and to get the re
 
 The `getRecipesSearchResults` takes as listener the APISearchResponseListener, whereas the `getRecipeInformationSearchResults` takes the APIRecipeInformationResponseListener listener.
 
-#### APIRecipeInformationResponseListener
-##### _Author: Sara Hoxha_
+#### APIRecipeInformationResponseListener 
+##### _Author: Endi Triço_
 
 The `APIRecipeInformationResponseListener` is an interface that defines two methods that must be implemented by any class that wants to listen for and handle the response of an API request made to retrieve information for a specific recipe from the Spoonacular API.
 

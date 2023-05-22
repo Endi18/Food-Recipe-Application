@@ -34,7 +34,7 @@ public class BottomNavigationFragment extends Fragment {
             } else if (itemId == R.id.menu_search) {
                 startActivity(new Intent(getActivity(), InitialActivity.class));
                 return true;
-            } else if (itemId == R.id.menu_love) {
+            } else if (itemId == R.id.menu_favorites) {
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 return true;
             } else if (itemId == R.id.menu_profile) {

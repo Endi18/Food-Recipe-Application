@@ -13,40 +13,46 @@
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_email"
         android:drawablePadding="10dp"
-        android:fontFamily="@font/abril_fatface"
-        android:text="Contact Us"
+        android:fontFamily="@font/aclonica"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.177"
+        app:layout_constraintHorizontal_bias="0.957"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewFoodtopia"
-        app:layout_constraintVertical_bias="0.392" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
 
     <TextView
         android:id="@+id/txtViewWelcome"
         android:layout_width="wrap_content"
         android:layout_height="74dp"
-        android:fontFamily="@font/abril_fatface"
+        android:fontFamily="@font/aclonica"
+        android:shadowColor="@color/black"
+        android:shadowDx="3"
+        android:shadowDy="2"
+        android:shadowRadius="10"
         android:text="@string/welcome"
         android:textColor="@color/white"
-        android:textSize="60sp"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtViewFoodtopia"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.82"
+        app:layout_constraintVertical_bias="0.863"
         tools:ignore="TextSizeCheck" />
 
     <TextView
         android:id="@+id/txtViewFoodtopia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/abril_fatface"
+        android:fontFamily="@font/aclonica"
+        android:shadowColor="@color/black"
+        android:shadowDx="3"
+        android:shadowDy="2"
+        android:shadowRadius="10"
         android:text="Foodtopia"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -54,10 +60,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.469"
+        app:layout_constraintVertical_bias="0.456"
         tools:ignore="HardcodedText" />
 
     <androidx.fragment.app.FragmentContainerView
@@ -65,10 +70,10 @@
         android:name="com.example.food_recipes_application.BottomNavigationFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewFoodtopia"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_bottom_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
