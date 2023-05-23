@@ -62,6 +62,5 @@ class InstructionStepViewHolder extends RecyclerView.ViewHolder {
         textView_instructions_step_title = itemView.findViewById(R.id.textView_instructions_step_title);
         recycler_instructions_equipments = itemView.findViewById(R.id.recycler_instructions_equipments);
         recycler_instructions_ingredients = itemView.findViewById(R.id.recycler_instructions_ingredients);
-
     }
 }

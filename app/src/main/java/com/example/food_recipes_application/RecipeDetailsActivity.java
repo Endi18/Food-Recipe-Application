@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,7 +83,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         @Override
         public void didFetch(List<InstructionsResponse> response, String message) {
             recycler_meal_instructions.setHasFixedSize(true);
-            recycler_meal_ingredients.setLayoutManager(new LinearLayoutManager(RecipeDetailsActivity.this, LinearLayoutManager.VERTICAL, false));
+            recycler_meal_instructions.setLayoutManager(new LinearLayoutManager(RecipeDetailsActivity.this, LinearLayoutManager.VERTICAL, false));
             instructionsAdapter = new InstructionsAdapter(RecipeDetailsActivity.this, response);
             recycler_meal_instructions.setAdapter(instructionsAdapter);
         }
@@ -91,4 +93,9 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
         }
     };
+
+    public void goBackToSearchActivity(View view){
+        //Intent intent = new Intent(this, InitialActivity.class);
+        //startActivity(intent);
+    }
 }

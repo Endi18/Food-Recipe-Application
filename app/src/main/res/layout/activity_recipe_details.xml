@@ -9,10 +9,24 @@
     tools:context=".RecipeDetailsActivity">
 
     <androidx.appcompat.widget.Toolbar
-        app:title="Recipe Details"
-        app:titleTextColor="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" />
+        android:layout_height="?attr/actionBarSize"
+        android:textAlignment="center"
+        android:layout_marginLeft="70dp"
+        app:title="Recipe Details"
+        app:titleTextColor="@color/white" />
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="70dp"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="-65dp"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="@android:string/yes"
+        android:drawableEnd="@drawable/baseline_arrow_back_24"
+        android:onClick="goBackToSearchActivity"
+        android:textSize="34sp" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -26,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textView_meal_name"
                 android:text="Recipe Name"
+                android:fontFamily="@font/aclonica"
                 android:textSize="20sp"
                 android:gravity="center"
                 android:textColor="@color/white"
@@ -60,7 +75,7 @@
                 android:layout_height="wrap_content"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_meal_instructions"
-                android:layout_margin="10dp"
+                android:layout_margin="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
