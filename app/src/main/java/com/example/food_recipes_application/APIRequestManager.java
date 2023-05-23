@@ -4,10 +4,14 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.example.food_recipes_application.Listeners.InstructionsListener;
 import com.example.food_recipes_application.Listeners.RecipeDetailsListener;
+import com.example.food_recipes_application.Models.InstructionsResponse;
 import com.example.food_recipes_application.Models.RecipeDetailsResponse;
 import com.example.food_recipes_application.Models.APISearchResponse;
 import com.example.food_recipes_application.Listeners.APISearchResponseListener;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,6 +26,7 @@ public class APIRequestManager {
     Context context;
     String recipeName;
     String recipeId;
+
     Retrofit retrofit =new Retrofit. Builder ()
             .baseUrl("https://api.spoonacular.com/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -62,7 +67,7 @@ public class APIRequestManager {
         Call<RecipeDetailsResponse> call = callRecipeDetails.callRecipeInformation(id, context.getString(R.string.apiKey));
         call.enqueue(new Callback<RecipeDetailsResponse>() {
             @Override
-            public void onResponse(Call<RecipeDetailsResponse> call, Response<RecipeDetailsResponse> response) {
+            public void onResponse(@NonNull Call<RecipeDetailsResponse> call, @NonNull Response<RecipeDetailsResponse> response) {
                 if (!response.isSuccessful()) {
                     listener.didError(response.message());
                     return;
@@ -71,9 +76,29 @@ public class APIRequestManager {
             }
 
             @Override
-            public void onFailure(Call<RecipeDetailsResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<RecipeDetailsResponse> call, @NonNull Throwable t) {
                 listener.didError(t.getMessage());
 
+            }
+        });
+    }
+
+    public void getInstructions(InstructionsListener listener, int id){
+        CallInstructions callInstructions = retrofit.create(CallInstructions.class);
+        Call<List<InstructionsResponse>> call = callInstructions.callInstructions(id, context.getString(R.string.apiKey));
+        call.enqueue(new Callback<List<InstructionsResponse>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<InstructionsResponse>> call, @NonNull Response<List<InstructionsResponse>> response) {
+                if(!response.isSuccessful()){
+                    listener.didError(response.message());
+                    return;
+                }
+                listener.didFetch(response.body(), response.message());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<InstructionsResponse>> call, @NonNull Throwable t) {
+                listener.didError(t.getMessage());
             }
         });
     }
@@ -90,6 +115,14 @@ public class APIRequestManager {
     private interface CallRecipeDetails {
         @GET("/recipes/{id}/information")
         Call<RecipeDetailsResponse> callRecipeInformation(
+                @Path("id") int id,
+                @Query("apiKey") String apiKey
+        );
+    }
+
+    private interface CallInstructions{
+        @GET("recipes/{id}/analyzedInstructions")
+        Call<List<InstructionsResponse>> callInstructions(
                 @Path("id") int id,
                 @Query("apiKey") String apiKey
         );
