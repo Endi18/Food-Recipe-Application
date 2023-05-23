@@ -33,7 +33,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
         id = Integer.parseInt(getIntent().getStringExtra("id"));
         manager = new APIRequestManager(this);
-        manager.getRecipeInformationSearchResults(recipeDetailslistener, id);
+        manager.getRecipeDetails(recipeDetailslistener, id);
         dialog = new ProgressDialog(this);
         dialog.setTitle("Loading Details...");
         dialog.show();

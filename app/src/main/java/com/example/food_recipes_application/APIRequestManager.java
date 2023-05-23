@@ -57,27 +57,6 @@ public class APIRequestManager {
         });
     }
 
-    public void getRecipeInformationSearchResults(RecipeDetailsListener listener, int id) {
-        CallRecipeDetails recipeInformation = retrofit.create(CallRecipeDetails.class);
-        Call<RecipeDetailsResponse> callResponse = recipeInformation.callRecipeInformation(Integer.parseInt(recipeId), context.getString(R.string.apiKey));
-
-        callResponse.enqueue(new Callback<RecipeDetailsResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<RecipeDetailsResponse> call, @NonNull Response<RecipeDetailsResponse> response) {
-                if (!response.isSuccessful()) {
-                    listener.didError(response.message());
-                    return;
-                }
-                listener.didFetch(response.body(), response.message());
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<RecipeDetailsResponse> call, @NonNull Throwable t) {
-                listener.didError(t.getMessage());
-            }
-        });
-    }
-
     public void getRecipeDetails(RecipeDetailsListener listener, int id){
         CallRecipeDetails callRecipeDetails = retrofit.create(CallRecipeDetails.class);
         Call<RecipeDetailsResponse> call = callRecipeDetails.callRecipeInformation(id, context.getString(R.string.apiKey));
