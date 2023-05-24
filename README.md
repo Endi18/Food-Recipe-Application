@@ -70,7 +70,6 @@ The didFetch method is called when the API request is successful and the respons
 
 The didError method is called when there is an error in the API request and the response is not successful. This method takes in a message string that describes the error that occurred.
 
-
 #### RecipeSearchResultAdapter
 ##### _Author: Sara Hoxha_
 
@@ -84,7 +83,6 @@ The `onCreateViewHolder()` method creates a new instance of the `RecipeSearchRes
 ##### _Author: Sara Hoxha_
 
 The `RecipeSearchResultViewHolder` class is an inner class that extends `RecyclerView.ViewHolder`. It has a constructor that takes a `View` object and initializes the card view, the dish name, and the dish image that will be displayed in the layout.
-
 
 ### Activities
 

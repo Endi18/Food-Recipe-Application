@@ -12,6 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import com.example.food_recipes_application.Adapters.IngredientsAdapter;
 import com.example.food_recipes_application.Adapters.InstructionsAdapter;
 import com.example.food_recipes_application.Listeners.InstructionsListener;
@@ -64,7 +69,10 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             dialog.dismiss();
             textView_meal_name.setText(response.title);
             textView_meal_source.setText(response.sourceName);
-            textView_meal_summary.setText(response.summary);
+            Document doc = Jsoup.parse(response.summary);
+
+            String plainText = doc.text();
+            textView_meal_summary.setText(plainText);
             Picasso.get().load(response.image).into(imageView_meal_image);
 
             recycler_meal_ingredients.setHasFixedSize(true);
@@ -95,7 +103,8 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     };
 
     public void goBackToSearchActivity(View view){
-        //Intent intent = new Intent(this, InitialActivity.class);
-        //startActivity(intent);
+        Intent intent = new Intent(RecipeDetailsActivity.this, RecipeSearchResultActivity.class);
+        intent.putExtra("id", id);
+        startActivity(intent);
     }
 }
