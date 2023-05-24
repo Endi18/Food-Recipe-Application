@@ -7,7 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.view.View;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -21,17 +21,9 @@ public class WelcomeActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, bottomNavigationFragment);
         transaction.commit();
+    }
 
-        TextView textEmail = findViewById(R.id.textViewEmail);
-
-        textEmail.setOnClickListener(v -> {
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:"));
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"info@foodtopia.al"});
-
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
-        });
+    public void emailTo(View view){
+        startActivity( new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:info@foodtopia.al")));
     }
 }

@@ -53,7 +53,7 @@ public class RecipeSearchResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_search_result);
-       //recipeSearchKeyword = getIntent().getStringExtra(""); //@@ADD INTENT KEY HERE FROM SEARCH ACTIVITY
+        recipeSearchKeyword = getIntent().getStringExtra("detailsId"); //@@ADD INTENT KEY HERE FROM SEARCH ACTIVITY
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading Recipes...");
 

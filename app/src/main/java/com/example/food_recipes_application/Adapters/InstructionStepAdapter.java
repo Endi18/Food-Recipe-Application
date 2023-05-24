@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,12 +39,22 @@ public class InstructionStepAdapter extends RecyclerView.Adapter<InstructionStep
         holder.recycler_instructions_ingredients.setHasFixedSize(true);
         holder.recycler_instructions_ingredients.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         InstructionsIngredientsAdapter instructionsIngredientsAdapter = new InstructionsIngredientsAdapter(context, list.get(position).ingredients);
-        holder.recycler_instructions_ingredients.setAdapter(instructionsIngredientsAdapter);
+        if(!instructionsIngredientsAdapter.list.isEmpty()) {
+            holder.textView_ingredients.setText("Ingredients");
+            holder.recycler_instructions_ingredients.setAdapter(instructionsIngredientsAdapter);
+        }
+        else
+            holder.LinearLayout_Ingredients.setVisibility(View.GONE);
 
         holder.recycler_instructions_equipments.setHasFixedSize(true);
         holder.recycler_instructions_equipments.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         InstructionsEquipmentsAdapter instructionsEquipmentsAdapter = new InstructionsEquipmentsAdapter(context, list.get(position).equipment);
-        holder.recycler_instructions_equipments.setAdapter(instructionsEquipmentsAdapter);
+        if(!instructionsEquipmentsAdapter.list.isEmpty()) {
+            holder.textView_equipments.setText("Equipments");
+            holder.recycler_instructions_equipments.setAdapter(instructionsEquipmentsAdapter);
+        }
+        else
+            holder.LinearLayout_Equipments.setVisibility(View.GONE);
     }
 
     @Override
@@ -53,8 +64,11 @@ public class InstructionStepAdapter extends RecyclerView.Adapter<InstructionStep
 }
 
 class InstructionStepViewHolder extends RecyclerView.ViewHolder {
-    TextView textView_instructions_step_number, textView_instructions_step_title;
+    TextView textView_instructions_step_number, textView_instructions_step_title, textView_equipments, textView_ingredients;
     RecyclerView recycler_instructions_equipments, recycler_instructions_ingredients;
+
+    LinearLayout LinearLayout_Equipments, LinearLayout_Ingredients;
+
 
     public InstructionStepViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -62,5 +76,9 @@ class InstructionStepViewHolder extends RecyclerView.ViewHolder {
         textView_instructions_step_title = itemView.findViewById(R.id.textView_instructions_step_title);
         recycler_instructions_equipments = itemView.findViewById(R.id.recycler_instructions_equipments);
         recycler_instructions_ingredients = itemView.findViewById(R.id.recycler_instructions_ingredients);
+        textView_equipments = itemView.findViewById(R.id.textView_equipments);
+        textView_ingredients = itemView.findViewById(R.id.textView_ingredients);
+        LinearLayout_Equipments = itemView.findViewById(R.id.LinearLayout_Equipments);
+        LinearLayout_Ingredients = itemView.findViewById(R.id.LinearLayout_Ingredients);
     }
 }

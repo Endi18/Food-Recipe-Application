@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:id="@+id/LinearLayout_Ingredients"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -36,11 +37,13 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/LinearLayout_Equipments"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="Equipments"
+                android:id="@+id/textView_equipments"
+                android:text=""
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:textAlignment="textStart"
@@ -59,7 +62,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="Ingredients"
+                android:id="@+id/textView_ingredients"
+                android:text=""
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:textAlignment="textStart"

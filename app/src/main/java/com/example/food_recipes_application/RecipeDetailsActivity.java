@@ -14,8 +14,6 @@ import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import com.example.food_recipes_application.Adapters.IngredientsAdapter;
 import com.example.food_recipes_application.Adapters.InstructionsAdapter;
@@ -36,7 +34,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     ProgressDialog dialog;
     IngredientsAdapter ingredientsAdapter;
     InstructionsAdapter instructionsAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +101,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
     public void goBackToSearchActivity(View view){
         Intent intent = new Intent(RecipeDetailsActivity.this, RecipeSearchResultActivity.class);
-        intent.putExtra("id", id);
+        intent.putExtra("detailsId", id);
         startActivity(intent);
     }
 }

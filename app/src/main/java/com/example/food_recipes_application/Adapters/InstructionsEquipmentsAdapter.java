@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.food_recipes_application.Models.Equipment;
-import com.example.food_recipes_application.Models.Ingredient;
 import com.example.food_recipes_application.R;
 import com.squareup.picasso.Picasso;
 
@@ -36,7 +35,7 @@ public class InstructionsEquipmentsAdapter extends RecyclerView.Adapter<Instruct
     public void onBindViewHolder(@NonNull InstructionsEquipmentsViewHolder holder, int position) {
         holder.textView_instructions_step_item.setText(list.get(position).name);
         holder.textView_instructions_step_item.setSelected(true);
-        Picasso.get().load("https://spoonacular.com/cdn/equipment_100x100/"+list.get(position).image).into(holder.imageView_instructions_step_items);
+        Picasso.get().load("https://spoonacular.com/cdn/equipment_100x100/" + list.get(position).image).into(holder.imageView_instructions_step_items);
     }
 
     @Override
@@ -47,11 +46,12 @@ public class InstructionsEquipmentsAdapter extends RecyclerView.Adapter<Instruct
 
 class InstructionsEquipmentsViewHolder extends RecyclerView.ViewHolder{
     ImageView imageView_instructions_step_items;
-    TextView textView_instructions_step_item;
+    TextView textView_instructions_step_item, textView_equipments;
 
     public InstructionsEquipmentsViewHolder(@NonNull View itemView) {
         super(itemView);
         imageView_instructions_step_items = itemView.findViewById(R.id.imageView_instructions_step_items);
         textView_instructions_step_item = itemView.findViewById(R.id.textView_instructions_step_item);
+        textView_equipments = itemView.findViewById(R.id.textView_equipments);
     }
 }
