@@ -44,7 +44,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
         id = Integer.parseInt(getIntent().getStringExtra("id"));
         manager = new APIRequestManager(this);
-        manager.getRecipeDetails(recipeDetailslistener, id);
+        manager.getRecipeDetails(recipeDetailsListener, id);
         manager.getInstructions(instructionsListener, id);
         dialog = new ProgressDialog(this);
         dialog.setTitle("Loading Details...");
@@ -60,7 +60,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         recycler_meal_instructions = findViewById(R.id.recycler_meal_instructions);
     }
 
-    private final RecipeDetailsListener recipeDetailslistener = new RecipeDetailsListener() {
+    private final RecipeDetailsListener recipeDetailsListener = new RecipeDetailsListener() {
         @Override
         public void didFetch(RecipeDetailsResponse response, String message) {
             dialog.dismiss();

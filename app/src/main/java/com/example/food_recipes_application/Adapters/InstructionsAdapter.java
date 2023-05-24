@@ -32,7 +32,6 @@ public class InstructionsAdapter extends RecyclerView.Adapter<InstructionsViewHo
 
     @Override
     public void onBindViewHolder(@NonNull InstructionsViewHolder holder, int position) {
-        //holder.textView_instruction_name.setText(list.get(position).name);
         holder.recycler_instruction_steps.setHasFixedSize(true);
         holder.recycler_instruction_steps.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         InstructionStepAdapter stepAdapter = new InstructionStepAdapter(context, list.get(position).steps);
@@ -46,13 +45,10 @@ public class InstructionsAdapter extends RecyclerView.Adapter<InstructionsViewHo
 }
 
 class InstructionsViewHolder extends RecyclerView.ViewHolder {
-
-    //TextView textView_instruction_name;
     RecyclerView recycler_instruction_steps;
 
     public InstructionsViewHolder(@NonNull View itemView) {
         super(itemView);
-        //textView_instruction_name = itemView.findViewById(R.id.textView_instruction_name);
         recycler_instruction_steps = itemView.findViewById(R.id.recycler_instruction_steps);
     }
 }

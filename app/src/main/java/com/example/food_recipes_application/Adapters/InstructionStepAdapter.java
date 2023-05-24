@@ -66,7 +66,6 @@ public class InstructionStepAdapter extends RecyclerView.Adapter<InstructionStep
 class InstructionStepViewHolder extends RecyclerView.ViewHolder {
     TextView textView_instructions_step_number, textView_instructions_step_title, textView_equipments, textView_ingredients;
     RecyclerView recycler_instructions_equipments, recycler_instructions_ingredients;
-
     LinearLayout LinearLayout_Equipments, LinearLayout_Ingredients;
 
 

@@ -51,7 +51,6 @@ class IngredientsViewHolder extends RecyclerView.ViewHolder {
     TextView textView_ingredients_quantity, textView_ingredients_name;
     ImageView imageView_ingredients;
 
-
     public IngredientsViewHolder(@NonNull View itemView) {
         super(itemView);
         textView_ingredients_quantity = itemView.findViewById(R.id.textView_ingredients_quantity);
