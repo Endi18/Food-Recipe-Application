@@ -36,12 +36,28 @@ Moreover, the class contains two methods to get search results and to get the re
 
 The `getRecipesSearchResults` takes as listener the APISearchResponseListener, whereas the `getRecipeInformationSearchResults` takes the APIRecipeInformationResponseListener listener.
 
-#### APIRecipeInformationResponseListener 
+#### RecipeDetailsListener 
 ##### _Author: Endi Triço_
 
-The `APIRecipeInformationResponseListener` is an interface that defines two methods that must be implemented by any class that wants to listen for and handle the response of an API request made to retrieve information for a specific recipe from the Spoonacular API.
+The `RecipeDetailsListener` is an interface that defines two methods that must be implemented by any class that wants to listen for and handle the response of an API request to retrieve a detailed information regarding a specific recipe using Spoonacular API.
 
-The didFetch method is called when the API request is successful and the response contains the information for the requested recipe. This method takes in the APIRecipeInformationResponse object as a parameter, which contains the recipe information, and a message string that describes the status of the response.
+The didFetch method is called when the API request is successful and the response contains the information for the requested recipe. This method takes in the RecipeDetailsListener object as a parameter, which contains the recipe information, and a message string that describes the status of the response.
+
+The didError method is called when there is an error in the API request and the response is not successful. This method takes in a message string that describes the error that occurred.
+
+#### RecipeClickListener
+##### _Author: Endi Triço_
+
+The `RecipeClickListener` is an interface that defines only one method that must be implemented by any class that wants to listen for and handle the response of an API request to get the detailed information by using the click event.
+
+This interface defines only one method named onRecipeClicked that takes as parameter the id of the recipe of type String, which corresponds to the image or name of the food that the user will click on.
+
+#### InstructionsListener
+##### _Author: Endi Triço_
+
+The `Instructions Listener` is an interface that defines two methods that must be implemented by any class that wants to listen for and handle the response of an API request to get the instructions that the user needs to follow to cook their delicious recipe by using the Spoonacular API.
+
+The didFetch method is called when the API request is successful and the response contains the information for the requested instructions' recipe. This method takes in a List of InstructionsResponse objects as a parameter, which contains the instructions information, and a message string that describes the status of the response.
 
 The didError method is called when there is an error in the API request and the response is not successful. This method takes in a message string that describes the error that occurred.
 
