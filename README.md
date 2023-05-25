@@ -44,21 +44,24 @@ Furthermore, we also have the option for the user to register if they haven't al
 #### Recipe Search Result Activity
 ##### _Author: Endi Triço_
 
-It is an activity class named `RecipeDetailsActivity`. The purpose of this activity is to show the details of the selected recipe by introducing a summary, instruction, ingredients, and equipments that will be needed to cook delicious foods.
+It is an activity class named `RecipeDetailsActivity`. The purpose of this activity is to show the details of the selected recipe by introducing the summary, instructions, ingredients, and equipments that will be needed to cook this delicious foods.
 
 The activity extends `AppCompatActivity` to create an activity. Various views such as TextView, ImageView, and RecyclerView are declared as class variables to be used later.
+
 The `onCreate` method is overridden and is called when the activity is created. In the `onCreate` method, the layout for the activity is set using setContentView. The views are initialized using the findViewById method. The id value is retrieved from the intent extras, which represents the ID of the recipe. An instance of APIRequestManager is created to make API requests.
 
-The `getRecipeDetails` method of `APIRequestManager` is called to fetch the recipe details using the recipeDetailsListener.
+The `getRecipeDetails` method of `APIRequestManager` is called to fetch the recipe details using the `recipeDetailsListener`.
 The `getInstructions` method of `APIRequestManager` is called to fetch the recipe instructions using the `instructionsListener`.
 
 A progress dialog is shown to indicate that the details are being loaded.
-
 The `findViews` method is defined to initialize the views.
+
 The `recipeDetailsListener` is implemented as an anonymous class to handle the recipe details response. In the didFetch method of `recipeDetailsListener`, the retrieved recipe details are displayed in the corresponding views.
+
 The `recycler_meal_ingredients` is set up with a horizontal layout manager, and an instance of `IngredientsAdapter` is created and set on the recycler view.
-The `instructionsListener` is implemented as an anonymous class to handle the recipe instructions response.
-In the didFetch method of instructionsListener, the retrieved instructions are displayed in the `recycler_meal_instructions` using an instance of `InstructionsAdapter`.
+
+The `instructionsListener` is implemented as an anonymous class to handle the recipe instructions response. In the didFetch method of instructionsListener, the retrieved instructions are displayed in the `recycler_meal_instructions` using an instance of `InstructionsAdapter`.
+
 The `goBackToSearchActivity` method is defined, which is called when the user clicks the back button. It starts the `RecipeSearchResultActivity` and passes the recipe ID as an extra.
 
 This activity fetches and displays recipe details and instructions, and provides navigation to go back to the search activity.
@@ -83,9 +86,8 @@ The `goBackToSearchPage()` method is called when the user clicks the "Back" butt
 ####  SignUpActivity
 ##### _Author: Endi Triço_
 
-The code you provided is an activity class named `SignUpActivity`.
+The `SignUpActivity` extends `AppCompatActivity` to create an activity. EditText fields for username, email, password, and confirmPassword are declared as class variables. Drawable resources for visibility icons (on and off) and a security icon are initialized.
 
-The activity extends `AppCompatActivity` to create an activity. EditText fields for username, email, password, and confirmPassword are declared as class variables. Drawable resources for visibility icons (on and off) and a security icon are initialized.
 In the `onCreate` method, the layout for the activity is set using setContentView. The EditText fields and touch listeners are initialized.
 
 The `toggleConfirmPasswordVisibility` method is defined to handle the visibility toggle for the confirm password field.
@@ -102,18 +104,15 @@ The `passwordInformation` method is called when the user clicks the "Password In
 
 The `goBackToInitialActivity` method is called when the user clicks the back button.  It navigates back to the initial activity.
 
-This activity allows users to sign up by entering their username, email, password, and confirming the password. It provides input validation and database interaction to add the user to the system.
+`SignUpActivity` allows users to sign up by entering their username, email, password, and confirming the password. It provides input validation and database interaction to add the user to the system.
 
 
 ####  WelcomeActivity
 ##### _Author: Endi Triço_
 
-It is an activity class named `WelcomeActivity`.
+The `WelcomeActivity` extends `AppCompatActivity` to create an activity. In the `onCreate` method, the layout for the activity is set using setContentView.
 
-The activity extends `AppCompatActivity` to create an activity. In the `onCreate` method, the layout for the activity is set using setContentView.
-
-The `emailTo` method is called when the user clicks the email button. It creates an intent with the action Intent.ACTION_SENDTO to compose an email. The email address "info@foodtopia.al" is set as the recipient in the intent. 
-The intent is started using startActivity to open the email client with the recipient pre-filled.
+The `emailTo` method is called when the user clicks the email button. It creates an intent with the action Intent.ACTION_SENDTO to compose an email. The email address "info@foodtopia.al" is set as the recipient in the intent. The intent is started using startActivity to open the email client with the recipient pre-filled.
 
 This activity sets up the welcome screen of the application and displays the BottomNavigationFragment. It also provides the functionality to compose an email to the specified email address when the user clicks the email button.
 
@@ -126,26 +125,30 @@ This activity sets up the welcome screen of the application and displays the Bot
 
 `IngredientsAdapter` is responsible for binding data to the views in each item of the RecyclerView.
 
-The `IngredientsAdapter` class extends `RecyclerView.Adapter<IngredientsViewHolder> and takes a context and a list of `ExtendedIngredient` objects as parameters in its constructor.
+The `IngredientsAdapter` class extends `RecyclerView.Adapter<IngredientsViewHolder>` and takes a context and a list of `ExtendedIngredient` objects as parameters in its constructor.
 
 The `onCreateViewHolder` method is overridden to inflate the layout for each item of the `RecyclerView`. It inflates the `list_meal_ingredients` layout using the LayoutInflater and returns an instance of `IngredientsViewHolder` that holds the inflated views.
+
 The `onBindViewHolder` method is overridden to bind the data to the views in each item. It gets the current `ExtendedIngredient` object from the list based on the current position and sets the appropriate data to the views in the `IngredientsViewHolder`.
+
 The `getItemCount` method returns the number of items in the list, which determines the number of items in the `RecyclerView`.
 
 The `IngredientsViewHolder` class is a ViewHolder that holds the views for each item in the `RecyclerView`. It initializes the views (e.g., textView_ingredients_quantity, textView_ingredients_name, imageView_ingredients) in its constructor.
 
-This adapter class is used to populate a `RecyclerView` with a list of `ExtendedIngredient` objects, setting the appropriate data to each view in the item layout (list_meal_ingredients). It uses `Picasso` library to load images into the imageView_ingredients using the URL provided in the `ExtendedIngredient` object.
+This adapter class is used to populate a `RecyclerView` with a list of `ExtendedIngredient` objects, setting the appropriate data to each view in the item layout (`list_meal_ingredients`). It uses `Picasso` library to load images into the imageView_ingredients using the URL provided in the `ExtendedIngredient` object.
 
 
 #### InstructionsAdapter
 ##### _Author: Endi Triço_
 
-The code you provided is an adapter class (InstructionsAdapter) for a RecyclerView. It is responsible for binding data to the views in each item of the RecyclerView.
+The `InstructionsAdapter` is responsible for binding data to the views in each item of the RecyclerView.
 
 The `InstructionsAdapter` class extends `RecyclerView.Adapter<InstructionsViewHolder>` and takes a context and a list of `InstructionsResponse` objects as parameters in its constructor.#
 
 The `onCreateViewHolder` method is overridden to inflate the layout for each item of the `RecyclerView`. It inflates the `list_instructions` layout using the LayoutInflater and returns an instance of `InstructionsViewHolder` that holds the inflated views.
+
 The `onBindViewHolder` method is overridden to bind the data to the views in each item. It gets the current `InstructionsResponse` object from the list based on the current position. It sets up a LinearLayoutManager for the recycler_instruction_steps `RecyclerView`, and creates an instance of `InstructionStepAdapter` to populate the steps in the `RecyclerView`.
+
 The `getItemCount` method returns the number of items in the list, which determines the number of items in the `RecyclerView`.
 
 The `InstructionsViewHolder` class is a ViewHolder that holds the views for each item in the `RecyclerView`. It initializes the views (e.g., recycler_instruction_steps) in its constructor.
@@ -156,12 +159,14 @@ This adapter class is used to populate a `RecyclerView` with a list of `Instruct
 #### InstructionsEquipmentsAdapter
 ##### _Author: Endi Triço_
 
-It an adapter class (`InstructionsEquipmentsAdapter`) for a `RecyclerView`. It is responsible for binding data to the views in each item of the `RecyclerView`.
+The `InstructionsEquipmentsAdapter` is responsible for binding data to the views in each item of the `RecyclerView`.
 
 The `InstructionsEquipmentsAdapter` class extends `RecyclerView.Adapter<InstructionsEquipmentsViewHolder>` and takes a context and a list of `Equipment` objects as parameters in its constructor.
 
 The `onCreateViewHolder` method is overridden to inflate the layout for each item of the `RecyclerView`. It inflates the `list_instructions_step_items` layout using the LayoutInflater and returns an instance of `InstructionsEquipmentsViewHolder` that holds the inflated views.
+
 The `onBindViewHolder` method is overridden to bind the data to the views in each item. It gets the current `Equipment` object from the list based on the current position and sets the appropriate data to the views in the `InstructionsEquipmentsViewHolder`.
+
 The `getItemCount` method returns the number of items in the list, which determines the number of items in the `RecyclerView`.
 
 The `InstructionsEquipmentsViewHolder` class is a ViewHolder that holds the views for each item in the `RecyclerView`. It initializes the views (e.g., imageView_instructions_step_items, textView_instructions_step_item, textView_equipments) in its constructor.
@@ -172,12 +177,14 @@ This adapter class is used to populate a `RecyclerView` with a list of `Equipmen
 #### InstructionsIngredientsAdapter
 ##### _Author: Endi Triço_
 
-It is an adapter class (`InstructionsIngredientsAdapter`) for a `RecyclerView`. It is responsible for binding data to the views in each item of the `RecyclerView`.
+The `InstructionsIngredientsAdapter` is responsible for binding data to the views in each item of the `RecyclerView`.
 
 The `InstructionsIngredientsAdapter` class extends `RecyclerView.Adapter<InstructionsIngredientsViewHolder>` and takes a context and a list of `Ingredient` objects as parameters in its constructor.
 
 The `onCreateViewHolder` method is overridden to inflate the layout for each item of the `RecyclerView`. It inflates the `list_instructions_step_items` layout using the LayoutInflater and returns an instance of `InstructionsIngredientsViewHolder` that holds the inflated views.
+
 The `onBindViewHolder` method is overridden to bind the data to the views in each item. It gets the current `Ingredient` object from the list based on the current position and sets the appropriate data to the views in the `InstructionsIngredientsViewHolder`.
+
 The `getItemCount` method returns the number of items in the list, which determines the number of items in the `RecyclerView`.
 
 The `InstructionsIngredientsViewHolder` class is a ViewHolder that holds the views for each item in the `RecyclerView`. It initializes the views (e.g., imageView_instructions_step_items, textView_instructions_step_item, textView_ingredients) in its constructor.
@@ -188,17 +195,19 @@ This adapter class is used to populate a `RecyclerView` with a list of `Ingredie
 #### InstructionStepAdapter
 ##### _Author: Endi Triço_
 
-This is an adapter class (`InstructionStepAdapter`) for a `RecyclerView`. It is responsible for binding data to the views in each item of the `RecyclerView`.
+The `InstructionStepAdapter` is responsible for binding data to the views in each item of the `RecyclerView`.
 
 The `InstructionStepAdapter` class extends `RecyclerView.Adapter<InstructionStepViewHolder>` and takes a context and a list of `Step` objects as parameters in its constructor.
 
 The `onCreateViewHolder` method is overridden to inflate the layout for each item of the `RecyclerView`. It inflates the `list_instructions_steps` layout using the LayoutInflater and returns an instance of `InstructionStepViewHolder` that holds the inflated views.
+
 The `onBindViewHolder` method is overridden to bind the data to the views in each item. It gets the current `Step` object from the list based on the current position and sets the appropriate data to the views in the `InstructionStepViewHolder`. In the `onBindViewHolder` method, it sets the step number and title to the respective TextViews. It initializes and sets up a horizontal `RecyclerView` (recycler_instructions_ingredients) for displaying the list of ingredients for each step. It creates an instance of `InstructionsIngredientsAdapter` and sets it as the adapter for the RecyclerView. If the list of ingredients is empty, it hides the LinearLayout_Ingredients layout. It also initializes and sets up a horizontal `RecyclerView` (recycler_instructions_equipments) for displaying the list of equipment for each step. It creates an instance of `InstructionsEquipmentsAdapter` and sets it as the adapter for the RecyclerView. If the list of equipment is empty, it hides the LinearLayout_Equipments layout.
+
 The `getItemCount` method returns the number of items in the list, which determines the number of items in the `RecyclerView`.
 
 The `InstructionStepViewHolder` class is a ViewHolder that holds the views for each item in the `RecyclerView`. It initializes the views (e.g., textView_instructions_step_number, textView_instructions_step_title, recycler_instructions_equipments, recycler_instructions_ingredients) in its constructor. It also initializes the views for the equipment and ingredients headers (textView_equipments, textView_ingredients) and the layout containers (LinearLayout_Equipments, LinearLayout_Ingredients).
 
-This adapter class is used to populate a `RecyclerView` with a list of Step objects. It sets the appropriate data to each view in the item layout (`list_instructions_steps`) using the Step object. It also sets up additional RecyclerViews for displaying ingredients and equipment if they exist, and hides the respective layouts if the lists are empty.
+This adapter class is used to populate a `RecyclerView` with a list of Step objects. It sets the appropriate data to each view in the item layout (`list_instructions_steps`) using the `Step` object. It also sets up additional RecyclerViews for displaying ingredients and equipment if they exist, and hides the respective layouts if the lists are empty.
 
 
 #### RecipeSearchResultAdapter
@@ -208,8 +217,13 @@ The `RecipeSearchResultAdapter` class is used to display a list of recipes obtai
 
 The `RecipeSearchResultAdapter` class extends the `RecyclerView.Adapter` class and has a constructor that takes two parameters, a `Context` object, and a list of `Recipe` objects.
 
-The `onCreateViewHolder()` method creates a new instance of the `RecipeSearchResultViewHolder` class, which contains a `CardView` that displays the recipe information. The `getItemCount()` method returns the number of recipes in the list.The `onBindViewHolder()` method binds the data from the `Recipe` object to the `RecipeSearchResultViewHolder`.
+The `onCreateViewHolder()` method creates a new instance of the `RecipeSearchResultViewHolder` class, which contains a `CardView` that displays the recipe information. 
 
+The `getItemCount()` method returns the number of recipes in the list.
+
+The `onBindViewHolder()` method binds the data from the `Recipe` object to the `RecipeSearchResultViewHolder`.
+
+The `RecipeSearchResultViewHolder` class is an inner class that extends `RecyclerView.ViewHolder`. It has a constructor that takes a View object and initializes the card view, the dish name, and the dish image that will be displayed in the layout.
 
 
 ### Database
@@ -272,7 +286,7 @@ In the `onCreateView` method, the layout for the fragment is inflated using the 
 The `BottomNavigationView` is retrieved from the inflated layout using its ID. A listener is set on the `BottomNavigationView` using the `setOnItemSelectedListener` method. Inside the listener, the selected item ID is checked to determine which menu item was clicked.
 If the "Home" menu item is clicked (R.id.menu_home), it starts the `WelcomeActivity`.
 If the "Search" menu item is clicked (R.id.menu_search), it starts the `SearchActivity`.
-If the "Favorites" menu item is clicked (R.id.menu_favorites), it starts the 'FavoritesActivity'.
+If the "Favorites" menu item is clicked (R.id.menu_favorites), it starts the '`avoritesActivity`.
 If the "Profile" menu item is clicked (R.id.menu_profile), it starts the `ProfileActivity`.
 The method returns the inflated view.
 
@@ -296,30 +310,30 @@ The didError method is called when there is an error in the API request and the 
 
 The `Instructions Listener` is an interface that defines two methods that must be implemented by any class that wants to listen for and handle the response of an API request to get the instructions that the user needs to follow to cook their delicious recipe by using the Spoonacular API.
 
-The didFetch method is called when the API request is successful and the response contains the information for the requested instructions' recipe. This method takes in a List of InstructionsResponse objects as a parameter, which contains the instructions information, and a message string that describes the status of the response.
+The `didFetch` method is called when the API request is successful and the response contains the information for the requested instructions' recipe. This method takes in a List of InstructionsResponse objects as a parameter, which contains the instructions information, and a message string that describes the status of the response.
 
-The didError method is called when there is an error in the API request and the response is not successful. This method takes in a message string that describes the error that occurred.
+The `didError` method is called when there is an error in the API request and the response is not successful. This method takes in a message string that describes the error that occurred.
 
 #### RecipeClickListener
 ##### _Author: Endi Triço_
 
 The `RecipeClickListener` is an interface that defines only one method that must be implemented by any class that wants to listen for and handle the response of an API request to get the detailed information by using the click event.
 
-This interface defines only one method named onRecipeClicked that takes as parameter the id of the recipe of type String, which corresponds to the image or name of the food that the user will click on.
+This interface defines only one method named `onRecipeClicked` that takes as parameter the id of the recipe of type String, which corresponds to the image or name of the food that the user will click on.
 
 #### RecipeDetailsListener
 ##### _Author: Endi Triço_
 
 The `RecipeDetailsListener` is an interface that defines two methods that must be implemented by any class that wants to listen for and handle the response of an API request to retrieve a detailed information regarding a specific recipe using Spoonacular API.
 
-The didFetch method is called when the API request is successful and the response contains the information for the requested recipe. This method takes in the RecipeDetailsListener object as a parameter, which contains the recipe information, and a message string that describes the status of the response.
+The didFetch method is called when the API request is successful and the response contains the information for the requested recipe. This method takes in the `RecipeDetailsListener` object as a parameter, which contains the recipe information, and a message string that describes the status of the response.
 
-The didError method is called when there is an error in the API request and the response is not successful. This method takes in a message string that describes the error that occurred.
+The `didError` method is called when there is an error in the API request and the response is not successful. This method takes in a message string that describes the error that occurred.
 
 #### RecipeSearchResultViewHolder
 ##### _Author: Sara Hoxha_
 
-The `RecipeSearchResultViewHolder` class is an inner class that extends `RecyclerView.ViewHolder`. It has a constructor that takes a `View` object and initializes the card view, the dish name, and the dish image that will be displayed in the layout.
+
 
 
 
