@@ -1,7 +1,10 @@
 package com.example.food_recipes_application;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -66,6 +69,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
         cursor.close();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("LOGIN_PREFS", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isLoggedIn", true); // Set the login state as logged in
+        editor.apply();
+
         goToSearchActivity(this.getCurrentFocus());
     }
 

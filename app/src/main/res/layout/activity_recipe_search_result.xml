@@ -47,6 +47,7 @@
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -63,10 +64,19 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipeRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:scrollbars="vertical"
-        android:scrollbarThumbVertical="@color/white"
+        android:scrollbarFadeDuration="0"
         android:scrollbarSize="6dp"
-        android:scrollbarFadeDuration="0" />
+        android:scrollbarThumbVertical="@color/white"
+        android:scrollbars="vertical">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerSearchResults"
+        android:name="com.example.food_recipes_application.BottomNavigationFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,11 +1,15 @@
 package com.example.food_recipes_application;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -39,6 +43,26 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("LOGIN_PREFS", Context.MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false); // Get the login state
+
+        if (isLoggedIn) {
+
+            BottomNavigationFragment bottomNavigationFragment = new BottomNavigationFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragmentContainerRecipeDetails, bottomNavigationFragment);
+            transaction.commit();
+
+        } else {
+            // User is a guest, hide the Bottom Navigation Bar fragment if previously added
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainerRecipeDetails);
+            if (fragment != null) {
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.remove(fragment);
+                fragmentTransaction.commit();
+            }
+        }
 
         findViews();
 

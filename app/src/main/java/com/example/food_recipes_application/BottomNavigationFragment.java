@@ -27,7 +27,7 @@ public class BottomNavigationFragment extends Fragment {
                 startActivity(new Intent(getActivity(), WelcomeActivity.class));
                 return true;
             } else if (itemId == R.id.menu_search) {
-                startActivity(new Intent(getActivity(), InitialActivity.class));
+                startActivity(new Intent(getActivity(), RecipeSearchResultActivity.class));
                 return true;
             } else if (itemId == R.id.menu_favorites) {
                 startActivity(new Intent(getActivity(), LoginActivity.class));
