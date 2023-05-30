@@ -89,11 +89,6 @@ public class RecipeSearchResultActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private final RecipeClickListener recipeClickListener = new RecipeClickListener() {
-        @Override
-        public void onRecipeClicked(String id) {
-           startActivity(new Intent(RecipeSearchResultActivity.this, RecipeDetailsActivity.class)
-                    .putExtra("id", id));
-        }
-    };
+    private final RecipeClickListener recipeClickListener = id -> startActivity(new Intent(RecipeSearchResultActivity.this, RecipeDetailsActivity.class)
+             .putExtra("id", id));
 }
