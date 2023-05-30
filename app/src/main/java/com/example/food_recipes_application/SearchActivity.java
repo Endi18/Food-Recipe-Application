@@ -72,7 +72,7 @@ public class SearchActivity extends AppCompatActivity {
         }
         else {
             Intent intent = new Intent(SearchActivity.this, RecipeSearchResultActivity.class);
-            intent.putExtra("recipeID", searchText);
+            intent.putExtra("keyword", searchText);
             startActivity(intent);
         }
     }

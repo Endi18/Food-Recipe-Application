@@ -44,6 +44,8 @@ Furthermore, we also have the option for the user to register if they haven't al
 #### Recipe Details Activity
 ##### _Author: Endi Triço_
 
+![Recipe Details Activity](app-screenshots/recipeDetailsActivity.png)
+
 It is an activity class named `RecipeDetailsActivity`. The purpose of this activity is to show the details of the selected recipe by introducing the summary, instructions, ingredients, and equipments that will be needed to cook this delicious foods.
 
 The activity extends `AppCompatActivity` to create an activity. Various views such as TextView, ImageView, and RecyclerView are declared as class variables to be used later.

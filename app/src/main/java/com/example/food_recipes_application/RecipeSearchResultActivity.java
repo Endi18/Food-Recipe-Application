@@ -57,7 +57,7 @@ public class RecipeSearchResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_search_result);
-        recipeSearchKeyword = getIntent().getStringExtra("recipeID");
+        recipeSearchKeyword = getIntent().getStringExtra("keyword");
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading Recipes...");
 
@@ -90,5 +90,5 @@ public class RecipeSearchResultActivity extends AppCompatActivity {
     }
 
     private final RecipeClickListener recipeClickListener = id -> startActivity(new Intent(RecipeSearchResultActivity.this, RecipeDetailsActivity.class)
-             .putExtra("id", id));
+             .putExtra("id", id).putExtra("keyword", recipeSearchKeyword));
 }

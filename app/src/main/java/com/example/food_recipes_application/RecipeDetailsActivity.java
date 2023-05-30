@@ -31,6 +31,7 @@ import java.util.List;
 
 public class RecipeDetailsActivity extends AppCompatActivity {
     int id;
+    String keyword;
     TextView textView_meal_name, textView_meal_source, textView_meal_summary;
     ImageView imageView_meal_image;
     RecyclerView recycler_meal_ingredients, recycler_meal_instructions;
@@ -67,6 +68,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         findViews();
 
         id = Integer.parseInt(getIntent().getStringExtra("id"));
+        keyword = getIntent().getStringExtra("keyword");
         manager = new APIRequestManager(this);
         manager.getRecipeDetails(recipeDetailsListener, id);
         manager.getInstructions(instructionsListener, id);
@@ -125,7 +127,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
     public void goBackToSearchActivity(View view){
         Intent intent = new Intent(RecipeDetailsActivity.this, RecipeSearchResultActivity.class);
-        intent.putExtra("detailsId", id);
+        intent.putExtra("keyword", keyword);
         startActivity(intent);
     }
 }
