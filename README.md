@@ -113,6 +113,7 @@ The `goBackToInitialActivity` method is called when the user clicks the back but
 ##### _Author: Endi Triço_
 
 ![Welcome Activity](app-screenshots/welcomeActivity.png)
+
 The `WelcomeActivity` extends `AppCompatActivity` to create an activity. In the `onCreate` method, the layout for the activity is set using setContentView.
 
 The `emailTo` method is called when the user clicks the email button. It creates an intent with the action Intent.ACTION_SENDTO to compose an email. The email address "info@foodtopia.al" is set as the recipient in the intent. The intent is started using startActivity to open the email client with the recipient pre-filled.
