@@ -41,7 +41,7 @@ After being redirected to the Login Activity, the user will be prompted to enter
 Furthermore, we also have the option for the user to register if they haven't already. This is done by clicking on the "Sign Up Now" label, which redirects them to the Sign Up Activity.
 
 
-#### Recipe Search Result Activity
+#### Recipe Details Activity
 ##### _Author: Endi Triço_
 
 It is an activity class named `RecipeDetailsActivity`. The purpose of this activity is to show the details of the selected recipe by introducing the summary, instructions, ingredients, and equipments that will be needed to cook this delicious foods.
@@ -86,6 +86,8 @@ The `goBackToSearchPage()` method is called when the user clicks the "Back" butt
 ####  SignUpActivity
 ##### _Author: Endi Triço_
 
+![Sign Up Activity](app-screenshots/signupActivity.png)
+
 The `SignUpActivity` extends `AppCompatActivity` to create an activity. EditText fields for username, email, password, and confirmPassword are declared as class variables. Drawable resources for visibility icons (on and off) and a security icon are initialized.
 
 In the `onCreate` method, the layout for the activity is set using setContentView. The EditText fields and touch listeners are initialized.
@@ -110,6 +112,7 @@ The `goBackToInitialActivity` method is called when the user clicks the back but
 ####  WelcomeActivity
 ##### _Author: Endi Triço_
 
+![Welcome Activity](app-screenshots/welcomeActivity.png)
 The `WelcomeActivity` extends `AppCompatActivity` to create an activity. In the `onCreate` method, the layout for the activity is set using setContentView.
 
 The `emailTo` method is called when the user clicks the email button. It creates an intent with the action Intent.ACTION_SENDTO to compose an email. The email address "info@foodtopia.al" is set as the recipient in the intent. The intent is started using startActivity to open the email client with the recipient pre-filled.
@@ -329,12 +332,6 @@ The `RecipeDetailsListener` is an interface that defines two methods that must b
 The didFetch method is called when the API request is successful and the response contains the information for the requested recipe. This method takes in the `RecipeDetailsListener` object as a parameter, which contains the recipe information, and a message string that describes the status of the response.
 
 The `didError` method is called when there is an error in the API request and the response is not successful. This method takes in a message string that describes the error that occurred.
-
-#### RecipeSearchResultViewHolder
-##### _Author: Sara Hoxha_
-
-
-
 
 
 ## External Resources
