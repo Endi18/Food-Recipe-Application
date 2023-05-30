@@ -82,9 +82,9 @@
         android:text="@string/app_title"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="26sp"
+        android:textSize="30sp"
         app:titleTextColor="@color/white"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="59dp" />
+        tools:layout_editor_absoluteY="111dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
