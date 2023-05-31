@@ -76,4 +76,9 @@ public class SearchActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    public void goBackToInitialActivity(View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 }
