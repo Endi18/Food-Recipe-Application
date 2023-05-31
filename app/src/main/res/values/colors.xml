@@ -4,10 +4,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="mainColor">#605A7C</color>
     <color name="coral">#DE543F</color>
-    <color name="navigationBarColor">#eecafc</color>
     <color name="lavender">#8692f7</color>
     <color name="grey">#d2d2d2</color>
     <color name="mainColor2">#6f7c9a</color>
+<!--<<<<<< HEAD-->
     <color name="navigationBarColorr">#51495e</color>
     <color name="background_gradient_start">#000000</color>
     <color name="background_gradient_end">#DDDDDD</color>
@@ -15,5 +15,8 @@
     <color name="search_opaque">#ffaa3f</color>
     <color name="selected_background">#ffaa3f</color>
     <color name="default_background">#3d3d3d</color>
+    <!--=======-->
+    <color name="navigationBarColor">#51495e</color>
+    <!-->>>>>>> c886be2a1d1b40b1c8a9a101e5f95a9dbeb845b6 -->
 
 </resources>

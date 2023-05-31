@@ -7,18 +7,6 @@
     android:background="@drawable/background_welcome"
     tools:context=".WelcomeActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_container"
-        android:name="com.example.food_recipes_application.BottomNavigationFragment"
-        android:layout_width="414dp"
-        android:layout_height="721dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_bottom_navigation" />
-
     <TextView
         android:id="@+id/txtViewWelcome"
         android:layout_width="wrap_content"
@@ -64,15 +52,24 @@
         android:id="@+id/btnEmail"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="380dp"
+        android:layout_marginBottom="136dp"
         android:backgroundTint="@android:color/transparent"
         android:drawableLeft="@drawable/ic_email"
         android:onClick="emailTo"
         android:text="."
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_container"
-        app:layout_constraintEnd_toEndOf="@+id/fragment_container"
-        app:layout_constraintHorizontal_bias="0.947"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fragment_container"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toTopOf="@id/txtViewWelcome"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
+        android:name="com.example.food_recipes_application.BottomNavigationFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="743dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,7 +27,7 @@ public class RecipeSearchResultActivity extends AppCompatActivity {
     RecipeSearchResultAdapter adapter;
     RecyclerView recyclerView;
     TextView recipesResultNumber;
-    String recipeSearchKeyword; //@@SET FOR TESTING PURPOSES WILL BE REMOVED
+    String recipeSearchKeyword;
 
 
     final APISearchResponseListener apiSearchResponseListener = new APISearchResponseListener() {
@@ -57,23 +57,25 @@ public class RecipeSearchResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_search_result);
+//<<<<<< HEAD --->
         recipeSearchKeyword = getIntent().getStringExtra("recipeID");
         // recipeSearchKeyword = getIntent().getStringExtra("detailsId"); //@@ADD INTENT KEY HERE FROM SEARCH ACTIVITY
+//=======
+        recipeSearchKeyword = getIntent().getStringExtra("keyword");
+//>>>>>>> c886be2a1d1b40b1c8a9a101e5f95a9dbeb845b6
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading Recipes...");
 
         SharedPreferences sharedPreferences = getSharedPreferences("LOGIN_PREFS", Context.MODE_PRIVATE);
-        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false); // Get the login state
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
 
         if (isLoggedIn) {
-
             BottomNavigationFragment bottomNavigationFragment = new BottomNavigationFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragmentContainerSearchResults, bottomNavigationFragment);
             transaction.commit();
 
         } else {
-            // User is a guest, hide the Bottom Navigation Bar fragment if previously added
             Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainerSearchResults);
             if (fragment != null) {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -81,22 +83,17 @@ public class RecipeSearchResultActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
             }
         }
+
         manager = new APIRequestManager(this, recipeSearchKeyword);
         manager.getRecipesSearchResults(apiSearchResponseListener);
         progressDialog.show();
     }
 
     public void goBackToSearchPage(View view) {
-        //Intent intent = new Intent(this, class); //@@COMPLETE WHEN SEARCH ACTIVITY IS DONE
-       // startActivity(intent);
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
     }
 
-    private final RecipeClickListener recipeClickListener = new RecipeClickListener() {
-        @Override
-        public void onRecipeClicked(String id) {
-           startActivity(new Intent(RecipeSearchResultActivity.this, RecipeDetailsActivity.class)
-                    .putExtra("id", id));
-          //  Toast.makeText(RecipeSearchResultActivity.this, id, Toast.LENGTH_SHORT).show();
-        }
-    };
+    private final RecipeClickListener recipeClickListener = id -> startActivity(new Intent(RecipeSearchResultActivity.this, RecipeDetailsActivity.class)
+             .putExtra("id", id).putExtra("keyword", recipeSearchKeyword));
 }

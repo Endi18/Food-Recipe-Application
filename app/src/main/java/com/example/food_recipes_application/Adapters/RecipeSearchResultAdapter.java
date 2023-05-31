@@ -40,12 +40,7 @@ public class RecipeSearchResultAdapter extends RecyclerView.Adapter<RecipeSearch
     public void onBindViewHolder(@NonNull RecipeSearchResultViewHolder holder, int position) {
          holder.dishName.setText(recipeList.get(position).title);
          Picasso.get().load(recipeList.get(position).image).into(holder.dishImage);
-         holder.recipeCardView.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 listener.onRecipeClicked(String.valueOf(recipeList.get(holder.getAdapterPosition()).id));
-             }
-         });
+         holder.recipeCardView.setOnClickListener(v -> listener.onRecipeClicked(String.valueOf(recipeList.get(holder.getAdapterPosition()).id)));
     }
 
     @Override

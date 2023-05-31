@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -31,9 +32,15 @@ public class SearchActivity extends AppCompatActivity {
 
         if (isLoggedIn) {
 
-            BottomNavigationFragment bottomNavigationFragment = new BottomNavigationFragment();
+            int selectedItemId = getIntent().getIntExtra("selectedItemId", R.id.menu_search);
+
+            BottomNavigationFragment fragment = new BottomNavigationFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("selectedItemId", selectedItemId);
+            fragment.setArguments(bundle);
+
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragmentContainerSearchNav, bottomNavigationFragment);
+            transaction.replace(R.id.fragmentContainerSearchNav, fragment);
             transaction.commit();
 
         } else {
@@ -48,10 +55,9 @@ public class SearchActivity extends AppCompatActivity {
 
         searchView = findViewById(R.id.searchView);
 
+        searchView.setOnClickListener(v -> searchView.setIconified(false));
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-
             @Override
             public boolean onQueryTextSubmit(String query) {
                 searchText = query;
@@ -67,12 +73,12 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void submitAndGoToRecipeSearchResult(View view){
-        if(searchText == null) {
-            System.out.println("Please write in the search bar");
+        if(searchText.equals("")) {
+            Toast.makeText(this, "Please write in the search bar", Toast.LENGTH_SHORT).show();
         }
         else {
             Intent intent = new Intent(SearchActivity.this, RecipeSearchResultActivity.class);
-            intent.putExtra("recipeID", searchText);
+            intent.putExtra("keyword", searchText);
             startActivity(intent);
         }
     }

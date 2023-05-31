@@ -20,14 +20,14 @@ public class BottomNavigationFragment extends Fragment {
 
         BottomNavigationView bottomNavigationView = view.findViewById(R.id.bottom_navigation_view);
 
-        bottomNavigationView.setOnItemSelectedListener(item -> {
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             int itemId = item.getItemId();
 
             if (itemId == R.id.menu_home) {
                 startActivity(new Intent(getActivity(), WelcomeActivity.class));
                 return true;
             } else if (itemId == R.id.menu_search) {
-                startActivity(new Intent(getActivity(), RecipeSearchResultActivity.class));
+                startActivity(new Intent(getActivity(), SearchActivity.class));
                 return true;
             } else if (itemId == R.id.menu_favorites) {
                 startActivity(new Intent(getActivity(), LoginActivity.class));
@@ -40,7 +40,6 @@ public class BottomNavigationFragment extends Fragment {
 
             return false;
         });
-
         return view;
     }
 
