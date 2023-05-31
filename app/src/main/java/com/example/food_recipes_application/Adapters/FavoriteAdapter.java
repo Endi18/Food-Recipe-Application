@@ -18,21 +18,23 @@ import com.example.food_recipes_application.Models.FavItem;
 import com.example.food_recipes_application.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> {
 
     private ArrayList<FavItem> favItem;
-    private Context context;
-    private MyDatabaseHelper myDatabaseHelper;
 
-    public FavoriteAdapter(ArrayList<FavItem> favItem, Context context)  {
-        this.favItem = favItem;
-        this.context = context;
-    }
+    public static final String ACTION_LIKE_IMAGE_CLICKED = "action_like_image_button";
+    private Context context;
+
+    private int changedItemPosition;
+    private boolean isLiked;
+
+
     @NonNull
     @Override
     public FavoriteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        myDatabaseHelper = new MyDatabaseHelper(context);
+      //  myDatabaseHelper = new MyDatabaseHelper(context);
         SharedPreferences prefs =  context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         boolean firstStart = prefs.getBoolean("firstStart", true);
         if (firstStart){
@@ -62,7 +64,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
             textViewF = itemView. findViewById(R.id. textViewF);
-            favBtn = itemView.findViewById(R.id. favBtn);
+           // favBtn = itemView.findViewById(R.id. favBtn);
             //Add to favorite  btn
            /* favBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

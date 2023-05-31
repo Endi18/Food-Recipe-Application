@@ -30,8 +30,8 @@ public class BottomNavigationFragment extends Fragment {
                 startActivity(new Intent(getActivity(), SearchActivity.class));
                 return true;
             } else if (itemId == R.id.menu_favorites) {
-                startActivity(new Intent(getActivity(), LoginActivity.class));
-                // startActivity(new Intent(getActivity(), FavoritesActivity.class));
+                //startActivity(new Intent(getActivity(), LoginActivity.class));
+                startActivity(new Intent(getActivity(), FavoritesActivity.class));
                 return true;
             } else if (itemId == R.id.menu_profile) {
                 startActivity(new Intent(getActivity(), SignUpActivity.class));
@@ -42,33 +42,4 @@ public class BottomNavigationFragment extends Fragment {
         });
         return view;
     }
-
-    /*
-
-
-
-    private final BottomNavigationView.OnNavigationItemSelectedListener listener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-            Fragment selected_fragment = null;
-            switch (item.getItemId()) {
-                case R.id.Location:
-                    selected_fragment = new LocationFragment();
-
-                    break;
-
-                case R.id.GiftCard:
-                    selected_fragment = new GiftCartFragment();
-                    break;
-
-                case R.id.MyProfile:
-                    selected_fragment = new ProfilFragment();
-                    break;
-                default:
-            }
-
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_Layout1, selected_fragment ).commit();
-
-            return true;*/
 }
