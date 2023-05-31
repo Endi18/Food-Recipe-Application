@@ -16,15 +16,9 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        int selectedItemId = getIntent().getIntExtra("selectedItemId", R.id.menu_home);
-
-        BottomNavigationFragment fragment = new BottomNavigationFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt("selectedItemId", selectedItemId);
-        fragment.setArguments(bundle);
-
+        BottomNavigationFragment bottomNavigationFragment = new BottomNavigationFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
+        transaction.replace(R.id.fragment_container, bottomNavigationFragment);
         transaction.commit();
     }
 

@@ -9,9 +9,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -31,18 +34,10 @@ public class SearchActivity extends AppCompatActivity {
         boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false); // Get the login state
 
         if (isLoggedIn) {
-
-            int selectedItemId = getIntent().getIntExtra("selectedItemId", R.id.menu_search);
-
-            BottomNavigationFragment fragment = new BottomNavigationFragment();
-            Bundle bundle = new Bundle();
-            bundle.putInt("selectedItemId", selectedItemId);
-            fragment.setArguments(bundle);
-
+            BottomNavigationFragment bottomNavigationFragment = new BottomNavigationFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragmentContainerSearchNav, fragment);
+            transaction.replace(R.id.fragmentContainerSearchNav, bottomNavigationFragment);
             transaction.commit();
-
         } else {
             // User is a guest, hide the Bottom Navigation Bar fragment if previously added
             Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainerSearchNav);
@@ -74,7 +69,7 @@ public class SearchActivity extends AppCompatActivity {
 
     public void submitAndGoToRecipeSearchResult(View view){
         if(searchText.equals("")) {
-            Toast.makeText(this, "Please write in the search bar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please write in the search bar", Toast.LENGTH_LONG).show();
         }
         else {
             Intent intent = new Intent(SearchActivity.this, RecipeSearchResultActivity.class);

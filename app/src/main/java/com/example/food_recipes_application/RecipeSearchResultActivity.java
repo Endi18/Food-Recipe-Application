@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.example.food_recipes_application.Adapters.RecipeSearchResultAdapter;
 import com.example.food_recipes_application.Listeners.APISearchResponseListener;
 import com.example.food_recipes_application.Listeners.RecipeClickListener;
 import com.example.food_recipes_application.Models.APISearchResponse;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class RecipeSearchResultActivity extends AppCompatActivity {
 
@@ -70,6 +72,9 @@ public class RecipeSearchResultActivity extends AppCompatActivity {
             transaction.replace(R.id.fragmentContainerSearchResults, bottomNavigationFragment);
             transaction.commit();
 
+//            BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
+//            MenuItem searchItem = bottomNavigationView.getMenu().findItem(R.id.menu_search);
+//            searchItem.setChecked(true);
         } else {
             Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainerSearchResults);
             if (fragment != null) {

@@ -20,7 +20,7 @@ public class BottomNavigationFragment extends Fragment {
 
         BottomNavigationView bottomNavigationView = view.findViewById(R.id.bottom_navigation_view);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+        bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
 
             if (itemId == R.id.menu_home) {
