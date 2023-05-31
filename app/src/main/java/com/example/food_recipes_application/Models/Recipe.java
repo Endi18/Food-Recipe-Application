@@ -5,4 +5,5 @@ public class Recipe {
         public String title;
         public String image;
         public String imageType;
+
 }
