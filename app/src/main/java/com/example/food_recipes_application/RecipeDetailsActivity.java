@@ -126,7 +126,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     };
 
     public void goBackToSearchActivity(View view){
-        Intent intent = new Intent(RecipeDetailsActivity.this, RecipeSearchResultActivity.class);
+        Intent intent = new Intent(this, RecipeSearchResultActivity.class);
         intent.putExtra("keyword", keyword);
         startActivity(intent);
     }

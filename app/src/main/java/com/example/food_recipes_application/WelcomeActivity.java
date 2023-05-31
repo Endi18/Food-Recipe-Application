@@ -2,7 +2,6 @@ package com.example.food_recipes_application;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,9 +16,15 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        BottomNavigationFragment bottomNavigationFragment = new BottomNavigationFragment();
+        int selectedItemId = getIntent().getIntExtra("selectedItemId", R.id.menu_home);
+
+        BottomNavigationFragment fragment = new BottomNavigationFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("selectedItemId", selectedItemId);
+        fragment.setArguments(bundle);
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, bottomNavigationFragment);
+        transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
     }
 

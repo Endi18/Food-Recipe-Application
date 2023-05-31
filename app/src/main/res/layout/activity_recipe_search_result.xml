@@ -34,8 +34,8 @@
 
         <TextView
             android:id="@+id/appName"
-            android:layout_width="318dp"
-            android:layout_height="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/aclonica"
             android:shadowColor="@color/black"
             android:shadowDx="3"
