@@ -28,7 +28,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE " + TABLE_NAME +
+        String query = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
                 " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_USERNAME + " TEXT, " +
                 COLUMN_EMAIL + " TEXT UNIQUE, " +
@@ -70,7 +70,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getUserData(String email){
-       // String query = "SELECT * FROM " + TABLE_NAME + "WHERE " + COLUMN_USERNAME + " = " + email;
         SQLiteDatabase db = this.getReadableDatabase();
         String selection = COLUMN_EMAIL + " =?";
         String[] selectionArgs = {email};
@@ -107,7 +106,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void deleteAllUser(){
+    public void deleteAllUsers(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME);
     }

@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,7 +25,6 @@ import com.example.food_recipes_application.Listeners.InstructionsListener;
 import com.example.food_recipes_application.Listeners.RecipeDetailsListener;
 import com.example.food_recipes_application.Models.InstructionsResponse;
 import com.example.food_recipes_application.Models.RecipeDetailsResponse;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -51,16 +49,11 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false); // Get the login state
 
         if (isLoggedIn) {
-//            BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
-//            MenuItem searchItem = bottomNavigationView.getMenu().findItem(R.id.menu_search);
-//            searchItem.setChecked(true);
-
             BottomNavigationFragment bottomNavigationFragment = new BottomNavigationFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragmentContainerRecipeDetails, bottomNavigationFragment);
             transaction.commit();
         } else {
-            // User is a guest, hide the Bottom Navigation Bar fragment if previously added
             Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainerRecipeDetails);
             if (fragment != null) {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -125,7 +118,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
         @Override
         public void didError(String message) {
-
         }
     };
 

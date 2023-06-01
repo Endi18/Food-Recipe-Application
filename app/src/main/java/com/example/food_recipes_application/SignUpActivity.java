@@ -131,7 +131,7 @@ public class SignUpActivity extends AppCompatActivity {
                 password.setText("");
                 confirmPassword.setText("");
                 Toast.makeText(this, "User added successfully!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                Intent intent = new Intent(SignUpActivity.this, WelcomeActivity.class);
                 startActivity(intent);
             }
             else{

@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("LOGIN_PREFS", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("isLoggedIn", true); // Set the login state as logged in
+        editor.putBoolean("isLoggedIn", true);
         editor.apply();
 
         goToSearchActivity(this.getCurrentFocus());

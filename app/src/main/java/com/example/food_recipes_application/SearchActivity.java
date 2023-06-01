@@ -9,18 +9,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class SearchActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
     SearchView searchView;
     String searchText;
+    Boolean isLoggedIn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +29,7 @@ public class SearchActivity extends AppCompatActivity {
         progressDialog.setTitle("Loading Search...");
 
         SharedPreferences sharedPreferences = getSharedPreferences("LOGIN_PREFS", Context.MODE_PRIVATE);
-        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false); // Get the login state
+        isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
 
         if (isLoggedIn) {
             BottomNavigationFragment bottomNavigationFragment = new BottomNavigationFragment();
@@ -39,7 +37,6 @@ public class SearchActivity extends AppCompatActivity {
             transaction.replace(R.id.fragmentContainerSearchNav, bottomNavigationFragment);
             transaction.commit();
         } else {
-            // User is a guest, hide the Bottom Navigation Bar fragment if previously added
             Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainerSearchNav);
             if (fragment != null) {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -78,8 +75,14 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    public void goBackToInitialActivity(View view) {
-        Intent intent = new Intent(this, LoginActivity.class);
+    public void goBackToInitialOrWelcomeActivity(View view) {
+        Intent intent;
+        if(isLoggedIn) {
+            intent = new Intent(this, WelcomeActivity.class);
+        }
+        else {
+            intent = new Intent(this, LoginActivity.class);
+        }
         startActivity(intent);
     }
 }
