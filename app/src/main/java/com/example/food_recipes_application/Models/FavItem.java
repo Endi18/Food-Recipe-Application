@@ -6,22 +6,18 @@ import java.util.ArrayList;
 
 public class FavItem {
     private String key_id;
-
     private String title;
+    private int image;
     private int isLiked;
 
-    @Override
-    public String toString() {
-        return GsonUtils.convertToJSON(this);
-    }
 
     public FavItem(ArrayList<FavItem> favItem, Context context) {
     }
 
-    public FavItem(String title, String key_id, int isLiked) {
+    public FavItem(String title, String key_id, int image) {
         this.title = title;
         this.key_id = key_id;
-        this.isLiked = isLiked;
+        this.image = image;
     }
 
     public String getTitle() {
@@ -38,6 +34,14 @@ public class FavItem {
 
     public void setKey_id(String key_id) {
         this.key_id = key_id;
+    }
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
     }
 
     public int getIsLiked() {

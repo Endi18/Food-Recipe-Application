@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 
@@ -48,8 +49,10 @@ import android.os.Bundle;
 //    }
 
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.TextView;
 
+import com.example.food_recipes_application.Adapters.FavoriteAdapter;
 import com.example.food_recipes_application.Models.FavItem;
 
 import org.json.JSONArray;
@@ -63,6 +66,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class FavoritesActivity extends AppCompatActivity {
@@ -71,6 +75,10 @@ public class FavoritesActivity extends AppCompatActivity {
     private Context context;
     private ArrayList<FavItem> favItem = new ArrayList<>();
 
+    private RecyclerView recyclerView;
+    private TextView textViewF;
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,14 +86,14 @@ public class FavoritesActivity extends AppCompatActivity {
         //setContentView(R.layout.favorite_activity);
         setContentView(R.layout.fav_fragment_recycler);
 
-        /*textView = findViewById(R.id.textViewF);
+        textView = findViewById(R.id.textViewF);
 
-        RecyclerView recyclerView = findViewById(R.id.fav_recyclerView);
+      /*   RecyclerView recyclerView = findViewById(R.id.fav_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(new FavItem(favItem,  context));
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        favItem.add(new favItem(R.drawable.img,   "Latte",  “0”,  ”0”));
+       favItem.add(new favItem(R.drawable.img,   "Latte",  “0”,  ”0”));
         favItem.add(new favItem(R.drawable.img,   "Kapucino", “1”,  ”0”));
         favItem.add(new favItem(R.drawable.img,   "Raf", “2”, ”0”));
         favItem.add(new favItem(R.drawable.img, "Milk Shake" , “3”, 0”));
@@ -94,66 +102,68 @@ public class FavoritesActivity extends AppCompatActivity {
 
         // Make an API request
        // new FetchFavoritesTask().execute(context.getString(R.string.apiKey));
+        recyclerView = findViewById(R.id.fav_recyclerView);
+        textViewF = findViewById(R.id.textViewF);
+
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("pref", 0);
+        // PreferenceManager preferenceManager = new PreferenceManager(sharedPreferences);
+
+
+      //  fetchData();
+   // }
     }
 
-    /*public FavoritesActivity(Context context) {
-        this.context = context;
-    }
 
-    private class FetchFavoritesTask extends AsyncTask<String, Void, String> {
+    /*private void fetchData() {
+        List<FavItem> fvitm =
 
-        @Override
-        protected String doInBackground(String... params) {
-            String apiKey = "aeb625c3f68d4365b5a01116e78a3663";
-            String apiUrl = "https://api.spoonacular.com/recipes/random?apiKey=" + apiKey;
-
-            try {
-                URL url = new URL(apiUrl);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-
-                InputStream inputStream = connection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                StringBuilder stringBuilder = new StringBuilder();
-                String line;
-
-                while ((line = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(line);
-                }
-
-                bufferedReader.close();
-                inputStream.close();
-                connection.disconnect();
-
-                return stringBuilder.toString();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return null;
+        if (fvitm != null && fvitm.size() > 0) {
+            showNoFavtText(false);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            recyclerView.setAdapter(new FavoriteAdapter(fvitm, this,));
+        } else {
+            showNoFavtText(true);
         }
 
-        @Override
-        protected void onPostExecute(String result) {
-            if (result != null) {
-                try {
-                    JSONObject jsonObject = new JSONObject(result);
-                    JSONArray recipes = jsonObject.getJSONArray("recipes");
-
-                    if (recipes.length() > 0) {
-                        JSONObject recipe = recipes.getJSONObject(0);
-                        String title = recipe.getString("title");
-                        String instructions = recipe.getString("instructions");
-
-                        String favoriteText = "Title: " + title + "\n\nInstructions: " + instructions;
-                        textView.setText(favoriteText);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                textView.setText("Failed to fetch favorite");
-            }
-        }
     }*/
+
+    private void showNoFavtText(boolean show) {
+        textViewF.setVisibility(show ? View.VISIBLE : View.GONE);
+        recyclerView.setVisibility(show ? View.GONE : View.VISIBLE);
+    }
+
+
+
+    // Define a static list to store the favorite items
+    private static List<FavItem> favoriteItems = new ArrayList<>();
+
+    // Add a favorite item to the list
+    public static void addFavoriteItem(FavItem favItem) {
+        favoriteItems.add(favItem);
+    }
+
+    // Get the list of favorite items
+    public static List<FavItem> getFavoriteItems() {
+        return favoriteItems;
+    }
+
+    // Clear the list of favorite items
+    public static void clearFavoriteItems() {
+        favoriteItems.clear();
+    }
+
+    private void fetchData() {
+        List<FavItem> fvitm = getFavoriteItems(); // Fetch the favorite items
+
+        if (fvitm != null && fvitm.size() > 0) {
+            showNoFavtText(false);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            recyclerView.setAdapter(new FavoriteAdapter(fvitm, this));
+        } else {
+            showNoFavtText(true);
+        }
+    }
+
 }

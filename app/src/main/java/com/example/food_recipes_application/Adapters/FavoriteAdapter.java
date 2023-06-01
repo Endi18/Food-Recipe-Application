@@ -2,18 +2,23 @@ package com.example.food_recipes_application.Adapters;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.food_recipes_application.Database.MyDatabaseHelper;
+import com.example.food_recipes_application.FavoritesActivity;
 import com.example.food_recipes_application.Models.FavItem;
 import com.example.food_recipes_application.R;
 
@@ -23,18 +28,14 @@ import java.util.List;
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> {
 
     private ArrayList<FavItem> favItem;
-
-    public static final String ACTION_LIKE_IMAGE_CLICKED = "action_like_image_button";
     private Context context;
-
-    private int changedItemPosition;
-    private boolean isLiked;
+    private boolean image;
 
 
     @NonNull
     @Override
-    public FavoriteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      //  myDatabaseHelper = new MyDatabaseHelper(context);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //
         SharedPreferences prefs =  context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         boolean firstStart = prefs.getBoolean("firstStart", true);
         if (firstStart){
@@ -47,26 +48,50 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull FavoriteAdapter.ViewHolder holder, int position) {
 
+        //final FavItem favItm =  favItem.get(position);
+
+        holder.textViewF.setText(favItem.get(position).getTitle());
+        if (favItem.get(position).getIsLiked() == 1)
+            holder.like_button_cb.setChecked(true);
+        else
+            holder.like_button_cb.setChecked(false);
+
+
+        holder.like_button_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (buttonView.isPressed()) {
+                    if (isChecked) {
+                        holder.like_button_cb.setChecked(false);
+                    } else {
+                        holder.like_button_cb.setChecked(true);
+                    }
+                }
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+
+        return favItem.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
         TextView textViewF;
-        Button favBtn;
+        CheckBox like_button_cb;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
             textViewF = itemView. findViewById(R.id. textViewF);
-           // favBtn = itemView.findViewById(R.id. favBtn);
+            like_button_cb = itemView.findViewById(R.id.like_button_cb);
+
             //Add to favorite  btn
-           /* favBtn.setOnClickListener(new View.OnClickListener() {
+           /* like_button_cb.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
@@ -75,11 +100,11 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                         favItem.setFavStatus(“1”);
                         myDatabaseHelper.insertIntoTheDatabase(favItem.getTitle(),favItem.getImageResourse(),
                                 favItem.getKey_id(), favItem.getFavStatus());
-                        favBtn.setBackgroundResource(R.drawable.ic_favorite_shadow_24dp);
+                        like_button_cb.setBackgroundResource(R.drawable.like_button_background);
                     }else  {
                         favItem.setFavStatus(“0”);
                         favDB.remove_fav(favItem.getKey_id());
-                        favBtn.setBackgroundeResource)(R.drawable.ic_favorite_shadow_24dp);
+                        like_button_cb.setBackgroundeResource)(R.drawable.ic_love);
                     }
                 }
 
@@ -87,15 +112,21 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         }
     }
 
+    private void showToast(String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
     private void createTableOnFirstStart() {
-       // myDatabaseHelper.
+        // myDatabaseHelper.
         SharedPreferences prefs = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean( "firstStart", false);
         editor.apply();
 
     }
-
+   /* private void readCrusorData(FavItem favItem, ViewHolder viewHolder){
+        //Cursor cursor =
+    }*/
 
 }
 
