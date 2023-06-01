@@ -81,7 +81,7 @@ public class SearchActivity extends AppCompatActivity {
             intent = new Intent(this, WelcomeActivity.class);
         }
         else {
-            intent = new Intent(this, LoginActivity.class);
+            intent = new Intent(this, InitialActivity.class);
         }
         startActivity(intent);
     }
