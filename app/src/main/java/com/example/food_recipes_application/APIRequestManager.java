@@ -25,7 +25,6 @@ import retrofit2.http.Query;
 public class APIRequestManager {
     Context context;
     String recipeName;
-    String recipeId;
 
     Retrofit retrofit =new Retrofit. Builder ()
             .baseUrl("https://api.spoonacular.com/")

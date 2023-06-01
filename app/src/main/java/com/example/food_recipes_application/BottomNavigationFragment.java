@@ -20,7 +20,7 @@ public class BottomNavigationFragment extends Fragment {
 
         BottomNavigationView bottomNavigationView = view.findViewById(R.id.bottom_navigation_view);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+        bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
 
             if (itemId == R.id.menu_home) {
@@ -30,7 +30,6 @@ public class BottomNavigationFragment extends Fragment {
                 startActivity(new Intent(getActivity(), SearchActivity.class));
                 return true;
             } else if (itemId == R.id.menu_favorites) {
-                //startActivity(new Intent(getActivity(), LoginActivity.class));
                 startActivity(new Intent(getActivity(), FavoritesActivity.class));
                 return true;
             } else if (itemId == R.id.menu_profile) {

@@ -20,6 +20,7 @@
 
         <Button
             android:id="@+id/btnBack"
+            android:onClick="goBackToInitialOrWelcomeActivity"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#00FFFFFF"

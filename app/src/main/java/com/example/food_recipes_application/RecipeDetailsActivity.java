@@ -46,26 +46,28 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_details);
 
         SharedPreferences sharedPreferences = getSharedPreferences("LOGIN_PREFS", Context.MODE_PRIVATE);
-        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false); // Get the login state
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+        findViews();
 
         if (isLoggedIn) {
-
             BottomNavigationFragment bottomNavigationFragment = new BottomNavigationFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragmentContainerRecipeDetails, bottomNavigationFragment);
             transaction.commit();
-
+            recycler_meal_ingredients.setPadding(recycler_meal_ingredients.getPaddingLeft(), recycler_meal_ingredients.getPaddingTop(),
+                    recycler_meal_ingredients.getPaddingLeft(), (int) (150 * getResources().getDisplayMetrics().density));
         } else {
-            // User is a guest, hide the Bottom Navigation Bar fragment if previously added
             Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainerRecipeDetails);
             if (fragment != null) {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.remove(fragment);
                 fragmentTransaction.commit();
+                recycler_meal_ingredients.setPadding(recycler_meal_ingredients.getPaddingLeft(), recycler_meal_ingredients.getPaddingTop(),
+                        recycler_meal_ingredients.getPaddingLeft(), (int) (80 * getResources().getDisplayMetrics().density));
             }
         }
 
-        findViews();
 
         id = Integer.parseInt(getIntent().getStringExtra("id"));
         keyword = getIntent().getStringExtra("keyword");
@@ -121,7 +123,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
         @Override
         public void didError(String message) {
-
         }
     };
 
