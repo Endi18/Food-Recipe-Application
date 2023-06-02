@@ -123,6 +123,31 @@ The `emailTo` method is called when the user clicks the email button. It creates
 This activity sets up the welcome screen of the application and displays the BottomNavigationFragment. It also provides the functionality to compose an email to the specified email address when the user clicks the email button.
 
 
+####  Search Activity
+##### _Author: Sexhi Picaku_
+![image](https://github.com/SaraHoxha/Food-Recipes-Application/assets/132173050/7aca477f-088c-4452-b3f6-8df26fb48180)
+![image](https://github.com/SaraHoxha/Food-Recipes-Application/assets/132173050/54e285f5-7abe-450f-b1e9-bbfb65c0911c)
+
+The ‘SearchActivity’ is used to search the recipe that the user wants . So,the user after writing the name of recipe and pressing enter ,below the app will show the results of the search. Also the user can write just one part of the name of recipe and the results will shown all the recipes related with that part of the search. Going in details:
+
+1.The ‘SearchActivity’ class is defined and it extends the ‘AppCompatActivity’ class, which is the base class for activities that use the support library action bar features.
+
+2.Inside the ‘SearchActivity’ class, there are several member variables declared: 
+‘progressDialog’;This variable represents a progress dialog, which is used to show a loading indicator while performing a search.
+‘searchView’: This variable represents a search view, which allows the user to enter a search query.
+‘searchText’: This variable stores the text entered by the user in the search view.
+
+3.The ‘onCreate’  method is overridden. This method is called when the activity is being created.
+The layout file "activity_search.sol" is set as the content view for the activity using the ‘setContentView’ method.
+A progress dialog is initialized and configured with a title. The ‘SharedPreferences’ object is used to retrieve the login state of the user. If the user is logged in (isLoggedIn is true), the selected item ID is obtained from the intent extras. An instance of the ‘BottoNavigationEragment’ class is created and arguments are passed to it using a bundle.
+The fragment is replaced in the container with the ID ;fragmentContainerSearchNav’ using a Fragment Transaction.  If the user is not logged in, the bottom navigation bar fragment is removed from the container. The ‘searchiView’ is initialized and configured. Event listeners are set on the ‘searchView’ to handle query submission and text changes.
+
+4.The ‘submitAndGoToRecipesearchResult’ method is called when the user clicks a button to submit the search query.
+ If the search text is empty, a toast message is shown to prompt the user to enter something in the search bar. If the search text is not empty, an intent is created to start the ‘RecipesearchResultActivity’ class. The search text is added as an extra to the intent. The ‘startActivity’ method is called to navigate to the search result activity.
+
+5.The ‘goBackToInitialActivity’ method is called when the user clicks a button to go back to the initial activity (presumably the login activity). An intent is created to start the ‘LoginActivity’ class.
+The ‘startActivity’ method is called to navigate to the login activity.
+
 
 ### Adapters
 
