@@ -139,13 +139,20 @@ The ‘SearchActivity’ is used to search the recipe that the user wants . So,t
 
 3.The ‘onCreate’  method is overridden. This method is called when the activity is being created.
 The layout file "activity_search.sol" is set as the content view for the activity using the ‘setContentView’ method.
-A progress dialog is initialized and configured with a title. The ‘SharedPreferences’ object is used to retrieve the login state of the user. If the user is logged in (isLoggedIn is true), the selected item ID is obtained from the intent extras. An instance of the ‘BottoNavigationEragment’ class is created and arguments are passed to it using a bundle.
-The fragment is replaced in the container with the ID ;fragmentContainerSearchNav’ using a Fragment Transaction.  If the user is not logged in, the bottom navigation bar fragment is removed from the container. The ‘searchiView’ is initialized and configured. Event listeners are set on the ‘searchView’ to handle query submission and text changes.
+A progress dialog is initialized and configured with a title. 
+The ‘SharedPreferences’ object is used to retrieve the login state of the user. If the user is logged in (isLoggedIn is true), the selected item ID is obtained from the intent extras.
+An instance of the ‘BottoNavigationEragment’ class is created and arguments are passed to it using a bundle.
+The fragment is replaced in the container with the ID ;fragmentContainerSearchNav’ using a Fragment Transaction.  
+If the user is not logged in, the bottom navigation bar fragment is removed from the container.
+The ‘searchiView’ is initialized and configured. Event listeners are set on the ‘searchView’ to handle query submission and text changes.
 
 4.The ‘submitAndGoToRecipesearchResult’ method is called when the user clicks a button to submit the search query.
- If the search text is empty, a toast message is shown to prompt the user to enter something in the search bar. If the search text is not empty, an intent is created to start the ‘RecipesearchResultActivity’ class. The search text is added as an extra to the intent. The ‘startActivity’ method is called to navigate to the search result activity.
+ If the search text is empty, a toast message is shown to prompt the user to enter something in the search bar.
+ If the search text is not empty, an intent is created to start the ‘RecipesearchResultActivity’ class. 
+ The search text is added as an extra to the intent. The ‘startActivity’ method is called to navigate to the search result activity.
 
-5.The ‘goBackToInitialActivity’ method is called when the user clicks a button to go back to the initial activity (presumably the login activity). An intent is created to start the ‘LoginActivity’ class.
+5.The ‘goBackToInitialActivity’ method is called when the user clicks a button to go back to the initial activity (presumably the login activity). 
+An intent is created to start the ‘LoginActivity’ class.
 The ‘startActivity’ method is called to navigate to the login activity.
 
 
