@@ -110,4 +110,22 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME);
     }
+
+    public Cursor getCurrentUser() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.query(
+                    TABLE_NAME,
+                    new String[]{COLUMN_ID, COLUMN_USERNAME, COLUMN_EMAIL, COLUMN_PASSWORD},
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+            );
+        }
+        return cursor;
+    }
+
 }
