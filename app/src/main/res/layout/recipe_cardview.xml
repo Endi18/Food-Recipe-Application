@@ -39,18 +39,15 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <CheckBox
-        android:id="@+id/like_button_cb"
+    <ImageView
+        android:id="@+id/imgFvrt"
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:layout_gravity="center|end"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="-80dp"
-        android:background="@drawable/ic_love"
-        android:button="@null"
-        android:gravity="center"
+        android:src="@drawable/ic_love"
         android:padding="5px"
-        android:textSize="12px"
         android:visibility="visible" />
 
 </androidx.cardview.widget.CardView>

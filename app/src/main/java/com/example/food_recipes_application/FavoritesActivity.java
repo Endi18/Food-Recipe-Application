@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
 
 
@@ -53,6 +53,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.food_recipes_application.Adapters.FavoriteAdapter;
+import com.example.food_recipes_application.Database.MyDatabaseHelper;
+import com.example.food_recipes_application.Listeners.RecipeClickListener;
 import com.example.food_recipes_application.Models.FavItem;
 
 import org.json.JSONArray;
@@ -66,104 +68,38 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class FavoritesActivity extends AppCompatActivity {
 
-    private TextView textView;
-    private Context context;
-    private ArrayList<FavItem> favItem = new ArrayList<>();
-
-    private RecyclerView recyclerView;
-    private TextView textViewF;
 
 
+
+
+    private MyDatabaseHelper helper;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.favorite_activity);
+
+        helper = new MyDatabaseHelper(this);
         setContentView(R.layout.fav_fragment_recycler);
+        RecyclerView recyclerView=findViewById(R.id.fav_recyclerView);
+        recyclerView.setAdapter(new FavoriteAdapter(this, helper.getAllRecipes(), new RecipeClickListener() {
+            @Override
+            public void onRecipeClicked(String id) {
 
-        textView = findViewById(R.id.textViewF);
+                startActivity(new Intent(FavoritesActivity.this, RecipeDetailsActivity.class)
+                        .putExtra("id", id).putExtra("keyword", ""));
+            }
+        }));
 
-      /*   RecyclerView recyclerView = findViewById(R.id.fav_recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new FavItem(favItem,  context));
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-
-       favItem.add(new favItem(R.drawable.img,   "Latte",  “0”,  ”0”));
-        favItem.add(new favItem(R.drawable.img,   "Kapucino", “1”,  ”0”));
-        favItem.add(new favItem(R.drawable.img,   "Raf", “2”, ”0”));
-        favItem.add(new favItem(R.drawable.img, "Milk Shake" , “3”, 0”));
-
-        return root;*/
-
-        // Make an API request
-       // new FetchFavoritesTask().execute(context.getString(R.string.apiKey));
-        recyclerView = findViewById(R.id.fav_recyclerView);
-        textViewF = findViewById(R.id.textViewF);
-
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("pref", 0);
-        // PreferenceManager preferenceManager = new PreferenceManager(sharedPreferences);
-
-
-      //  fetchData();
-   // }
+        findViewById(R.id.btnBack).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
-
-
-    /*private void fetchData() {
-        List<FavItem> fvitm =
-
-        if (fvitm != null && fvitm.size() > 0) {
-            showNoFavtText(false);
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-            recyclerView.setAdapter(new FavoriteAdapter(fvitm, this,));
-        } else {
-            showNoFavtText(true);
-        }
-
-    }*/
-
-    private void showNoFavtText(boolean show) {
-        textViewF.setVisibility(show ? View.VISIBLE : View.GONE);
-        recyclerView.setVisibility(show ? View.GONE : View.VISIBLE);
-    }
-
-
-
-    // Define a static list to store the favorite items
-    private static List<FavItem> favoriteItems = new ArrayList<>();
-
-    // Add a favorite item to the list
-    public static void addFavoriteItem(FavItem favItem) {
-        favoriteItems.add(favItem);
-    }
-
-    // Get the list of favorite items
-    public static List<FavItem> getFavoriteItems() {
-        return favoriteItems;
-    }
-
-    // Clear the list of favorite items
-    public static void clearFavoriteItems() {
-        favoriteItems.clear();
-    }
-
-    private void fetchData() {
-        List<FavItem> fvitm = getFavoriteItems(); // Fetch the favorite items
-
-        if (fvitm != null && fvitm.size() > 0) {
-            showNoFavtText(false);
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-         //   recyclerView.setAdapter(new FavoriteAdapter(fvitm, this));
-        } else {
-            showNoFavtText(true);
-        }
-    }
-
 }

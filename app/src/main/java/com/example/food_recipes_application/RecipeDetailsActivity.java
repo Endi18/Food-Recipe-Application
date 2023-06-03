@@ -10,6 +10,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,9 +23,11 @@ import org.jsoup.nodes.Document;
 
 import com.example.food_recipes_application.Adapters.IngredientsAdapter;
 import com.example.food_recipes_application.Adapters.InstructionsAdapter;
+import com.example.food_recipes_application.Database.MyDatabaseHelper;
 import com.example.food_recipes_application.Listeners.InstructionsListener;
 import com.example.food_recipes_application.Listeners.RecipeDetailsListener;
 import com.example.food_recipes_application.Models.InstructionsResponse;
+import com.example.food_recipes_application.Models.Recipe;
 import com.example.food_recipes_application.Models.RecipeDetailsResponse;
 import com.squareup.picasso.Picasso;
 
@@ -33,13 +37,15 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     int id;
     String keyword;
     TextView textView_meal_name, textView_meal_source, textView_meal_summary;
+    ImageView like_button_cb_recipeCardView;
     ImageView imageView_meal_image;
     RecyclerView recycler_meal_ingredients, recycler_meal_instructions;
     APIRequestManager manager;
     ProgressDialog dialog;
     IngredientsAdapter ingredientsAdapter;
     InstructionsAdapter instructionsAdapter;
-
+    MyDatabaseHelper helper;
+    Recipe recipe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +75,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         }
 
 
+        helper=new MyDatabaseHelper(this);
         id = Integer.parseInt(getIntent().getStringExtra("id"));
         keyword = getIntent().getStringExtra("keyword");
         manager = new APIRequestManager(this);
@@ -86,6 +93,37 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         imageView_meal_image = findViewById(R.id.imageView_meal_image);
         recycler_meal_ingredients =  findViewById(R.id.recycler_meal_ingredients);
         recycler_meal_instructions = findViewById(R.id.recycler_meal_instructions);
+        like_button_cb_recipeCardView = findViewById(R.id.like_button_cb_recipeCardView);
+
+
+    }
+
+    void initRecipeHeart()
+    {
+        if(helper.isRecipeExists(recipe.id))
+        {
+            like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.RED));
+        }
+        else
+        {
+            like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.WHITE));
+        }
+
+        like_button_cb_recipeCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(helper.isRecipeExists(recipe.id))
+                {
+                    helper.deleteRecipe(recipe.id);
+                    like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.WHITE));
+                }
+                else
+                {
+                    helper.saveRecipe(recipe);
+                    like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.RED));
+                }
+            }
+        });
     }
 
     private final RecipeDetailsListener recipeDetailsListener = new RecipeDetailsListener() {
@@ -104,6 +142,13 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             recycler_meal_ingredients.setLayoutManager(new LinearLayoutManager(RecipeDetailsActivity.this, LinearLayoutManager.HORIZONTAL, false));
             ingredientsAdapter = new IngredientsAdapter(RecipeDetailsActivity.this, response.extendedIngredients);
             recycler_meal_ingredients.setAdapter(ingredientsAdapter);
+
+            recipe=new Recipe();
+            recipe.id=response.id;
+            recipe.image=response.image;
+            recipe.imageType=response.imageType;
+            recipe.title=response.title;
+            initRecipeHeart();
         }
 
         @Override
@@ -127,8 +172,17 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     };
 
     public void goBackToSearchActivity(View view){
-        Intent intent = new Intent(this, RecipeSearchResultActivity.class);
-        intent.putExtra("keyword", keyword);
-        startActivity(intent);
+
+        if(keyword.isEmpty())
+        {
+            finish();
+        }
+        else
+        {
+            Intent intent = new Intent(this, RecipeSearchResultActivity.class);
+            intent.putExtra("keyword", keyword);
+            startActivity(intent);
+        }
+
     }
 }

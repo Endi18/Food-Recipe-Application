@@ -14,14 +14,17 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView usernameTextView;
     private TextView emailTextView;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
         dbHelper = new MyDatabaseHelper(this);
-        usernameTextView = findViewById(R.id.usernameTextView);
-        emailTextView = findViewById(R.id.emailTextView);
+        usernameTextView = findViewById(R.id.editTextUsername);
+        emailTextView = findViewById(R.id.editTextEmail);
 
         // Get the current logged-in user
         Cursor cursor = dbHelper.getCurrentUser();

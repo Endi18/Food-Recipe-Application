@@ -6,4 +6,6 @@ public class Recipe {
         public String image;
         public String imageType;
 
+        public boolean isFvrt;
+
 }
