@@ -99,6 +99,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/textView_meal_summary"
                 app:layout_constraintStart_toStartOf="parent" />
 
+
             <CheckBox
                 android:id="@+id/like_button_cb_recipeCardView"
                 android:layout_width="52dp"
@@ -114,11 +115,11 @@
                 android:textSize="12px"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/textView_meal_name"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.05"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textView_meal_summary"

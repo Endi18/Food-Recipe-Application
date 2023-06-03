@@ -160,7 +160,7 @@ public class FavoritesActivity extends AppCompatActivity {
             showNoFavtText(false);
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-            recyclerView.setAdapter(new FavoriteAdapter(fvitm, this));
+         //   recyclerView.setAdapter(new FavoriteAdapter(fvitm, this));
         } else {
             showNoFavtText(true);
         }

@@ -3,6 +3,7 @@ package com.example.food_recipes_application.Adapters;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,11 +52,13 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         //final FavItem favItm =  favItem.get(position);
 
         holder.textViewF.setText(favItem.get(position).getTitle());
-        if (favItem.get(position).getIsLiked() == 1)
+        if (favItem.get(position).getIsLiked() == 1) {
             holder.like_button_cb.setChecked(true);
-        else
+            holder.like_button_cb.setBackground(Drawable.createFromPath("@drawable/ic_love"));
+        }else {
             holder.like_button_cb.setChecked(false);
-
+            holder.like_button_cb.setBackground(Drawable.createFromPath("@drawable/ic_love_checked"));
+        }
 
         holder.like_button_cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -63,8 +66,10 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                 if (buttonView.isPressed()) {
                     if (isChecked) {
                         holder.like_button_cb.setChecked(false);
+                        holder.like_button_cb.setBackground(Drawable.createFromPath("@drawable/ic_love_checked"));
                     } else {
                         holder.like_button_cb.setChecked(true);
+                        holder.like_button_cb.setBackground(Drawable.createFromPath("@drawable/ic_love"));
                     }
                 }
             }
