@@ -203,6 +203,46 @@ If the recipe does not exist in the database:
 `holder.imgFvrt.setImageTintList(ColorStateList.valueOf(Color.RED))` - It sets the tint color of the favorite icon to red, indicating that the recipe is now a favorite.
 
 
+####  Profile Activity
+##### _Author: Sexhi Picaku_
+
+![image](https://github.com/SaraHoxha/Food-Recipes-Application/assets/132173050/fe1d5efc-eb61-495b-82d8-564a1519788a)
+
+Clicking profile icon in the navigation bar will directed to Profile Activity. 
+Profile Activity shows username, email and password that the user will fullfill.
+Also in this activity the user can log out and update all the information that he/she wants. 
+
+The imports at the beginning of the code include necessary Android classes and the`MyDatabaseHelper` class, which is a custom database helper class for managing user data.
+  
+The `ProfileActivity` class is declared as a subclass of `AppCompatActivity`, which is the base class for activities that use the support library action bar features.
+ 
+Various variables and views are declared, including `usernameTextView`, `emailTextView`, and `passwordTextView` representing the `EditText` views for username, email, and password input respectively.
+  
+  In the onCreate method, the activity layout is set using setContentView. Then, the database helper object is created.
+    
+Various click listeners and touch listeners are set on views to handle user interactions. For example, the `togglePasswordVisibility` method is called when the password visibility icon is clicked to show or hide the password.
+
+An instance of the `BottomNavigationFragment` class is created and added to the activity's layout using fragment transactions.
+Click listeners are set on buttons to handle actions such as updating user information or logging out.
+   
+The `getUserData` method is called on the database helper object to retrieve the current user's data based on the currentEmail value. The retrieved data is then populated into the corresponding EditText views.
+    
+The `clickUsernamePencil`, `clickEmailPencil`, and `clickPasswordPencil` methods are called when the user clicks on the pencil icons next to the username, email, and password fields respectively. These methods toggle the editability of the corresponding `EditText` views.
+ 
+ The `togglePasswordVisibility` method is responsible for toggling the visibility of the password text in the password `EditText` view
+ 
+ 
+ Several methods in a custom database helper class that handle updating user information in an SQLite database. 
+ 
+1. `public boolean updateUser(String id, String username, String email, String password)`: This method updates the user's username, email, and password in the database. It takes the user's ID, new username, new email, and new password as parameters. It first gets a writable database instance using `getWritableDatabase()`. Then, it creates a `ContentValues` object and puts the new values for username, email, and password into it. The method then executes a query to check if a user with the given ID exists in the database. If the user exists, it performs an update operation on the "Users" table using the new values and the user's ID. Finally, it returns true if the update was successful, and false otherwise.
+
+2. `public boolean updateUsername(String id, String username)`: This method updates the user's username in the database. It takes the user's ID and new username as parameters. It follows a similar approach to the updateUser method but only updates the username field in the "Users" table.
+ 
+3. `public boolean updateEmail(String id, String email)`: This method updates the user's email in the database. It takes the user's ID and new email as parameters. It follows a similar approach to the updateUser method but only updates the email field in the "Users" table.
+
+4. `public boolean updatePassword(String id, String password)`: This method updates the user's password in the database. It takes the user's ID and new password as parameters. It follows a similar approach to the updateUser method but only updates the password field in the "Users" table.
+
+5. `public boolean isEmailAlreadyExists(String email)`: This method checks if an email already exists in the database. It takes an email as a parameter and uses `getReadableDatabase()` to get a readable database instance. Then, it performs a query on the "users" table to check if any rows have the given email. If the cursor returns any rows, it means that the email already exists, and the method returns true. Otherwise, it returns false.
 
 
 
