@@ -46,16 +46,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE " + TABLE_NAME_USERS +
+        String query = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_USERS +
                 " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_USERNAME + " TEXT, " +
                 COLUMN_EMAIL + " TEXT UNIQUE, " +
                 COLUMN_PASSWORD + " TEXT);";
         db.execSQL(query);
 
-
-
-        String createRecipeTable = "CREATE TABLE " + TABLE_NAME + "(" +
+        String createRecipeTable = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY," +
                 COLUMN_TITLE + " TEXT," +
                 COLUMN_IMAGE + " TEXT," +
@@ -160,6 +158,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_NAME, null, values);
         db.close();
     }
+    @SuppressLint("Range")
     public List<Recipe> getAllRecipes() {
         List<Recipe> recipes = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
@@ -239,8 +238,25 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         else
             return false;
+    }
+
+    public boolean isEmailAlreadyExists(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
 
 
+        Cursor cursor = db.query(
+                "users",
+                null,
+                "email = ?",
+                new String[]{email},
+                null,
+                null,
+                null
+        );
 
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+
+        return exists;
     }
 }
