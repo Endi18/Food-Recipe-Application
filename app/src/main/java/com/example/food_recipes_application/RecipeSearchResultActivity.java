@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +32,7 @@ public class RecipeSearchResultActivity extends AppCompatActivity {
 
 
     final APISearchResponseListener apiSearchResponseListener = new APISearchResponseListener() {
+        @SuppressLint("DefaultLocale")
         @Override
         public void didFetch(APISearchResponse response, String message) {
             progressDialog.dismiss();

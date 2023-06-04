@@ -23,6 +23,6 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     public void emailTo(View view){
-        startActivity( new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:info@foodtopia.al")));
+        startActivity(new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:info@foodtopia.al")));
     }
 }
