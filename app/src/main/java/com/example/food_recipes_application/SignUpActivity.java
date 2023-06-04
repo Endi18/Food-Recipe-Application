@@ -36,6 +36,8 @@ public class SignUpActivity extends AppCompatActivity {
     private Drawable visibilityOnIcon, visibilityOffIcon, securityIcon;
     private Typeface typeface;
 
+    private final MyDatabaseHelper dbHelper = new MyDatabaseHelper(this);
+
     @SuppressLint({"ClickableViewAccessibility", "UseCompatLoadingForDrawables"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,10 +160,15 @@ public class SignUpActivity extends AppCompatActivity {
         } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
             email.setError("Please enter a valid email address!");
             return false;
-        } else {
+        } else if (dbHelper.isEmailAlreadyExists(emailInput)) {
+            email.setError("This email is being used by another user!");
+            return false;
+        }
+        else {
             email.setError(null);
             return true;
         }
+
     }
 
     private boolean validateUsername() {
