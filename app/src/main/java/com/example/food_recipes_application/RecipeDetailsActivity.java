@@ -46,13 +46,15 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     InstructionsAdapter instructionsAdapter;
     MyDatabaseHelper helper;
     Recipe recipe;
+    boolean isLoggedIn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
 
         SharedPreferences sharedPreferences = getSharedPreferences("LOGIN_PREFS", Context.MODE_PRIVATE);
-        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+        isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
 
         findViews();
 
@@ -71,6 +73,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
                 recycler_meal_ingredients.setPadding(recycler_meal_ingredients.getPaddingLeft(), recycler_meal_ingredients.getPaddingTop(),
                         recycler_meal_ingredients.getPaddingLeft(), (int) (80 * getResources().getDisplayMetrics().density));
+                like_button_cb_recipeCardView.setVisibility(View.GONE);
             }
         }
 
@@ -94,8 +97,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         recycler_meal_ingredients =  findViewById(R.id.recycler_meal_ingredients);
         recycler_meal_instructions = findViewById(R.id.recycler_meal_instructions);
         like_button_cb_recipeCardView = findViewById(R.id.like_button_cb_recipeCardView);
-
-
     }
 
     void initRecipeHeart()
@@ -109,19 +110,16 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.WHITE));
         }
 
-        like_button_cb_recipeCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(helper.isRecipeExists(recipe.id))
-                {
-                    helper.deleteRecipe(recipe.id);
-                    like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.WHITE));
-                }
-                else
-                {
-                    helper.saveRecipe(recipe);
-                    like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.RED));
-                }
+        like_button_cb_recipeCardView.setOnClickListener(v -> {
+            if(helper.isRecipeExists(recipe.id))
+            {
+                helper.deleteRecipe(recipe.id);
+                like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.WHITE));
+            }
+            else
+            {
+                helper.saveRecipe(recipe);
+                like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.RED));
             }
         });
     }
