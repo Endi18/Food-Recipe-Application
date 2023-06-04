@@ -33,7 +33,7 @@ public class BottomNavigationFragment extends Fragment {
                 startActivity(new Intent(getActivity(), FavoritesActivity.class));
                 return true;
             } else if (itemId == R.id.menu_profile) {
-                startActivity(new Intent(getActivity(), SignUpActivity.class));
+                startActivity(new Intent(getActivity(), ProfileActivity.class));
                 return true;
             }
 

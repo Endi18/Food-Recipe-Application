@@ -16,6 +16,7 @@ import java.util.List;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
+
     private final Context context;
     private static final String DATABASE_NAME = "FoodRecipes.db";
     private static final int DATABASE_VERSION = 2;
@@ -206,7 +207,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = null;
         if (db != null) {
             cursor = db.query(
-                    TABLE_NAME,
+                    TABLE_NAME_USERS,
                     new String[]{COLUMN_ID, COLUMN_USERNAME, COLUMN_EMAIL, COLUMN_PASSWORD},
                     null,
                     null,
@@ -217,5 +218,29 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         return cursor;
     }
+    public boolean updateUser(String id,String username, String email, String password){
+        SQLiteDatabase db = this.getWritableDatabase();
 
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USERNAME, username);
+        values.put(COLUMN_EMAIL, email);
+        values.put(COLUMN_PASSWORD, password);
+
+
+        Cursor cursor = db.rawQuery("Select * from Users where ID = ?", new String[]{String.valueOf(id)});
+        if (cursor.getCount()>0)
+        {
+            long result =   db.update("Users" ,values,"ID=?",new String[]{String.valueOf(id)});
+            if (result==-1)
+                return false;
+            else
+                return true;
+        }
+        else
+            return false;
+
+
+
+    }
 }

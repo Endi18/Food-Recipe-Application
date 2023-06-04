@@ -1,8 +1,15 @@
 package com.example.food_recipes_application;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Patterns;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,10 +17,11 @@ import com.example.food_recipes_application.Database.MyDatabaseHelper;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    public  static String currentEmail="";
     private MyDatabaseHelper dbHelper;
-    private TextView usernameTextView;
-    private TextView emailTextView;
-
+    private EditText usernameTextView;
+    private EditText emailTextView,passwordTextView;
+    String userId;
 
 
 
@@ -23,24 +31,72 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         dbHelper = new MyDatabaseHelper(this);
-        usernameTextView = findViewById(R.id.editTextUsername);
-        emailTextView = findViewById(R.id.editTextEmail);
+        usernameTextView = findViewById(R.id.editTextText);
+        emailTextView = findViewById(R.id.editTextText2);
+        passwordTextView = findViewById(R.id.editTextTextPassword);
 
-        // Get the current logged-in user
-        Cursor cursor = dbHelper.getCurrentUser();
+        findViewById(R.id.button2).setOnClickListener(v -> {
 
-        if (cursor != null && cursor.moveToFirst()) {
-            String username = cursor.getString(cursor.getColumnIndex(MyDatabaseHelper.COLUMN_USERNAME));
-            String email = cursor.getString(cursor.getColumnIndex(MyDatabaseHelper.COLUMN_EMAIL));
+            String userName= usernameTextView.getText().toString();
+            String email= emailTextView.getText().toString();
+            String password= passwordTextView.getText().toString();
+            if (userName.isEmpty()) {
+
+                Toast.makeText(ProfileActivity.this, "Please provide your Name!", Toast.LENGTH_SHORT).show();
+
+                return;
+            } else if (password.isEmpty()) {
+                Toast.makeText(ProfileActivity.this, "Please provide your password!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+
+                Toast.makeText(ProfileActivity.this, "Please provide a valid email!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            boolean checkInsert = dbHelper.updateUser(userId,userName,email,password);
+            if (checkInsert)
+            {
+                Toast.makeText(ProfileActivity.this, "Update User Data Successfully ", Toast.LENGTH_SHORT).show();
+            currentEmail=email;
+            }
+            else
+                Toast.makeText(ProfileActivity.this, "Update User Data Failed  !! Please Try Again" , Toast.LENGTH_SHORT).show();
+        });
+        findViewById(R.id.button4).setOnClickListener(v -> {
+            startActivity(new Intent(this, InitialActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            SharedPreferences sharedPreferences = getSharedPreferences("LOGIN_PREFS", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isLoggedIn", false); // Set the login state as logged in
+            editor.apply();
+        });
+
+        findViewById(R.id.btnBack2).
+                setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                });
+// Get the current logged-in user
+        Cursor cursor = dbHelper.getUserData(currentEmail);
 
 
-            // Display the user data in the TextViews
-            usernameTextView.setText(username);
-            emailTextView.setText(email);
 
-            cursor.close(); // Remember to close the cursor when you're done with it
-        } else {
-            // No logged-in user found
+        int EMAIL_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyDatabaseHelper.COLUMN_EMAIL);
+        int PASSWORD_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyDatabaseHelper.COLUMN_PASSWORD);
+        int USER_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyDatabaseHelper.COLUMN_USERNAME);
+        int ID_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyDatabaseHelper.COLUMN_ID);
+
+        while (cursor.moveToNext()) {
+            emailTextView.setText(cursor.getString(EMAIL_COLUMN_INDEX));
+            passwordTextView.setText(cursor.getString(PASSWORD_COLUMN_INDEX));
+            usernameTextView.setText(cursor.getString(USER_COLUMN_INDEX));
+            userId = cursor.getString(ID_COLUMN_INDEX);
+
+
         }
-    }
-}
+        cursor.close();
+
+    }}
