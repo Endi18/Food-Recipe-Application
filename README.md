@@ -156,6 +156,56 @@ An intent is created to start the `LoginActivity`  class.
 The `startActivity`  method is called to navigate to the login activity.
 
 
+
+####  Favorite Activity
+##### _Author: Sexhi Picaku_
+
+![image](https://github.com/SaraHoxha/Food-Recipes-Application/assets/132173050/b7c84268-9407-4dd0-8197-b833842df15a)
+![image](https://github.com/SaraHoxha/Food-Recipes-Application/assets/132173050/4faa67f6-c248-480d-b64d-7962557ad53b)
+
+Favorite Activity shows all the favorite recipes of the user by clicking the heart in the recipe that user wants. The heart from white color ,will be red by clicking it. In this way those recipes will go automatically at favorites interface. Also the user can make unclick by removing the recipe  from favorites.Each user will have their own favorites recipes.
+
+
+`MyDatabaseHelper(this)`- It creates a new instance of the `MyDatabaseHelper` class, which handles the database operations for managing recipes.
+
+`setContentView(R.layout.fav_fragment_recycler)`- It sets the layout file fav_fragment_recycler.xml as the content view for the activity or fragment. This layout contains the `RecyclerView` and other necessary views.
+
+`findViewById(R.id.fav_recyclerView)` - It finds the RecyclerView with the id fav_recyclerView from the layout.
+
+`recyclerView.setAdapter(new FavoriteAdapter(this, helper.getAllRecipes()` - It sets the adapter for the `RecyclerView`. The adapter used is an instance of the `FavoriteAdapter` class provides the current context (activity or fragment) to the adapter.
+
+`helper.getAllRecipes()`- It retrieves all the recipes from the database using the ‘getAllRecipes()’ method of the ‘MyDatabaseHelper class’
+
+new `RecipeClickListener()`- It creates an instance of the ‘RecipeClickListener’ interface, which is a callback for recipe click events. 
+
+In Favorite Adapter;
+
+`if(helper.isRecipeExists(recipe.id))`- It checks if the current recipe is already saved as a favorite in the database by calling the `isRecipeExists()` method of the `MyDatabaseHelper` class.
+
+If the recipe exists in the database:
+`holder.imgFvrt.setImageTintList(ColorStateList.valueOf(Color.RED))` - It sets the tint color of the favorite icon to red, indicating that the recipe is a favorite.
+
+If the recipe does not exist in the database:
+`holder.imgFvrt.setImageTintList(ColorStateList.valueOf(Color.WHITE))`-  It sets the tint color of the favorite icon to white, indicating that the recipe is not a favorite.
+
+`holder.imgFvrt.setOnClickListener(new View.OnClickListener()` - It sets a click listener on the favorite icon. When the icon is clicked:
+
+If the recipe exists in the database:
+`helper.deleteRecipe(recipe.id)`It deletes the recipe from the database using the deleteRecipe() method of the `MyDatabaseHelper` class.
+
+`recipeList.remove(holder.getAbsoluteAdapterPosition())` - It removes the recipe from the list of recipes in the adapter.
+
+`notifyItemRemoved(holder.getAbsoluteAdapterPosition())`- It notifies the adapter that an item has been removed at the specified position, triggering a UI update.
+
+If the recipe does not exist in the database:
+`helper.saveRecipe(recipe)`- It saves the recipe to the database using the saveRecipe() method of the `MyDatabaseHelper` class.
+
+`holder.imgFvrt.setImageTintList(ColorStateList.valueOf(Color.RED))` - It sets the tint color of the favorite icon to red, indicating that the recipe is now a favorite.
+
+
+
+
+
 ### Adapters
 
 #### IngredientsAdapter
