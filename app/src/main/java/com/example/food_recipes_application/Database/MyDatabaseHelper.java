@@ -217,13 +217,75 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
     public boolean updateUser(String id,String username, String email, String password){
         SQLiteDatabase db = this.getWritableDatabase();
-
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME, username);
         values.put(COLUMN_EMAIL, email);
+        values.put(COLUMN_PASSWORD, password);
+
+
+        Cursor cursor = db.rawQuery("Select * from Users where ID = ?", new String[]{String.valueOf(id)});
+        if (cursor.getCount()>0)
+        {
+            long result =   db.update("Users" ,values,"ID=?",new String[]{String.valueOf(id)});
+            if (result==-1)
+                return false;
+            else
+                return true;
+        }
+        else
+            return false;
+    }
+
+    public boolean updateUsername(String id, String username){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USERNAME, username);
+
+        Cursor cursor = db.rawQuery("Select * from Users where ID = ?", new String[]{String.valueOf(id)});
+        if (cursor.getCount()>0)
+        {
+            long result =   db.update("Users" ,values,"ID=?",new String[]{String.valueOf(id)});
+            if (result==-1)
+                return false;
+            else
+                return true;
+        }
+        else
+            return false;
+    }
+
+
+
+    public boolean updateEmail(String id, String email){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_EMAIL, email);
+
+
+        Cursor cursor = db.rawQuery("Select * from Users where ID = ?", new String[]{String.valueOf(id)});
+        if (cursor.getCount()>0)
+        {
+            long result =   db.update("Users" ,values,"ID=?",new String[]{String.valueOf(id)});
+            if (result==-1)
+                return false;
+            else
+                return true;
+        }
+        else
+            return false;
+    }
+
+
+    public boolean updatePassword(String id, String password){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
         values.put(COLUMN_PASSWORD, password);
 
 

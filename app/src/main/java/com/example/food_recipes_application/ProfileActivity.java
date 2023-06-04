@@ -22,7 +22,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.food_recipes_application.Database.MyDatabaseHelper;
-
 import java.util.regex.Pattern;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -40,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private Drawable visibilityOnIcon, visibilityOffIcon, pencil, pencil_diagonal;
     private Typeface typeface;
+    String originalUsername, originalEmail, originalPassword;
 
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
@@ -74,6 +74,7 @@ public class ProfileActivity extends AppCompatActivity {
         pencil_diagonal = getDrawable(R.drawable.ic_pencil_with_diagonal_line);
 
         typeface = passwordTextView.getTypeface();
+
 
         passwordTextView.setOnTouchListener(new View.OnTouchListener() {
             final int DRAWABLE_RIGHT = 2;
@@ -127,14 +128,34 @@ public class ProfileActivity extends AppCompatActivity {
                 return;
             }
 
-            boolean checkInsert = dbHelper.updateUser(userId,userName,email,password);
-            if (checkInsert)
-            {
-                Toast.makeText(ProfileActivity.this, "Update User Data Successfully ", Toast.LENGTH_SHORT).show();
-                currentEmail=email;
+            String toastMessage = "";
+
+
+            if(!originalUsername.equals(userName)){
+               if(dbHelper.updateUsername(userId, userName))
+                  toastMessage += "Username, ";
             }
-            else
-                Toast.makeText(ProfileActivity.this, "Update User Data Failed  !! Please Try Again" , Toast.LENGTH_SHORT).show();
+
+            if(!originalEmail.equals(email)){
+                if(dbHelper.updateEmail(userId, email)) {
+                    currentEmail = email;
+                    toastMessage += "Email, ";
+                }
+            }
+
+            if(!originalPassword.equals(password)){
+                if(dbHelper.updatePassword(userId, password)){
+                    toastMessage += "Password ";
+                }
+            }
+
+            if(toastMessage.equals(""))
+                Toast.makeText(ProfileActivity.this, "Nothing is changed", Toast.LENGTH_SHORT).show();
+            else{
+                toastMessage += "is/are updated";
+                Toast.makeText(ProfileActivity.this, toastMessage , Toast.LENGTH_SHORT).show();
+            }
+
         });
         findViewById(R.id.button4).setOnClickListener(v -> {
             startActivity(new Intent(this, InitialActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
@@ -162,10 +183,12 @@ public class ProfileActivity extends AppCompatActivity {
             usernameTextView.setText(cursor.getString(USER_COLUMN_INDEX));
             userId = cursor.getString(ID_COLUMN_INDEX);
 
-
+            originalUsername = cursor.getString(USER_COLUMN_INDEX);
+            originalEmail = cursor.getString(EMAIL_COLUMN_INDEX);
+            originalPassword = cursor.getString(PASSWORD_COLUMN_INDEX);
         }
-        cursor.close();
 
+        cursor.close();
     }
     private void togglePasswordVisibility() {
         if (passwordVisible) {
@@ -186,53 +209,58 @@ public class ProfileActivity extends AppCompatActivity {
         if (isUsernameEditable) {
             isUsernameEditable = false;
             usernameTextView.setEnabled(false);
-            usernameTextView.setFocusable(false);
+            usernameTextView.requestFocus();
             usernameTextView.setCursorVisible(false);
             usernameTextView.setInputType(InputType.TYPE_NULL);
             iconUsername.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil, null, null, null);
         } else {
             isUsernameEditable = true;
             usernameTextView.setEnabled(true);
-            usernameTextView.setFocusableInTouchMode(true);
+            usernameTextView.requestFocus();
+            usernameTextView.setFocusable(true);
             usernameTextView.setCursorVisible(true);
             usernameTextView.setInputType(InputType.TYPE_CLASS_TEXT);
             iconUsername.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil_diagonal, null, null, null);
         }
+        usernameTextView.setTypeface(typeface);
     }
 
     public void clickEmailPencil(View view){
         if (isEmailEditable) {
             isEmailEditable = false;
             emailTextView.setEnabled(false);
-            emailTextView.setFocusable(false);
+            emailTextView.requestFocus();
             emailTextView.setCursorVisible(false);
             emailTextView.setInputType(InputType.TYPE_NULL);
             iconEmail.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil, null, null, null);
         } else {
             isEmailEditable = true;
             emailTextView.setEnabled(true);
-            emailTextView.setFocusableInTouchMode(true);
+            emailTextView.requestFocus();
             emailTextView.setCursorVisible(true);
             emailTextView.setInputType(InputType.TYPE_CLASS_TEXT);
             iconEmail.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil_diagonal, null, null, null);
         }
+        emailTextView.setTypeface(typeface);
     }
 
     public void clickPasswordPencil(View view){
         if (isPasswordEditable) {
             isPasswordEditable = false;
             passwordTextView.setEnabled(false);
-            passwordTextView.setFocusable(false);
+            passwordTextView.requestFocus();
             passwordTextView.setCursorVisible(false);
             passwordTextView.setInputType(InputType.TYPE_NULL);
             iconPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil, null, null, null);
         } else {
             isPasswordEditable = true;
             passwordTextView.setEnabled(true);
-            passwordTextView.setFocusableInTouchMode(true);
+            passwordTextView.requestFocus();
             passwordTextView.setCursorVisible(true);
             passwordTextView.setInputType(InputType.TYPE_CLASS_TEXT);
             iconPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil_diagonal, null, null, null);
         }
+        passwordTextView.setTypeface(typeface);
     }
+
 }
