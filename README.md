@@ -20,6 +20,8 @@ Tested on:
 * Pixel 3 XL with 6.3-inch screen. 
 * Android API version 33.
 
+Application Demo: [View on YouTube](https://youtu.be/xdqvXjBMZe4)
+
 ## Tasks implemented
 
 
