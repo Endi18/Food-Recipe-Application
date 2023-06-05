@@ -14,9 +14,13 @@ Inside our app, we have incorporated a search function that allows users to easi
 
 Overall, thanks to its user-friendly interface and extensive recipe collection, our food recipes app is a must-have for anyone who loves to cook and experiment with new flavors, all through the convenience of their own mobile phone.
 
+## Dependencies
+
+Tested on:
+* Pixel 3 XL with 6.3-inch screen. 
+* Android API version 33.
+
 ## Tasks implemented
-
-
 
 
 ### Activities
