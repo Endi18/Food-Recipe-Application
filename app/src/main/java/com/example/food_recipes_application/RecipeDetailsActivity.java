@@ -135,7 +135,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 String newList= gson.toJson(FavoritesActivity.listRecipesFavorite);
                 helper.saveRecipeFavorite(Integer.parseInt(ProfileActivity.UserID),newList);
-                Toast.makeText(this, "removed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Removed", Toast.LENGTH_SHORT).show();
                 like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.WHITE));
 
             }
@@ -147,7 +147,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 String newList= gson.toJson(FavoritesActivity.listRecipesFavorite);
                 helper.saveRecipeFavorite(Integer.parseInt(ProfileActivity.UserID),newList);
 
-                Toast.makeText(this, "saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
                 like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.RED));
             }
 
