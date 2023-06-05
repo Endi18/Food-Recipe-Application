@@ -379,6 +379,8 @@ The `getUserData` method retrieves the data of a specific user based on their em
 
 This `MyDatabaseHelper` class provides methods to create the database, insert new users, retrieve user data, and delete users from the "Users" table in the SQLite database.
 
+#### ER Diagram
+![img.png](img.png)
 
 ### Classes
 
