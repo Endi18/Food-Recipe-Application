@@ -6,17 +6,23 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.example.food_recipes_application.Models.Recipe;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
-
+    // for Recipes Favorites
+    private static final String TABLE_Recipes_Favorites = "Favorites";
+    public static final String Recipes_Favorites= "recipes_Favorites";
     private final Context context;
     private static final String DATABASE_NAME = "FoodRecipes.db";
     private static final int DATABASE_VERSION = 2;
@@ -61,12 +67,19 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_IS_FAVORITE + " INTEGER DEFAULT 0)";
 
         db.execSQL(createRecipeTable);
+
+        String createRecipeFavTable = "CREATE TABLE IF NOT EXISTS " + TABLE_Recipes_Favorites + "(" +
+                COLUMN_ID + " INTEGER," +
+                Recipes_Favorites + " TEXT)";
+
+        db.execSQL(createRecipeFavTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String dropTableQuery = "DROP TABLE IF EXISTS " + TABLE_NAME;
         String dropTableUSer = "DROP TABLE IF EXISTS " + TABLE_NAME_USERS;
+        String dropTableFavorite = "DROP TABLE IF EXISTS " + TABLE_Recipes_Favorites;
         db.execSQL(dropTableQuery);
         db.execSQL(dropTableUSer);
         onCreate(db);
@@ -303,5 +316,57 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
 
         return exists;
+    }
+
+
+    public void saveRecipeFavorite(int userID,String recipes) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_ID, userID);
+        values.put(Recipes_Favorites, recipes);
+        db.insert(TABLE_Recipes_Favorites, null, values);
+        db.close();
+    }
+
+    public ArrayList<Recipe> getRecipeFavorite(int userId)
+    {
+        ArrayList<Recipe> list =new ArrayList<>();
+
+        String selectQuery = "SELECT * FROM " + TABLE_Recipes_Favorites;
+
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery,null);
+
+        if (cursor.moveToFirst()) {
+            cursor.moveToFirst();
+            do {
+                if (cursor.getInt(0)==userId)
+                {
+                    String recipes =  cursor.getString(1);
+
+
+                    Gson gson = new Gson();
+                    Type type2 = new TypeToken<ArrayList<Recipe>>() {}.getType();
+
+                    ArrayList<Recipe> recipeArrayList = gson.fromJson(recipes, type2);
+
+
+                    Log.e("recipesTag", "Size "+ recipeArrayList.size());
+
+                    if (recipes==null)
+                        recipeArrayList=new ArrayList<>();
+
+
+                    list=recipeArrayList;
+
+
+                }
+
+            }while (cursor.moveToNext());
+
+
+
+        }
+        return list;
     }
 }

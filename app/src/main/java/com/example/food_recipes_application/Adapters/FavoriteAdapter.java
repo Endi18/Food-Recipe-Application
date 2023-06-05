@@ -14,9 +14,12 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.food_recipes_application.Database.MyDatabaseHelper;
+import com.example.food_recipes_application.FavoritesActivity;
 import com.example.food_recipes_application.Listeners.RecipeClickListener;
 import com.example.food_recipes_application.Models.Recipe;
+import com.example.food_recipes_application.ProfileActivity;
 import com.example.food_recipes_application.R;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -51,31 +54,60 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteViewHolder>{
          Picasso.get().load(recipe.image).into(holder.dishImage);
          holder.recipeCardView.setOnClickListener(v -> listener.onRecipeClicked(String.valueOf(recipeList.get(holder.getAdapterPosition()).id)));
 
-         if(helper.doesRecipeExists(recipe.id))
-         {
-          holder.imgFvrt.setImageTintList(ColorStateList.valueOf(Color.RED));
-         }
-         else
-         {
-             holder.imgFvrt.setImageTintList(ColorStateList.valueOf(Color.WHITE));
-         }
+        holder.recipeCardView.setOnClickListener(v ->
+                {
+                    FavoritesActivity.currentSelectFavorite=recipe;
+                    listener.onRecipeClicked(String.valueOf(recipeList.get(holder.getAdapterPosition()).id));
+                }
+        );
 
-         holder.imgFvrt.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 if(helper.doesRecipeExists(recipe.id))
-                 {
-                     helper.deleteRecipe(recipe.id);
-                     recipeList.remove(holder.getAbsoluteAdapterPosition());
-                     notifyItemRemoved(holder.getAbsoluteAdapterPosition());
-                 }
-                 else
-                 {
-                     helper.saveRecipe(recipe);
-                     holder.imgFvrt.setImageTintList(ColorStateList.valueOf(Color.RED));
-                 }
+        if(FavoritesActivity.listRecipesFavorite.contains(recipe))
+        {
+            holder.imgFvrt.setImageTintList(ColorStateList.valueOf(Color.RED));
+        }
+        else
+        {
+            holder.imgFvrt.setImageTintList(ColorStateList.valueOf(Color.WHITE));
+        }
+
+        holder.imgFvrt.setOnClickListener(v -> {
+
+            if (FavoritesActivity.listRecipesFavorite.contains(recipe))
+            {
+
+                FavoritesActivity.listRecipesFavorite.remove(recipe);
+                recipeList.remove(holder.getAbsoluteAdapterPosition());
+                Gson gson = new Gson();
+                String newList= gson.toJson(FavoritesActivity.listRecipesFavorite);
+                helper.saveRecipeFavorite(Integer.parseInt(ProfileActivity.UserID),newList);
+                notifyItemRemoved(holder.getAbsoluteAdapterPosition());
+
+            }
+            else
+            {
+                FavoritesActivity.listRecipesFavorite.add(recipe);
+
+                Gson gson = new Gson();
+                String newList= gson.toJson(FavoritesActivity.listRecipesFavorite);
+                helper.saveRecipeFavorite(Integer.parseInt(ProfileActivity.UserID),newList);
+                notifyItemRemoved(holder.getAbsoluteAdapterPosition());
+                holder.imgFvrt.setImageTintList(ColorStateList.valueOf(Color.RED));
+            }
+            /* if(helper.isRecipeExists(recipe.id))
+             {
+                 helper.deleteRecipe(recipe.id);
+                 recipeList.remove(holder.getAbsoluteAdapterPosition());
+                 notifyItemRemoved(holder.getAbsoluteAdapterPosition());
+                // holder.imgFvrt.setImageTintList(ColorStateList.valueOf(Color.WHITE));
              }
-         });
+             else
+             {
+                 Gson gson = new Gson();
+                 helper.saveRecipe(recipe);
+                 String laminate= gson.toJson(Helper.laminateList);
+                 holder.imgFvrt.setImageTintList(ColorStateList.valueOf(Color.RED));
+             }*/
+        });
     }
 
     @Override

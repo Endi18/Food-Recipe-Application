@@ -29,6 +29,7 @@ import com.example.food_recipes_application.Listeners.RecipeDetailsListener;
 import com.example.food_recipes_application.Models.InstructionsResponse;
 import com.example.food_recipes_application.Models.Recipe;
 import com.example.food_recipes_application.Models.RecipeDetailsResponse;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -101,27 +102,57 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
     void initRecipeHeart()
     {
-        if(helper.doesRecipeExists(recipe.id))
+        boolean isFav=false;
+        int pos=0;
+        for (int i = 0; i< FavoritesActivity.listRecipesFavorite.size(); i++)
         {
-            like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.RED));
-        }
-        else
-        {
-            like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.WHITE));
+            if (FavoritesActivity.listRecipesFavorite.get(i).id==recipe.id)
+            {
+                isFav=true;
+
+                pos=i;
+            }
+
+            if (i==FavoritesActivity.listRecipesFavorite.size()-1)
+            {
+                if (isFav)
+                    like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.RED));
+                else
+                    like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.WHITE));
+
+            }
         }
 
+
+        boolean finalIsFav = isFav;
+        int finalPos = pos;
         like_button_cb_recipeCardView.setOnClickListener(v -> {
-            if(helper.doesRecipeExists(recipe.id))
+            if (finalIsFav)
             {
-                helper.deleteRecipe(recipe.id);
+                FavoritesActivity.listRecipesFavorite.remove(finalPos);
+                FavoritesActivity.listRecipesFavorite.remove(recipe);
+
+                Gson gson = new Gson();
+                String newList= gson.toJson(FavoritesActivity.listRecipesFavorite);
+                helper.saveRecipeFavorite(Integer.parseInt(ProfileActivity.UserID),newList);
+                Toast.makeText(this, "removed", Toast.LENGTH_SHORT).show();
                 like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.WHITE));
+
             }
             else
             {
-                helper.saveRecipe(recipe);
+                FavoritesActivity.listRecipesFavorite.add(recipe);
+
+                Gson gson = new Gson();
+                String newList= gson.toJson(FavoritesActivity.listRecipesFavorite);
+                helper.saveRecipeFavorite(Integer.parseInt(ProfileActivity.UserID),newList);
+
+                Toast.makeText(this, "saved", Toast.LENGTH_SHORT).show();
                 like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.RED));
             }
+
         });
+
     }
 
     private final RecipeDetailsListener recipeDetailsListener = new RecipeDetailsListener() {

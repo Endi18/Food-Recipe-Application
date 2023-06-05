@@ -81,6 +81,7 @@ public class LoginActivity extends AppCompatActivity {
     public void goToSearchActivity(View view) {
         if(isDataCorrect) {
             ProfileActivity.currentEmail=email.getText().toString();
+            ProfileActivity.UserID=userId;
             Intent intent = new Intent(this, WelcomeActivity.class);
             intent.putExtra("UserId", userId);
             startActivity(intent);

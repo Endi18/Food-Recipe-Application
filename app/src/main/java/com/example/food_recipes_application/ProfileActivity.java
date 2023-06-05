@@ -27,6 +27,8 @@ import java.util.regex.Pattern;
 public class ProfileActivity extends AppCompatActivity {
 
     public  static String currentEmail="";
+
+    public  static String UserID="";
     private MyDatabaseHelper dbHelper;
     private EditText usernameTextView, emailTextView,passwordTextView;
     String userId;
