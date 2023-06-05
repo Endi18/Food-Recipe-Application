@@ -202,16 +202,8 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
     public void goBackToSearchActivity(View view){
 
-        if(keyword.isEmpty())
-        {
             finish();
-        }
-        else
-        {
-            Intent intent = new Intent(this, RecipeSearchResultActivity.class);
-            intent.putExtra("keyword", keyword);
-            startActivity(intent);
-        }
+
 
     }
 }
