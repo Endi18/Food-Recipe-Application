@@ -101,7 +101,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
     void initRecipeHeart()
     {
-        if(helper.isRecipeExists(recipe.id))
+        if(helper.doesRecipeExists(recipe.id))
         {
             like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.RED));
         }
@@ -111,7 +111,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         }
 
         like_button_cb_recipeCardView.setOnClickListener(v -> {
-            if(helper.isRecipeExists(recipe.id))
+            if(helper.doesRecipeExists(recipe.id))
             {
                 helper.deleteRecipe(recipe.id);
                 like_button_cb_recipeCardView.setImageTintList(ColorStateList.valueOf(Color.WHITE));

@@ -112,13 +112,14 @@ public class ProfileActivity extends AppCompatActivity {
             }
             if (email.isEmpty()){
                 emailTextView.setError("This field should not be empty");
+                return;
             }
 
             if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                 emailTextView.setError("Provide a valid email!");
                 return;
             }
-            else if (dbHelper.isEmailAlreadyExists(email)) {
+            else if (!originalEmail.equals(email) && dbHelper.isEmailAlreadyExists(email)) {
                 emailTextView.setError("This email is used by another user!");
                 return;
             }
@@ -128,32 +129,33 @@ public class ProfileActivity extends AppCompatActivity {
                 return;
             }
 
-            String toastMessage = "";
+            boolean isUpdated = false;
 
 
             if(!originalUsername.equals(userName)){
-               if(dbHelper.updateUsername(userId, userName))
-                  toastMessage += "Username, ";
+                if(dbHelper.updateUsername(userId, userName))
+                    isUpdated = true;
             }
 
             if(!originalEmail.equals(email)){
                 if(dbHelper.updateEmail(userId, email)) {
                     currentEmail = email;
-                    toastMessage += "Email, ";
+                    isUpdated = true;
                 }
             }
 
             if(!originalPassword.equals(password)){
                 if(dbHelper.updatePassword(userId, password)){
-                    toastMessage += "Password ";
+                    isUpdated = true;
                 }
             }
 
-            if(toastMessage.equals(""))
+            if(!isUpdated) {
                 Toast.makeText(ProfileActivity.this, "Nothing is changed", Toast.LENGTH_SHORT).show();
-            else{
-                toastMessage += "is/are updated";
-                Toast.makeText(ProfileActivity.this, toastMessage , Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(ProfileActivity.this, "Info is updated" , Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(getIntent());
             }
 
         });
@@ -167,10 +169,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         findViewById(R.id.btnBack2).
                 setOnClickListener(v -> finish());
-// Get the current logged-in user
         Cursor cursor = dbHelper.getUserData(currentEmail);
-
-
 
         int EMAIL_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyDatabaseHelper.COLUMN_EMAIL);
         int PASSWORD_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyDatabaseHelper.COLUMN_PASSWORD);
@@ -208,17 +207,20 @@ public class ProfileActivity extends AppCompatActivity {
     public void clickUsernamePencil(View view){
         if (isUsernameEditable) {
             isUsernameEditable = false;
-            usernameTextView.setEnabled(false);
-            usernameTextView.requestFocus();
+
+            usernameTextView.setFocusable(false);
             usernameTextView.setCursorVisible(false);
-            usernameTextView.setInputType(InputType.TYPE_NULL);
+            usernameTextView.setFocusableInTouchMode(false);
+           usernameTextView.setInputType(InputType.TYPE_NULL);
             iconUsername.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil, null, null, null);
         } else {
             isUsernameEditable = true;
-            usernameTextView.setEnabled(true);
-            usernameTextView.requestFocus();
+
             usernameTextView.setFocusable(true);
+            usernameTextView.setFocusableInTouchMode(true);
+
             usernameTextView.setCursorVisible(true);
+
             usernameTextView.setInputType(InputType.TYPE_CLASS_TEXT);
             iconUsername.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil_diagonal, null, null, null);
         }
@@ -228,15 +230,15 @@ public class ProfileActivity extends AppCompatActivity {
     public void clickEmailPencil(View view){
         if (isEmailEditable) {
             isEmailEditable = false;
-            emailTextView.setEnabled(false);
-            emailTextView.requestFocus();
+            emailTextView.setFocusable(false);
+            emailTextView.setFocusableInTouchMode(false);
             emailTextView.setCursorVisible(false);
             emailTextView.setInputType(InputType.TYPE_NULL);
             iconEmail.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil, null, null, null);
         } else {
             isEmailEditable = true;
-            emailTextView.setEnabled(true);
-            emailTextView.requestFocus();
+            emailTextView.setFocusable(true);
+            emailTextView.setFocusableInTouchMode(true);
             emailTextView.setCursorVisible(true);
             emailTextView.setInputType(InputType.TYPE_CLASS_TEXT);
             iconEmail.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil_diagonal, null, null, null);
@@ -247,15 +249,15 @@ public class ProfileActivity extends AppCompatActivity {
     public void clickPasswordPencil(View view){
         if (isPasswordEditable) {
             isPasswordEditable = false;
-            passwordTextView.setEnabled(false);
-            passwordTextView.requestFocus();
+            passwordTextView.setFocusable(false);
+            passwordTextView.setFocusableInTouchMode(false);
             passwordTextView.setCursorVisible(false);
-            passwordTextView.setInputType(InputType.TYPE_NULL);
+            passwordTextView.setInputType(InputType.TYPE_CLASS_TEXT);
             iconPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil, null, null, null);
         } else {
             isPasswordEditable = true;
-            passwordTextView.setEnabled(true);
-            passwordTextView.requestFocus();
+            passwordTextView.setFocusable(true);
+            passwordTextView.setFocusableInTouchMode(true);
             passwordTextView.setCursorVisible(true);
             passwordTextView.setInputType(InputType.TYPE_CLASS_TEXT);
             iconPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil_diagonal, null, null, null);

@@ -51,7 +51,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteViewHolder>{
          Picasso.get().load(recipe.image).into(holder.dishImage);
          holder.recipeCardView.setOnClickListener(v -> listener.onRecipeClicked(String.valueOf(recipeList.get(holder.getAdapterPosition()).id)));
 
-         if(helper.isRecipeExists(recipe.id))
+         if(helper.doesRecipeExists(recipe.id))
          {
           holder.imgFvrt.setImageTintList(ColorStateList.valueOf(Color.RED));
          }
@@ -63,12 +63,11 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteViewHolder>{
          holder.imgFvrt.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 if(helper.isRecipeExists(recipe.id))
+                 if(helper.doesRecipeExists(recipe.id))
                  {
                      helper.deleteRecipe(recipe.id);
                      recipeList.remove(holder.getAbsoluteAdapterPosition());
                      notifyItemRemoved(holder.getAbsoluteAdapterPosition());
-                    // holder.imgFvrt.setImageTintList(ColorStateList.valueOf(Color.WHITE));
                  }
                  else
                  {

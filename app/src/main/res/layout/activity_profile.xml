@@ -27,8 +27,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Username:"
+        android:fontFamily="@font/aclonica"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +97,7 @@
         android:fontFamily="@font/aclonica"
         android:text="Email:"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -109,9 +110,10 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/aclonica"
         android:text="Password:"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -126,7 +128,6 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:cursorVisible="false"
-        android:editable="false"
         android:ems="10"
         android:focusable="false"
         android:fontFamily="@font/aclonica"
@@ -139,7 +140,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.25"
-        tools:ignore="Deprecated,SpeakableTextPresentCheck" />
+        />
 
     <EditText
         android:id="@+id/editTextProfileEmail"
@@ -147,7 +148,6 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:cursorVisible="false"
-        android:editable="false"
         android:ems="10"
         android:focusable="false"
         android:fontFamily="@font/aclonica"
@@ -160,7 +160,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.351"
-        tools:ignore="SpeakableTextPresentCheck" />
+         />
 
     <EditText
         android:id="@+id/editTextProfilePassword"
@@ -169,7 +169,6 @@
         android:background="@null"
         android:cursorVisible="false"
         android:drawableEnd="@drawable/ic_visibility_on"
-        android:editable="false"
         android:ems="10"
         android:focusable="false"
         android:fontFamily="@font/aclonica"
@@ -183,7 +182,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.448"
-        tools:ignore="SpeakableTextPresentCheck" />
+        />
 
 
     <TextView

@@ -114,22 +114,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-//    public void updateUserData(String row_id, String title, String author, String pages){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues cv = new ContentValues();
-//        cv.put(COLUMN_USERNAME, title);
-//        cv.put(COLUMN_EMAIL, author);
-//        cv.put(COLUMN_PASSWORD, pages);
-//
-//        long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
-//        if(result == -1){
-//            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
-//        }else {
-//            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
-//        }
-//
-//    }
-
     public void deleteOneUser(String row_id){
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_NAME_USERS, "_id=?", new String[]{row_id});
@@ -144,7 +128,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME_USERS);
     }
-
 
 
     public void saveRecipe(Recipe recipe) {
@@ -190,7 +173,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public boolean isRecipeExists(int id) {
+    public boolean doesRecipeExists(int id) {
         SQLiteDatabase db = getReadableDatabase();
         String[] columns = {COLUMN_ID};
         String selection = COLUMN_ID + " = ?";
