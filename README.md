@@ -471,7 +471,9 @@ To provide a way for the "Foodtopia" application to access and retrieve data abo
 **Spoonacular Food API** - https://spoonacular.com/food-api
 
 To simplify the process of making network requests and handling APIs in our Android application, we have utilized the popular open-source library Retrofit.
+
 **Retrofit** - https://github.com/square/retrofit
 
 To simplify the process of loading and displaying images in our Android application, we have utilized the popular open-source library Picasso.
+
 **Picasso** - https://github.com/square/picasso
