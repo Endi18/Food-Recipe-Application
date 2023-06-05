@@ -23,11 +23,10 @@ public class InitialActivity extends AppCompatActivity {
         isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
 
         if(isLoggedIn) {
-            Intent intent = new Intent(this, WelcomeActivity.class);
-            startActivity(intent);
-            guestButton = findViewById(R.id.guestButton);
-            guestButton.setClickable(false);
-            guestButton.setBackgroundColor(Color.GRAY);
+            SharedPreferences sharedPreferencesLogOut = getSharedPreferences("LOGIN_PREFS", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferencesLogOut.edit();
+            editor.putBoolean("isLoggedIn", false); // Set the login state as logged in
+            editor.apply();
         }
     }
 
