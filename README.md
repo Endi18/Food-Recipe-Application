@@ -34,18 +34,28 @@ Delving into more detail, we have created multi-activities that allow users to p
 
 ![Initial Activity](app-screenshots/initialActivity.png)
 
-When the user first launches the application, he is shown an activity that allows the user to opt for authentication or to continue using our application in Guest Mode. This choice is facilitated through the use of Buttons. If the user clicks on the "Log in" button, he is redirected to the Login Activity. Alternatively, if the user clicks on the "Guest Mode" button, he is directly redirected to the Search Recipes Activity.This redirection is done through the use of explicit intents.
+When the user first launches the application, he is shown an activity that allows the user to opt for authentication or to continue using our application in Guest Mode.
 
+The `onCreate()` method is called when the activity is created. It sets the layout for the activity using the `setContentView()` method and initializes the `isLoggedIn` variable, which is a boolean flag to check if the user is logged in, by retrieving the login status from shared preferences. The `getSharedPreferences()` method is used to access the shared preferences file named "LOGIN_PREFS" with the mode set to `Context.MODE_PRIVATE`. If the `isLoggedIn` flag is `true`, it means the user is already logged in. In that case, it sets the `isLoggedIn` flag in shared preferences to `false`. This step is performed to ensure that if the user is already logged in, they are logged out when they open the initial activity. 
+
+The `goToLoginPage()` method is called when the user clicks the "Log In" button. It creates an intent to start the `LoginActivity`.
+
+Alternatively, the `goToSearchPage()` method is called when the user clicks the "Guest Mode" button. It creates an intent to start the `SearchActivity`.
 
 #### Login Activity
 ##### _Author: Sara Hoxha_
 
 ![Login Activity](app-screenshots/loginActivity.png)
 
-After being redirected to the Login Activity, the user will be prompted to enter their email and password. After finishing entering their credentials, the user can try to authenticate and enter the application by clicking on the button "Log In". Firstly, after the user has clicked this button, we check if the user has provided an email and password, and if the email is in valid format. If these conditions are not fulfilled, we display an error message to the appropriate TextView and require the user to amend this data. If this data is entered and in valid format, we check these credentials checked against the data stored in our SQLite database. The process of authentication works by querying the database to see if the entered email and password exists in our database. If a match is found, the user is authenticated and they are redirected to the "Search Activity", through the use of an explicit intent that also sends the authenticated user ID as part of the message. On the other hand, if there is not a match found, the application will display an error toast message indicating that the login failed due to invalid data.
+In the Login Activity, the user will be prompted to enter their email and password to authenticate. Inside the class for this activity, I have declared variables such as  `email` and `password` as EditText fields for the user input, `userId` to store the ID of the logged-in user,  `isDataCorrect`  as a boolean flag to check if the entered data is correct, and `databaseHelper` which is an instance of `MyDatabaseHelper` class that handles database operations.
 
-Furthermore, we also have the option for the user to register if they haven't already. This is done by clicking on the "Sign Up Now" label, which redirects them to the Sign Up Activity.
+The `authenticateUser()` method is called when the user clicks the "Log In" button to authenticate their credentials. It retrieves the email and password entered by the user and performs validation checks regarding the data's format. If any error occurs, an error message is displayed using the `setError()` method on the respective EditText field and requires the user to amend this data. 
 
+If this data is entered and in a valid format, we check these credentials against the data stored in our SQLite database. A cursor is used to retrieve user data from the database based on the provided email, and then by iterating over the results and checking if the entered email and password match existing user credentials. If the user's data is correct, the `isDataCorrect` flag is set to true, and a shared preference named "LOGIN_PREFS" is created to store the login status of the user. The `goToWelcomeActivity()` method is then called, which is responsible for navigating to the Welcome Activity or showing an error message if the data is incorrect. If the data is correct, it sets the User Id and Email variables in the `ProfileActivity` class and starts a new activity called `WelcomeActivity` via Intent, passing the `userId` as a parameter.
+
+Alternatively, the `registerUser()` method is called when the user clicks the "Sign Up Now" button, which redirects the user to the activity `SignUpActivity`.
+
+Finally, the `goBackToInitialActivity()` method is called when the user clicks on the back button to go back to the initial activity.
 
 #### Recipe Details Activity
 ##### _Author: Endi Triço_
@@ -80,15 +90,16 @@ This activity fetches and displays recipe details and instructions, and provides
 
 ![Recipe Search Result Activity](app-screenshots/RecipeResultsActivity.png)
 
-The `RecipeSearchResultActivity` is used to display the search results of recipes, based on the keyword provided by the user.
 
-Inside this activity, we have initialized a `ProgressDialog` to show a loading spinner while the search results are being fetched.
+The `RecipeSearchResultActivity` is used to display the search results of recipes, based on the keyword provided by the user. It has instance variables like `manager` for managing API requests, `progressDialog` for displaying a progress dialog while loading recipes, `adapter` for the RecyclerView adapter, `recyclerView` for displaying the list of recipes, `recipesResultNumber` for displaying the number of recipes found, and `recipeSearchKeyword` for storing the keyword used for searching recipes. The `apiSearchResponseListener` is an instance of `APISearchResponseListener` interface that handles the response callbacks from the API request. 
 
-We also initialize an instance of the `APIRequestManager` class with a search keyword, that we get from the "Search Recipe" Activity and we call its `getRecipesSearchResults()` method to fetch the search results from the API.
+The `onCreate()` method is called when the activity is created. It retrieves the `recipeSearchKeyword` from the intent extras. Moreover, we check if the user is logged in by retrieving the `isLoggedIn` flag from shared preferences. If the user is logged in, we add a `BottomNavigationFragment` to the activity layout, otherwise we remove any existing fragment.
 
-After the results are fetched, the spinner is dismissed and the results are displayed in a `RecyclerView` using the `RecipeSearchResultAdapter` class to provide the adapter for the recycler view.
+An instance of `APIRequestManager` is created with the provided `recipeSearchKeyword`, and the `getRecipesSearchResults()` method is called to fetch the recipe search results from the Spoonacular API. The `apiSearchResponseListener` handles the response and displays a progress dialog while loading the recipes. Then, it updates the UI with the fetched recipes or displays an error message if data is not fetched.
 
-The `goBackToSearchPage()` method is called when the user clicks the "Back" button on the activity. This uses an explicit intent to navigate the user back to the "Search Recipe" activity.
+The `recipeClickListener` is an instance of `RecipeClickListener` interface that handles the click events on individual recipes. When a recipe is clicked, it starts the `RecipeDetailsActivity` by also passing the selected recipe's ID and the search keyword.
+
+The `goBackToSearchPage()` method is called when the user clicks the back button to go back to the search page. It creates an intent to start the `SearchActivity`.
 
 
 ####  SignUpActivity
@@ -347,18 +358,17 @@ This adapter class is used to populate a `RecyclerView` with a list of Step obje
 #### RecipeSearchResultAdapter
 ##### _Author: Sara Hoxha_
 
-The `RecipeSearchResultAdapter` class is used to display a list of recipes obtained from the Spoonacular API call.
+The `RecipeSearchResultAdapter` class is used to display a list of recipes in a RecyclerView obtained from the Spoonacular API call. The `RecipeSearchResultAdapter` class extends the `RecyclerView.Adapter` class and is responsible for creating the view holders and binding the data to the views in the RecyclerView. There are several instance variables declared such as `context` for storing the application context, `recipeList` for storing the list of recipes to be displayed, `listener` for handling individual recipe click event, and `helper` variable which is an instance of `MyDatabaseHelper` class, which is responsible for database operations.
 
-The `RecipeSearchResultAdapter` class extends the `RecyclerView.Adapter` class and has a constructor that takes two parameters, a `Context` object, and a list of `Recipe` objects.
+The `onCreateViewHolder()` method is called when the RecyclerView needs a new view holder to represent an item. It inflates the layout for a recipe card view using the `LayoutInflater` and returns a new instance of `RecipeSearchResultViewHolder`.
 
-The `onCreateViewHolder()` method creates a new instance of the `RecipeSearchResultViewHolder` class, which contains a `CardView` that displays the recipe information. 
+The `onBindViewHolder()` method is called to bind the data to the views in the view holder at the specified position. It retrieves the recipe from the `recipeList`, sets the dish name, the dish image using Picasso library, and sets a click listener on the recipe card view. Moreover, we check if the recipe exists in the database as a Favorite using the `doesRecipeExists()` method of `MyDatabaseHelper`. Based on the result, the color of the favorite image (heart) is set to either red if it exists or white.
 
-The `getItemCount()` method returns the number of recipes in the list.
+Additionally, there is a click listener on the favorite image (heart) which toggles the recipe's favorite status in the database. If the recipe exists in the database, it is deleted using the `deleteRecipe()` method of `MyDatabaseHelper`, and the image color is set to white. If the recipe doesn't exist in the database, it is saved using the `saveRecipe()` method of `MyDatabaseHelper`, and the image color is set to red.
 
-The `onBindViewHolder()` method binds the data from the `Recipe` object to the `RecipeSearchResultViewHolder`.
+The `getItemCount()` method returns the total number of recipes in the `recipeList`.
 
 The `RecipeSearchResultViewHolder` class is an inner class that extends `RecyclerView.ViewHolder`. It has a constructor that takes a View object and initializes the card view, the dish name, and the dish image that will be displayed in the layout.
-
 
 ### Database
 
@@ -437,9 +447,9 @@ This code sets up the bottom navigation bar in the fragment and handles the item
 
 The `APISearchResponseListener` is an interface that defines two methods that must be implemented by any class that wants to listen for and handle the response of an API request made to retrieve recipes from the Spoonacular API.
 
-The didFetch method is called when the API request is successful and the response contains the information for the requested recipe. This method takes in the APISearchResponse object as a parameter, which contains the recipe information, and a message string that describes the status of the response.
+The `didFetch` method is called when the API request is successful and the response contains the information for the requested recipe. This method takes in the APISearchResponse object as a parameter, which contains the recipe information, and a message string that describes the status of the response.
 
-The didError method is called when there is an error in the API request and the response is not successful. This method takes in a message string that describes the error that occurred.
+The `didError` method is called when there is an error in the API request and the response is not successful. This method takes in a message string that describes the error that occurred.
 
 #### InstructionsListener
 ##### _Author: Endi Triço_

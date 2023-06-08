@@ -75,10 +75,10 @@ public class LoginActivity extends AppCompatActivity {
         editor.putBoolean("isLoggedIn", true);
         editor.apply();
 
-        goToSearchActivity(this.getCurrentFocus());
+        goToWelcomeActivity(this.getCurrentFocus());
     }
 
-    public void goToSearchActivity(View view) {
+    public void goToWelcomeActivity(View view) {
         if(isDataCorrect) {
             ProfileActivity.currentEmail=email.getText().toString();
             ProfileActivity.UserID=userId;

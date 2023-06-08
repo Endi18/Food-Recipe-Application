@@ -13,7 +13,6 @@ import android.widget.Button;
 
 public class InitialActivity extends AppCompatActivity {
     Boolean isLoggedIn;
-    Button guestButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +24,7 @@ public class InitialActivity extends AppCompatActivity {
         if(isLoggedIn) {
             SharedPreferences sharedPreferencesLogOut = getSharedPreferences("LOGIN_PREFS", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferencesLogOut.edit();
-            editor.putBoolean("isLoggedIn", false); // Set the login state as logged in
+            editor.putBoolean("isLoggedIn", false);
             editor.apply();
         }
     }
