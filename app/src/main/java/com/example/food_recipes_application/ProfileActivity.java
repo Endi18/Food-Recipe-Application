@@ -214,7 +214,7 @@ public class ProfileActivity extends AppCompatActivity {
             usernameTextView.setCursorVisible(false);
             usernameTextView.setFocusableInTouchMode(false);
            usernameTextView.setInputType(InputType.TYPE_NULL);
-            iconUsername.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil, null, null, null);
+            iconUsername.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil_diagonal, null, null, null);
         } else {
             isUsernameEditable = true;
 
@@ -224,7 +224,7 @@ public class ProfileActivity extends AppCompatActivity {
             usernameTextView.setCursorVisible(true);
 
             usernameTextView.setInputType(InputType.TYPE_CLASS_TEXT);
-            iconUsername.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil_diagonal, null, null, null);
+            iconUsername.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil, null, null, null);
         }
         usernameTextView.setTypeface(typeface);
     }
@@ -236,14 +236,14 @@ public class ProfileActivity extends AppCompatActivity {
             emailTextView.setFocusableInTouchMode(false);
             emailTextView.setCursorVisible(false);
             emailTextView.setInputType(InputType.TYPE_NULL);
-            iconEmail.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil, null, null, null);
+            iconEmail.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil_diagonal, null, null, null);
         } else {
             isEmailEditable = true;
             emailTextView.setFocusable(true);
             emailTextView.setFocusableInTouchMode(true);
             emailTextView.setCursorVisible(true);
             emailTextView.setInputType(InputType.TYPE_CLASS_TEXT);
-            iconEmail.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil_diagonal, null, null, null);
+            iconEmail.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil, null, null, null);
         }
         emailTextView.setTypeface(typeface);
     }
@@ -255,14 +255,14 @@ public class ProfileActivity extends AppCompatActivity {
             passwordTextView.setFocusableInTouchMode(false);
             passwordTextView.setCursorVisible(false);
             passwordTextView.setInputType(InputType.TYPE_CLASS_TEXT);
-            iconPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil, null, null, null);
+            iconPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil_diagonal, null, null, null);
         } else {
             isPasswordEditable = true;
             passwordTextView.setFocusable(true);
             passwordTextView.setFocusableInTouchMode(true);
             passwordTextView.setCursorVisible(true);
             passwordTextView.setInputType(InputType.TYPE_CLASS_TEXT);
-            iconPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil_diagonal, null, null, null);
+            iconPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(pencil, null, null, null);
         }
         passwordTextView.setTypeface(typeface);
     }
