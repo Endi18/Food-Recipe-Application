@@ -415,8 +415,6 @@ This `MyDatabaseHelper` class provides methods to create the database, insert ne
 1. id -> recipe ID
 2. apiKey -> specifies the unique API Key used to make the request
 
-CallInstructions
-
 * The `getRecipesSearchResults` method sends a search query to the API to retrieve a list of recipes matching the provided recipe name. It calls the `searchRecipes` interface and enqueues a Retrofit `Call` object for asynchronous execution. It handles the response and notifies the listener accordingly.
 The `getRecipeDetails` method retrieves detailed information about a specific recipe by its ID. It calls the `CallRecipeDetails` interface and enqueues a Retrofit `Call` object. It also handles the response and notifies the listener.
 The `getInstructions` method fetches the step-by-step instructions for a recipe by its ID. It calls the `CallInstructions` interface and enqueues a Retrofit `Call` object. It handles the response and notifies the listener.
